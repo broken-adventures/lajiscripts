@@ -3,6 +3,7 @@
 # 一些全局变量
 ver="1.4.4"
 changeLog="新增部署Telegram MTProxy脚本"
+virt=`systemd-detect-virt`
 
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
@@ -189,6 +190,8 @@ function start_menu(){
     echo "                            "
     green "检测到您当前运行的工具箱版本是：$ver"
     green "更新日志：$changeLog"
+    echo "                            "
+    green "检测到你的VPS虚拟化类型为：$virt"
     echo "                            "
     echo "下面是我们提供的一些功能"
     echo "1. VPS修改登录方式为root密码登录"
