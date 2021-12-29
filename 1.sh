@@ -193,7 +193,7 @@ function start_menu(){
     green "检测到您当前运行的工具箱版本是：$ver"
     green "更新日志：$changeLog"
     echo "                            "
-    green "检测到你的VPS虚拟化类型为：$virt"
+    yellow "检测到你正在使用的是 $virt $arch 的VPS"
     echo "                            "
     echo "下面是我们提供的一些功能"
     echo "1. VPS修改登录方式为root密码登录"
