@@ -171,6 +171,11 @@ function updateScript(){
     wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/MisakaLinuxToolbox@master/MisakaToolbox.sh && chmod -R 777 MisakaToolbox.sh && bash MisakaToolbox.sh
 }
 
+function tgMTProxy(){
+    mkdir /home/mtproxy && cd /home/mtproxy
+    curl -s -o mtproxy.sh https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh && chmod +x mtproxy.sh && bash mtproxy.sh
+}
+
 function start_menu(){
     clear
     red "============================"
@@ -197,6 +202,7 @@ function start_menu(){
     echo "10. 修改主机名"
     echo "11. 安装可乐大佬的ServerStatus-Horatu探针"
     echo "12. hijk大佬的v2脚本，支持IBM LinuxONE s390x的机器搭建节点"
+    echo "13. 一键安装 Telegram MTProxy 代理服务器"
     echo "v. 更新脚本"
     echo "0. 退出脚本"
     echo "                            "
@@ -214,6 +220,7 @@ function start_menu(){
         10 ) changehostname ;;
         11 ) serverstatus ;;
         12 ) hijk ;; 
+        13 ) tgMTProxy ;;
         v ) updateScript ;;
         0 ) exit 0;;
     esac
