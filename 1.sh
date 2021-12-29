@@ -3,6 +3,7 @@
 # 一些全局变量
 ver="1.4.4"
 changeLog="新增部署Telegram MTProxy脚本"
+arch=`uname -m`
 virt=`systemd-detect-virt`
 
 green(){
