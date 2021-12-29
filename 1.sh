@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="1.4.3"
-changeLog="更新hijk大佬的v2脚本，支持IBM LinuxONE s390x的机器搭建节点"
+ver="1.4.4"
+changeLog="新增部署Telegram MTProxy脚本"
 
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
