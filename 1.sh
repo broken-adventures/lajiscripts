@@ -5,6 +5,7 @@ ver="1.4.4"
 changeLog="新增部署Telegram MTProxy脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
+osVer=`uname -r`
 
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
