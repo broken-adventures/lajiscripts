@@ -195,7 +195,7 @@ function start_menu(){
     echo "                            "
     yellow "检测到VPS信息如下"
     yellow "处理器架构：$arch"
-    yellow "虚拟化：$virt"
+    yellow "虚拟化架构：$virt"
     yellow "操作系统：$release"
     yellow "内核版本：$kernelVer"
     echo "                            "
