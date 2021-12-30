@@ -34,13 +34,13 @@ release="Ubuntu"
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 release="Centos"
 else 
-red "不支持你当前系统，请使用Ubuntu,Debian,Centos系统"
+red "不支持你当前系统，请使用Ubuntu、Debian、Centos的主流系统"
 rm -f MisakaToolbox.sh
 exit 1
 fi
 
 if ! type curl >/dev/null 2>&1; then 
-yellow "检测到curl未安装，安装中 "
+yellow "curl未安装，安装中"
 if [ $release = "Centos" ]; then
 yum -y update && yum install curl -y
 else
@@ -51,7 +51,7 @@ green "curl已安装"
 fi
 
 if ! type wget >/dev/null 2>&1; then 
-yellow "检测到wget未安装，安装中 "
+yellow "wget未安装，安装中"
 if [ $release = "Centos" ]; then
 yum -y update && yum install wget -y
 else
@@ -62,7 +62,7 @@ green "wget已安装"
 fi
 
 if ! type sudo >/dev/null 2>&1; then 
-yellow "检测到sudo未安装，安装中 "
+yellow "sudo未安装，安装中"
 if [ $release = "Centos" ]; then
 yum -y update && yum install sudo -y
 else
