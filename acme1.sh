@@ -47,12 +47,16 @@ function acme(){
     domainIP=$(curl ipget.net/?ip="$domain")
     yellow "VPS本地IP：$IP"
     yellow "当前的域名解析到的IP：$domainIP"
-    if echo $domainIP | grep -q ":"; then
-        bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
+    if [ $IP = $domainIP]; then
+        if echo $domainIP | grep -q ":"; then
+            bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
+        else
+            bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt
+        fi
+        bash /root/.acme.sh/acme.sh --installcert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
     else
-        bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt
+        echo "域名解析IP不匹配"
     fi
-    bash /root/.acme.sh/acme.sh --installcert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
 }
 
 function acmer(){
