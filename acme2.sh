@@ -42,9 +42,9 @@ function acme(){
         apt update -y && apt install curl -y && apt install -y socat
     fi
     curl https://get.acme.sh | sh
-    read -p "请输入需要注册的邮箱" email
+    read -p "请输入注册邮箱：" email
     bash /root/.acme.sh/acme.sh --register-account -m ${email}
-    read -p "你解析的域名:" domain
+    read -p "输入需要申请SSL证书的域名域名:" domain
     domainIP=$(curl ipget.net/?ip="$domain")
     yellow "VPS本机IP：$IP"
     yellow "当前的域名解析到的IP：$domainIP"
