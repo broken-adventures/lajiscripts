@@ -18,4 +18,4 @@ fi
 
 [[ $(type -P yum) ]] && osapt='yum -y' || osapt='apt -y'
 [[ $(type -P curl) ]] || (yellow "curl未安装，正在安装中" && $osapt install curl)
-[[ $(type -P socat) ]] || (yellow "socat未安装，正在安装中" && $osapt install curl)
+[[ $(type -P socat) ]] || (yellow "socat未安装，正在安装中" && $osapt install socat)
