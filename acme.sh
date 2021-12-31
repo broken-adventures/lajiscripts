@@ -42,7 +42,8 @@ function acme(){
         apt update -y && apt install curl -y && apt install -y socat
     fi
     curl https://get.acme.sh | sh
-    bash /root/.acme.sh/acme.sh --register-account -m xxxx@gmail.com
+    read -p "请输入需要注册的邮箱" email
+    bash /root/.acme.sh/acme.sh --register-account -m ${email}
     read -p "你解析的域名:" domain
     domainIP=$(curl ipget.net/?ip="$domain")
     yellow "VPS本机IP：$IP"
@@ -54,6 +55,7 @@ function acme(){
             bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt
         fi
         bash /root/.acme.sh/acme.sh --installcert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
+        green "域名证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹，请注意保存"
     else
         red "域名解析IP不匹配"
         green "请确认DNS已正确解析到VPS，或CloudFlare的小云朵没关闭，请关闭小云朵后重试"
