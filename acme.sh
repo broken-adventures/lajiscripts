@@ -45,7 +45,7 @@ function acme(){
     bash /root/.acme.sh/acme.sh --register-account -m xxxx@gmail.com
     read -p "你解析的域名:" domain
     domainIP=$(curl ipget.net/?ip="$domain")
-    yellow "VPS本地IP：$IP"
+    yellow "VPS本机IP：$IP"
     yellow "当前的域名解析到的IP：$domainIP"
     if [ $IP = $domainIP ]; then
         if echo $domainIP | grep -q ":"; then
@@ -55,35 +55,42 @@ function acme(){
         fi
         bash /root/.acme.sh/acme.sh --installcert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
     else
-        echo "域名解析IP不匹配"
+        red "域名解析IP不匹配"
+        green "请确认DNS已正确解析到VPS，或CloudFlare的小云朵没关闭，请关闭小云朵后重试"
+        exit 0
     fi
 }
 
-function acmer(){
+function renew(){
     read -p "你的域名:" domain
     bash /root/.acme.sh/acme.sh --renew -d ${domain} --force --ecc
 }
 
 function start_menu(){
     clear
-    
-    green " 1.  首次申请证书 "
-    
-    green " 2.  手动续期证书 "
-    
-    green " 0.  退出 "
-    
-read -p "请输入数字:" menuNumberInput
+    red "=================================="
+    echo "                           "
+    red "    Acme.sh 域名证书一键申请脚本     "
+    red "          by 小御坂的破站           "
+    echo "                           "
+    red "  Site: https://blog.misaka.rest  "
+    echo "                           "
+    red "=================================="
+    echo "                           "
+    echo "                           "
+    echo "1. 申请证书"
+    echo "2. 续期证书"
+    echo "v. 更新脚本"
+    echo "0. 退出脚本"
+    echo "                           "
+    echo "                           "
+    read -p "请输入数字:" menuNumberInput
     case "$menuNumberInput" in     
-        1 )
-           acme
-	;;
-        2 )
-           acmer
-	;;
-        0 )
-           exit 1
+        1 ) acme ;;
+        2 ) renew ;;
+        0 ) exit 0
     ;;       
- esac
+    esac
 }   
+
 start_menu
