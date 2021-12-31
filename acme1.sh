@@ -42,7 +42,7 @@ function registerWith80(){
     read -p "请输入需要申请证书的域名：" domainForSSL
     domainIP = $(curl ipget.net/?ip="$domainForSSL")
     if echo $localIP | grep -q ":"; then
-        if [ $domainIP == $localIP ]
+        if [ $domainIP == $localIP ]; then
             bash /root/.acme.sh/acme.sh  --issue -d ${domainForSSL} --standalone -k ec-256 --server letsencrypt --listen-v6
             green "TLS证书已申请"
         else
@@ -53,7 +53,7 @@ function registerWith80(){
             exit 0
         fi
     else
-        if [ $domainIP == $localIP ]
+        if [ $domainIP == $localIP ]; then
             bash /root/.acme.sh/acme.sh  --issue -d ${domainForSSL} --standalone -k ec-256 --server letsencrypt
             green "TLS证书已申请"
         else
