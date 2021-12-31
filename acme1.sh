@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-localIP = `curl ipget.net`
+localIP = $(curl ipget.net)
 
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
