@@ -42,34 +42,37 @@ get_char() {
 }
 
 back(){
-white "------------------------------------------------------------------------------------------------"
-white " 回主菜单，请按任意键"
-white " 退出脚本，请按Ctrl+C"
-get_char && bash <(curl -sSL https://cdn.jsdelivr.net/gh/kkkyg/screen-script/screen.sh)
+    get_char
+    echo "脚本快捷方式 bash screen.sh"
 }
 
 [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
 [[ $(type -P screen) ]] || (yellow "检测到screen未安装，升级安装中" && $yumapt install screen)	   
 
-ab="1.创建screen窗口程序名称\n2.查看并进入指定screen窗口\n3.查看并删除指定screen窗口\n4.清除所有screen窗口\n0.退出\n 请选择："
-readp "$ab" cd
+echo "1. 创建screen后台名称"
+echo "2. 查看并进入指定screen后台"
+echo "3. 查看并删除指定screen后台"
+echo "4. 清除所有screen后台"
+echo "v. 更新脚本"
+echo "0. 退出脚本"
+read -p "请输入选项:" cd
 case "$cd" in 
     1 )
-        readp "为方便管理，设置screen窗口程序名称：" screen
+        readp "为方便管理，设置screen后台名称：" screen
         screen -S $screen
         back;;
     2 )
         names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2}'`
-        [[ -n $names ]] && green "$names" && readp "输入进入的screen窗口程序名称：" screename && screen -r $screename || red "无执行内容"
+        [[ -n $names ]] && green "$names" && readp "输入进入的screen后台名称：" screename && screen -r $screename || red "无执行内容"
         back;;
     3 )
         names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2}'`
-        [[ -n $names ]] && green "$names" && readp "输入删除的screen窗口程序名称：" screename && screen -S $screename -X quit || red "无执行内容"
+        [[ -n $names ]] && green "$names" && readp "输入删除的screen后台名称：" screename && screen -S $screename -X quit || red "无执行内容"
         back;;
     4 )
         names=`screen -ls | grep '(Detached)' | awk '{print $1}' | awk -F "." '{print $2}'`
         screen -wipe
-        [[ -n $names ]] && screen -ls | grep '(Detached)' | cut -d. -f1 | awk '{print $1}' | xargs kill && green "所有screen窗口清除完毕"|| red "无执行内容，无须清除"
+        [[ -n $names ]] && screen -ls | grep '(Detached)' | cut -d. -f1 | awk '{print $1}' | xargs kill && green "所有screen后台清除完毕"|| red "无执行内容，无须清除"
         back;;
     0 ) exit 0
 esac
