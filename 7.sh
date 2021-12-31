@@ -28,10 +28,18 @@ readp(){
 [[ $(type -P screen) ]] || (yellow "screen未安装，正在安装中" && $yumapt install screen)	   
 
 function back(){
-    menu()
+    echo "设置完成，请选择接下来的操作"
+    echo "1. 回到主页"
+    echo "2. 退出脚本"
+    read -p "请输入选项:" backInput
+    case "$backInput" in 
+        1 ) menu ;;
+        2 ) exit 0
+    esac
 }
 
 function menu(){
+    clear
     red "============================"
     echo "                           "
     red "   Screen 后台运行管理脚本   "
@@ -67,4 +75,4 @@ function menu(){
     esac
 }
 
-menu()
+menu
