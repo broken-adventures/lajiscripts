@@ -47,7 +47,7 @@ function acme(){
     domainIP=$(curl ipget.net/?ip="$domain")
     yellow "VPS本地IP：$IP"
     yellow "当前的域名解析到的IP：$domainIP"
-    if [ $IP = $domainIP]; then
+    if [ $IP = $domainIP ]; then
         if echo $domainIP | grep -q ":"; then
             bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
         else
