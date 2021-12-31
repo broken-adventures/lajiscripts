@@ -19,3 +19,29 @@ fi
 [[ $(type -P yum) ]] && osapt='yum -y' || osapt='apt -y'
 [[ $(type -P curl) ]] || (yellow "curl未安装，正在安装中" && $osapt install curl)
 [[ $(type -P socat) ]] || (yellow "socat未安装，正在安装中" && $osapt install socat)
+
+function main_menu(){
+    clear
+    red "=================================="
+    echo "                           "
+    red "    Acme.sh 域名证书一键申请脚本     "
+    red "          by 小御坂的破站           "
+    echo "                           "
+    red "  Site: https://blog.misaka.rest  "
+    echo "                           "
+    red "=================================="
+    echo "                           "
+    echo "                           "
+    echo "1. 申请证书"
+    echo "2. 续期证书"
+    echo "v. 更新脚本"
+    echo "0. 退出脚本"
+    echo "                           "
+    echo "                           "
+    read -p "请输入选项：" menuNumberInput
+    case "$menuNumberInput" in
+        0 ) exit 0
+    esac
+}
+
+main_menu
