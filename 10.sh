@@ -264,6 +264,9 @@ function start_menu(){
         11 ) serverstatus ;;
         12 ) hijk ;; 
         13 ) tgMTProxy ;;
+        14 ) acme1key ;;
+        15 ) screenManager ;;
+        16 ) oraclefirewall ;;
         v ) updateScript ;;
         0 ) exit 0;;
     esac
