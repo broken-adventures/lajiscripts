@@ -114,13 +114,14 @@ function menu(){
         4 ) page4 ;;
         5 ) page5 ;;
         9 ) updateScript ;;
-        0 ) exit 0;;
+        0 ) exit 0
     esac
 }
 
 function page1(){
     echo "                            "
     green "请选择你接下来的操作"
+    echo "                            "
     echo "1. Oracle 原生系统关闭防火墙"
     echo "2. 修改登录方式为 root + 密码 登录"
     echo "3. Screen 后台任务管理"
@@ -133,17 +134,17 @@ function page1(){
         2 ) page2 ;;
         3 ) page3 ;;
         4 ) page4 ;;
-        0 ) menu;;
+        0 ) menu
     esac
 }
 
 function page2(){
     echo "                            "
-    green "请选择你接下来的操作"
-    echo "1. Oracle 原生系统关闭防火墙"
-    echo "2. 修改登录方式为 root + 密码 登录"
-    echo "3. Screen 后台任务管理"
-    echo "4. 开启BBR"
+    green "请选择你准备安装的面板"
+    echo "                            "
+    echo "1. 安装宝塔面板"
+    echo "2. 安装x-ui面板"
+    echo "3. 安装aria2面板"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
@@ -151,18 +152,17 @@ function page2(){
         1 ) page1 ;;
         2 ) page2 ;;
         3 ) page3 ;;
-        4 ) page4 ;;
-        0 ) menu;;
+        0 ) menu
     esac
 }
 
 function page3(){
     echo "                            "
-    green "请选择你接下来的操作"
-    echo "1. Oracle 原生系统关闭防火墙"
-    echo "2. 修改登录方式为 root + 密码 登录"
-    echo "3. Screen 后台任务管理"
-    echo "4. 开启BBR"
+    green "请选择你接下来使用的脚本"
+    echo "                            "
+    echo "1. 使用Mack-a的脚本"
+    echo "2. 使用233boy的脚本"
+    echo "3. 使用hijk的脚本"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
@@ -170,18 +170,17 @@ function page3(){
         1 ) page1 ;;
         2 ) page2 ;;
         3 ) page3 ;;
-        4 ) page4 ;;
-        0 ) menu;;
+        0 ) menu
     esac
 }
 
 function page4(){
     echo "                            "
     green "请选择你接下来的操作"
-    echo "1. Oracle 原生系统关闭防火墙"
-    echo "2. 修改登录方式为 root + 密码 登录"
-    echo "3. Screen 后台任务管理"
-    echo "4. 开启BBR"
+    echo "                            "
+    echo "1. VPS测试（bench.sh）"
+    echo "2. 流媒体检测"
+    echo "3. VPS三网测速"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
@@ -189,27 +188,23 @@ function page4(){
         1 ) page1 ;;
         2 ) page2 ;;
         3 ) page3 ;;
-        4 ) page4 ;;
-        0 ) menu;;
+        0 ) menu
     esac
 }
 
 function page5(){
     echo "                            "
-    green "请选择你接下来的操作"
-    echo "1. Oracle 原生系统关闭防火墙"
-    echo "2. 修改登录方式为 root + 密码 登录"
-    echo "3. Screen 后台任务管理"
-    echo "4. 开启BBR"
+    green "请选择你需要的探针"
+    echo "                            "
+    echo "1. 哪吒面板"
+    echo "2. 可乐ServerStatus-Horatu"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
     case "$page1NumberInput" in
         1 ) page1 ;;
         2 ) page2 ;;
-        3 ) page3 ;;
-        4 ) page4 ;;
-        0 ) menu;;
+        0 ) menu
     esac
 }
 
