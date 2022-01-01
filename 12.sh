@@ -118,6 +118,10 @@ function warp(){
     wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh
 }
 
+function docker(){
+    curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+}
+
 # 第二页
 
 function bt(){
@@ -193,8 +197,66 @@ function aria2(){
     wget -N git.io/aria2.sh && chmod +x aria2.sh && bash aria2.sh
 }
 
+# 第三页
+
+function macka(){
+    wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
+}
+
+function boy233(){
+    bash <(curl -s -L https://git.io/v2ray.sh)
+}
+
+function hijk(){
+    bash <(curl -sL https://raw.githubusercontent.com/Misaka-blog/hijk-backup/master/xray.sh)
+}
+
+function tgMTProxy(){
+    mkdir /home/mtproxy && cd /home/mtproxy
+    curl -s -o mtproxy.sh https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh && chmod +x mtproxy.sh && bash mtproxy.sh
+    bash mtproxy.sh start
+}
+
+# 第四页
+
+function benchsh(){
+    wget -qO- bench.sh | bash
+}
+
+function mediaUnblockTest(){
+    bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh)
+}
+
+function chinaSpeedTest(){
+    bash <(curl -sSL "https://github.com/CoiaPrant/Speedtest/raw/main/speedtest-multi.sh")
+}
+
 function updateScript(){
     wget -N https://raw.githubusercontent.com/Misaka-blog/MisakaLinuxToolbox/master/MisakaToolbox.sh && chmod -R 777 MisakaToolbox.sh && bash MisakaToolbox.sh
+}
+
+# 第五页
+
+function nezha(){
+    curl -L https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh  -o nezha.sh && chmod +x nezha.sh
+    sudo ./nezha.sh
+}
+
+function serverstatus(){
+    wget -N https://raw.githubusercontent.com/cokemine/ServerStatus-Hotaru/master/status.sh
+    echo "                            "
+    green "请选择你需要安装的客户端类型"
+    echo "                            "
+    echo "1. 服务端"
+    echo "2. 监控端"
+    echo "0. 返回主页"
+    echo "                            "
+    read -p "请输入选项:" menuNumberInput1
+    case "$menuNumberInput1" in     
+        1 ) bash status.sh s ;;
+        2 ) bash status.sh c ;;
+        0 ) menu;;
+    esac
 }
 
 function menu(){
@@ -248,6 +310,7 @@ function page1(){
     echo "3. Screen 后台任务管理"
     echo "4. 开启BBR"
     echo "5. 启用WARP"
+    echo "6. 安装docker"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
@@ -257,6 +320,7 @@ function page1(){
         3 ) screenManager ;;
         4 ) bbr ;;
         5 ) warp ;;
+        6 ) docker ;;
         0 ) menu
     esac
 }
@@ -286,13 +350,15 @@ function page3(){
     echo "1. 使用Mack-a的脚本"
     echo "2. 使用233boy的脚本"
     echo "3. 使用hijk的脚本"
+    echo "4. 搭建Telegram MTProxy代理"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page3NumberInput
     case "$page3NumberInput" in
-        1 ) page1 ;;
-        2 ) page2 ;;
-        3 ) page3 ;;
+        1 ) macka ;;
+        2 ) boy233 ;;
+        3 ) hijk ;;
+        4 ) tgMTProxy ;;
         0 ) menu
     esac
 }
@@ -308,9 +374,9 @@ function page4(){
     echo "0. 返回主菜单"
     read -p "请输入选项:" page4NumberInput
     case "$page4NumberInput" in
-        1 ) page1 ;;
-        2 ) page2 ;;
-        3 ) page3 ;;
+        1 ) benchsh ;;
+        2 ) mediaUnblockTest ;;
+        3 ) chinaSpeedTest ;;
         0 ) menu
     esac
 }
@@ -325,8 +391,8 @@ function page5(){
     echo "0. 返回主菜单"
     read -p "请输入选项:" page5NumberInput
     case "$page5NumberInput" in
-        1 ) page1 ;;
-        2 ) page2 ;;
+        1 ) nezha ;;
+        2 ) serverstatus ;;
         0 ) menu
     esac
 }
