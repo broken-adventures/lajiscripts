@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="1.5"
+ver="2.0"
 changeLog="重构脚本，详细内容可看Github项目的思维导图"
 arch=`uname -m`
 virt=`systemd-detect-virt`
@@ -72,6 +72,50 @@ else
     green "sudo已安装"
 fi
 
+function oraclefirewall(){
+    if [ $release = "Centos" ]; then
+        systemctl stop oracle-cloud-agent
+        systemctl disable oracle-cloud-agent
+        systemctl stop oracle-cloud-agent-updater
+        systemctl disable oracle-cloud-agent-updater
+        systemctl stop firewalld.service
+        systemctl disable firewalld.service
+    else
+        iptables -P INPUT ACCEPT
+        iptables -P FORWARD ACCEPT
+        iptables -P OUTPUT ACCEPT
+        iptables -F
+        apt-get purge netfilter-persistent -y
+    fi
+}
+
+function rootLogin(){
+    wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/rootLogin@master/root.sh && chmod -R 777 root.sh && bash root.sh
+}
+
+function screenManager(){
+    wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/screenManager@master/screen.sh && chmod -R 777 screen.sh && bash screen.sh
+}
+
+function bbr(){
+    if [ ${virt} == "kvm" ]; then
+        wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+    fi
+    if [[ ${virt} == "lxc" || ${virt} == "openvz" ]]; then
+        if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
+            green "已开启TUN，准备安装针对OpenVZ / LXC架构的BBR"
+            wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
+        else
+            red "未开启TUN，请在VPS后台设置以开启TUN"
+            exit 1
+        fi
+    fi
+}
+
+function warp(){
+    wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh
+}
+
 function updateScript(){
     wget -N https://raw.githubusercontent.com/Misaka-blog/MisakaLinuxToolbox/master/MisakaToolbox.sh && chmod -R 777 MisakaToolbox.sh && bash MisakaToolbox.sh
 }
@@ -126,14 +170,16 @@ function page1(){
     echo "2. 修改登录方式为 root + 密码 登录"
     echo "3. Screen 后台任务管理"
     echo "4. 开启BBR"
+    echo "5. 启用WARP"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
     case "$page1NumberInput" in
-        1 ) page1 ;;
-        2 ) page2 ;;
-        3 ) page3 ;;
-        4 ) page4 ;;
+        1 ) oraclefirewall ;;
+        2 ) rootLogin ;;
+        3 ) screenManager ;;
+        4 ) bbr ;;
+        5 ) warp ;;
         0 ) menu
     esac
 }
