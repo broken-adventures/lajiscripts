@@ -73,7 +73,7 @@ else
 fi
 
 function updateScript(){
-
+    wget -N https://raw.githubusercontent.com/Misaka-blog/MisakaLinuxToolbox/master/MisakaToolbox.sh && chmod -R 777 MisakaToolbox.sh && bash MisakaToolbox.sh
 }
 
 function menu(){
