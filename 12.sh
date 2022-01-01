@@ -89,6 +89,8 @@ function oraclefirewall(){
     fi
 }
 
+#第一页
+
 function rootLogin(){
     wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/rootLogin@master/root.sh && chmod -R 777 root.sh && bash root.sh
 }
@@ -114,6 +116,81 @@ function bbr(){
 
 function warp(){
     wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh
+}
+
+# 第二页
+
+function bt(){
+    echo "                   "
+    green "请选择你需要安装的版本"
+    echo "                            "
+    echo "1. 开心版"
+    echo "2. 国际版"
+    echo "                            "
+    read -p "请输入选项:" btNumberInput
+    case "$btNumberInput" in     
+        1 ) btHappy;;
+        2 ) 
+            if [ $release = "Centos" ]; then
+                yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh forum
+            elif [ $release = "Debian" ]; then
+                wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh forum
+            else
+                wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh forum
+            fi
+        ;;
+        0 ) menu;;
+    esac
+}
+
+function btHappy(){
+    echo "                   "
+    green "请选择你需要安装的版本"
+    echo "                   "
+    echo "1. 专业版"
+    echo "2. 企业版"
+    echo "0. 返回主页"
+    echo "                            "
+    read -p "请输入选项:" btHappyNumberInput
+    case "$btHappyNumberInput" in     
+        1 ) 
+            if [ $release = "Centos" ]; then
+                yum install -y wget && wget -O install.sh http://download.moetas.com/ltd/install/install_6.0.sh && sh install.sh
+            elif [ $release = "Debian" ]; then
+                wget -O install.sh http://download.moetas.com/ltd/install/install-ubuntu_6.0.sh && bash install.sh
+            else
+                wget -O install.sh http://download.moetas.com/ltd/install/install-ubuntu_6.0.sh && sudo bash install.sh
+            fi
+        ;;
+        2 ) 
+            if [ $release = "Centos" ]; then
+                yum install -y wget && wget -O install.sh http://download.moetas.com/install/install_6.0.sh && sh install.sh
+            elif [ $release = "Debian" ]; then
+                wget -O install.sh http://download.moetas.com/install/install-ubuntu_6.0.sh && bash install.sh
+            else
+                wget -O install.sh http://download.moetas.com/install/install-ubuntu_6.0.sh && sudo bash install.sh
+            fi
+        ;;
+        0 ) menu;;
+    esac
+}
+
+function xui(){
+    bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
+}
+
+function aria2(){
+    if ! type ca-certificates >/dev/null 2>&1; then 
+        yellow "ca-certificates未安装，安装中"
+        if [ $release = "Centos" ]; then
+            yum -y update && yum install ca-certificates -y
+        else
+            apt-get update -y && apt-get install ca-certificates -y
+        fi	   
+    else
+        green "ca-certificates已安装"
+    fi
+    wget -N git.io/aria2.sh && chmod +x aria2.sh && bash aria2.sh
 }
 
 function updateScript(){
@@ -193,11 +270,11 @@ function page2(){
     echo "3. 安装aria2面板"
     echo "                            "
     echo "0. 返回主菜单"
-    read -p "请输入选项:" page1NumberInput
-    case "$page1NumberInput" in
-        1 ) page1 ;;
-        2 ) page2 ;;
-        3 ) page3 ;;
+    read -p "请输入选项:" page2NumberInput
+    case "$page2NumberInput" in
+        1 ) bt ;;
+        2 ) x-ui ;;
+        3 ) aria2 ;;
         0 ) menu
     esac
 }
@@ -211,8 +288,8 @@ function page3(){
     echo "3. 使用hijk的脚本"
     echo "                            "
     echo "0. 返回主菜单"
-    read -p "请输入选项:" page1NumberInput
-    case "$page1NumberInput" in
+    read -p "请输入选项:" page3NumberInput
+    case "$page3NumberInput" in
         1 ) page1 ;;
         2 ) page2 ;;
         3 ) page3 ;;
@@ -229,8 +306,8 @@ function page4(){
     echo "3. VPS三网测速"
     echo "                            "
     echo "0. 返回主菜单"
-    read -p "请输入选项:" page1NumberInput
-    case "$page1NumberInput" in
+    read -p "请输入选项:" page4NumberInput
+    case "$page4NumberInput" in
         1 ) page1 ;;
         2 ) page2 ;;
         3 ) page3 ;;
@@ -246,8 +323,8 @@ function page5(){
     echo "2. 可乐ServerStatus-Horatu"
     echo "                            "
     echo "0. 返回主菜单"
-    read -p "请输入选项:" page1NumberInput
-    case "$page1NumberInput" in
+    read -p "请输入选项:" page5NumberInput
+    case "$page5NumberInput" in
         1 ) page1 ;;
         2 ) page2 ;;
         0 ) menu
