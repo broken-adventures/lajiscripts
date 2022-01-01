@@ -119,23 +119,98 @@ function menu(){
 }
 
 function page1(){
-
+    echo "                            "
+    green "请选择你接下来的操作"
+    echo "1. Oracle 原生系统关闭防火墙"
+    echo "2. 修改登录方式为 root + 密码 登录"
+    echo "3. Screen 后台任务管理"
+    echo "4. 开启BBR"
+    echo "                            "
+    echo "0. 返回主菜单"
+    read -p "请输入选项:" page1NumberInput
+    case "$page1NumberInput" in
+        1 ) page1 ;;
+        2 ) page2 ;;
+        3 ) page3 ;;
+        4 ) page4 ;;
+        0 ) menu;;
+    esac
 }
 
 function page2(){
-
+    echo "                            "
+    green "请选择你接下来的操作"
+    echo "1. Oracle 原生系统关闭防火墙"
+    echo "2. 修改登录方式为 root + 密码 登录"
+    echo "3. Screen 后台任务管理"
+    echo "4. 开启BBR"
+    echo "                            "
+    echo "0. 返回主菜单"
+    read -p "请输入选项:" page1NumberInput
+    case "$page1NumberInput" in
+        1 ) page1 ;;
+        2 ) page2 ;;
+        3 ) page3 ;;
+        4 ) page4 ;;
+        0 ) menu;;
+    esac
 }
 
 function page3(){
-
+    echo "                            "
+    green "请选择你接下来的操作"
+    echo "1. Oracle 原生系统关闭防火墙"
+    echo "2. 修改登录方式为 root + 密码 登录"
+    echo "3. Screen 后台任务管理"
+    echo "4. 开启BBR"
+    echo "                            "
+    echo "0. 返回主菜单"
+    read -p "请输入选项:" page1NumberInput
+    case "$page1NumberInput" in
+        1 ) page1 ;;
+        2 ) page2 ;;
+        3 ) page3 ;;
+        4 ) page4 ;;
+        0 ) menu;;
+    esac
 }
 
 function page4(){
-
+    echo "                            "
+    green "请选择你接下来的操作"
+    echo "1. Oracle 原生系统关闭防火墙"
+    echo "2. 修改登录方式为 root + 密码 登录"
+    echo "3. Screen 后台任务管理"
+    echo "4. 开启BBR"
+    echo "                            "
+    echo "0. 返回主菜单"
+    read -p "请输入选项:" page1NumberInput
+    case "$page1NumberInput" in
+        1 ) page1 ;;
+        2 ) page2 ;;
+        3 ) page3 ;;
+        4 ) page4 ;;
+        0 ) menu;;
+    esac
 }
 
 function page5(){
-
+    echo "                            "
+    green "请选择你接下来的操作"
+    echo "1. Oracle 原生系统关闭防火墙"
+    echo "2. 修改登录方式为 root + 密码 登录"
+    echo "3. Screen 后台任务管理"
+    echo "4. 开启BBR"
+    echo "                            "
+    echo "0. 返回主菜单"
+    read -p "请输入选项:" page1NumberInput
+    case "$page1NumberInput" in
+        1 ) page1 ;;
+        2 ) page2 ;;
+        3 ) page3 ;;
+        4 ) page4 ;;
+        0 ) menu;;
+    esac
 }
 
 menu
