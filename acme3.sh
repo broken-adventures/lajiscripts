@@ -1,7 +1,5 @@
 #!/bin/bash
 
-IP=$(curl ipget.net)
-
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
 }
@@ -33,7 +31,8 @@ elif cat /proc/version | grep -q -E -i "ubuntu"; then
     release="Ubuntu"
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
     release="Centos"
-fi	   
+fi
+[[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y' 	   
 
 function acme() {
 	systemctl stop nginx >/dev/null 2>&1
