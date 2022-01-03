@@ -34,6 +34,11 @@ elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 fi
 [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y' 	   
 
+function tls(){
+	bash /root/.acme.sh/acme.sh --installcert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
+	[[ -f /root/cert.crt && -f /root/private.key ]] && green "恭喜，tls证书申请成功！域名证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" || red "遗憾，tls证书申请失败，请查看80端口是否被占用（先lsof -i :80 后kill -9 进程id）或者更换下二级域名称再尝试执行脚本！"
+}
+
 function acme() {
 	systemctl stop nginx >/dev/null 2>&1
 	wg-quick down wgcf >/dev/null 2>&1
@@ -59,10 +64,6 @@ function acme() {
 			yellow "2、请检查域名解析网站设置的IP是否正确"
 		fi
 	fi
-	tls() {
-		bash /root/.acme.sh/acme.sh --installcert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
-		[[ -f /root/cert.crt && -f /root/private.key ]] && green "恭喜，tls证书申请成功！域名证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" || red "遗憾，tls证书申请失败，请查看80端口是否被占用（先lsof -i :80 后kill -9 进程id）或者更换下二级域名称再尝试执行脚本！"
-	}
 	wg-quick up wgcf >/dev/null 2>&1
 	systemctl start nginx >/dev/null 2>&1
 }
