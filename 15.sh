@@ -217,6 +217,10 @@ function tgMTProxy(){
     bash mtproxy.sh start
 }
 
+function iptablesUtils(){
+    wget --no-check-certificate -qO natcfg.sh https://raw.githubusercontent.com/arloor/iptablesUtils/master/natcfg.sh && bash natcfg.sh
+}
+
 function easyGost(){
     wget --no-check-certificate -O gost.sh https://raw.githubusercontent.com/KANIKIG/Multi-EasyGost/master/gost.sh && chmod +x gost.sh && ./gost.sh
 }
