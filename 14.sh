@@ -369,6 +369,7 @@ function page3(){
     echo "2. 使用233boy的脚本"
     echo "3. 使用hijk的脚本"
     echo "4. 搭建Telegram MTProxy代理"
+    echo "5. GOST小白脚本"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page3NumberInput
@@ -377,6 +378,7 @@ function page3(){
         2 ) boy233 ;;
         3 ) hijk ;;
         4 ) tgMTProxy ;;
+        5 ) easyGost ;;
         0 ) menu
     esac
 }
