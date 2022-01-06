@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.1"
-changeLog="新增一些VPS测试脚本"
+ver="2.0.2"
+changeLog="新增中转脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
