@@ -217,6 +217,10 @@ function tgMTProxy(){
     bash mtproxy.sh start
 }
 
+function easyGost(){
+    wget --no-check-certificate -O gost.sh https://raw.githubusercontent.com/KANIKIG/Multi-EasyGost/master/gost.sh && chmod +x gost.sh && ./gost.sh
+}
+
 # 第四页
 
 function vpsBench(){
