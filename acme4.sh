@@ -47,28 +47,28 @@ stty $SAVEDSTTY
 }
 
 back(){
-white "------------------------------------------------------------------------------------------------"
-white " 回主菜单，请按任意键"
-white " 退出脚本，请按Ctrl+C"
-exit 0
+    white "------------------------------------------------------------------------------------------------"
+    white " 回主菜单，请按任意键"
+    white " 退出脚本，请按Ctrl+C"
+    exit 0
 }
 
 checktls(){
-if [[ -f /root/cert.crt && -f /root/private.key ]]; then
-if [[ -s /root/cert.crt && -s /root/private.key ]]; then
-green "恭喜，域名证书申请成功！域名证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" 
-yellow "证书crt路径如下，可直接复制"
-green "/root/cert.crt"
-yellow "私钥key路径如下，可直接复制"
-green "/root/private.key"
-else
-red "遗憾，域名证书申请失败"
-green "建议如下（按顺序）："
-yellow "1、检测防火墙是否打开"
-yellow "2、请查看80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
-yellow "3、更换下二级域名名称再尝试执行脚本"
-fi
-fi
+    if [[ -f /root/cert.crt && -f /root/private.key ]]; then
+        if [[ -s /root/cert.crt && -s /root/private.key ]]; then
+            green "恭喜，域名证书申请成功！域名证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" 
+            yellow "证书crt路径如下，可直接复制"
+            green "/root/cert.crt"
+            yellow "私钥key路径如下，可直接复制"
+            green "/root/private.key"
+        else
+            red "遗憾，域名证书申请失败"
+            green "建议如下（按顺序）："
+            yellow "1、检测防火墙是否打开"
+            yellow "2、请查看80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
+            yellow "3、更换下二级域名名称再尝试执行脚本"
+        fi
+    fi
 }
 acme(){
 systemctl stop nginx >/dev/null 2>&1
