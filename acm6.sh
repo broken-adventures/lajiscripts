@@ -63,11 +63,10 @@ acme(){
     [[ $(type -P binutils) ]] || $yumapt install binutils
     v6=$(curl -s6m3 https://ip.gs)
     v4=$(curl -s4m3 https://ip.gs)
-    auto=`head -n 50 /dev/urandom | sed 's/[^a-z]//g' | strings -n 4 | tr '[:upper:]' '[:lower:]' | head -1`
-    curl https://get.acme.sh | sh -s email=$auto@gmail.com
+    read -p "请输入你注册的邮箱：" acmeEmail
+    curl https://get.acme.sh | sh -s email=$acmeEmail@gmail.com
     source ~/.bashrc
     bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
-    yellow "注册acme，创建邮箱的随机前缀：$auto@gmail.com"
     read -p "请输入解析完成的域名:" domain
     green "已输入的域名:$domain" && sleep 1
     domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$domain")
