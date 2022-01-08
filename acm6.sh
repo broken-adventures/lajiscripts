@@ -156,6 +156,7 @@ start_menu(){
     green "2.  查询、撤销并删除当前已申请的域名证书"
     green "3.  手动续期域名证书"
     green "0.  退出"
+    echo "         "
     read -p "请输入数字:" NumberInput
     case "$NumberInput" in     
         1 ) acme;;
