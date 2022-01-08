@@ -42,14 +42,13 @@ function uninstall(){
 }
 
 function main(){
-        clear
+    clear
     red "=================================="
     echo "                           "
     red "    Acme.sh 域名证书一键申请脚本     "
     red "          by 小御坂的破站           "
     echo "                           "
     red "  Site: https://blog.misaka.rest  "
-    red " 本脚本在kkkyg的原作上进行二次修改 "
     echo "                           "
     red "=================================="
     echo "                           "
@@ -66,3 +65,5 @@ function main(){
         0 ) exit 1      
     esac
 }
+
+main
