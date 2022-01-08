@@ -33,7 +33,7 @@ function install(){
 }
 
 function makeConfig(){
-    
+    echo "112233"
 }
 
 function uninstall(){
