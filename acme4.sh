@@ -70,24 +70,22 @@ checktls(){
         fi
     fi
 }
-acme(){
-systemctl stop nginx >/dev/null 2>&1
-systemctl stop wg-quick@wgcf >/dev/null 2>&1	   
-green "安装必要依赖及acme……"
-[[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
-[[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
-[[ $(type -P socat) ]] || $yumapt install socat
-[[ $(type -P binutils) ]] || $yumapt install binutils
-v6=$(curl -s6m3 https://ip.gs)
-v4=$(curl -s4m3 https://ip.gs)
-auto=`head -n 50 /dev/urandom | sed 's/[^a-z]//g' | strings -n 4 | tr '[:upper:]' '[:lower:]' | head -1`
-curl https://get.acme.sh | sh -s email=$auto@gmail.com
-source ~/.bashrc
-bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
-yellow "注册acme，创建邮箱的随机前缀：$auto@gmail.com"
-read -p "请输入解析完成的域名:" ym
-green "已输入的域名:$ym" && sleep 1
-domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$ym")
+acme(){   
+    green "安装必要依赖及acme……"
+    [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
+    [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
+    [[ $(type -P socat) ]] || $yumapt install socat
+    [[ $(type -P binutils) ]] || $yumapt install binutils
+    v6=$(curl -s6m3 https://ip.gs)
+    v4=$(curl -s4m3 https://ip.gs)
+    auto=`head -n 50 /dev/urandom | sed 's/[^a-z]//g' | strings -n 4 | tr '[:upper:]' '[:lower:]' | head -1`
+    curl https://get.acme.sh | sh -s email=$auto@gmail.com
+    source ~/.bashrc
+    bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
+    yellow "注册acme，创建邮箱的随机前缀：$auto@gmail.com"
+    read -p "请输入解析完成的域名:" ym
+    green "已输入的域名:$ym" && sleep 1
+    domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$ym")
 if [[ -n $(echo $domainIP | grep nginx) ]]; then
 domainIP=$(curl -s ipget.net/?ip="$ym")
 if [[ $domainIP = $v4 ]]; then
