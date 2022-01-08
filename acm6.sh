@@ -33,7 +33,7 @@ elif cat /proc/version | grep -q -E -i "ubuntu"; then
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
     release="Centos"
 else 
-    red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统" && exit 1
+    red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统" && exit 1    
 fi
 
 checktls(){
@@ -149,6 +149,7 @@ start_menu(){
     red "          by 小御坂的破站           "
     echo "                           "
     red "  Site: https://blog.misaka.rest  "
+    red " 本脚本在kkkyg的原作上进行二次修改 "
     echo "                           "
     red "=================================="
     echo "                           "
