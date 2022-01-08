@@ -86,46 +86,45 @@ acme(){
     read -p "请输入解析完成的域名:" ym
     green "已输入的域名:$ym" && sleep 1
     domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$ym")
-if [[ -n $(echo $domainIP | grep nginx) ]]; then
-domainIP=$(curl -s ipget.net/?ip="$ym")
-if [[ $domainIP = $v4 ]]; then
-yellow "当前二级域名解析到的IPV4：$domainIP" && sleep 1
-bash /root/.acme.sh/acme.sh  --issue -d ${ym} --standalone -k ec-256 --server letsencrypt
-fi
-if [[ $domainIP = $v6 ]]; then
-yellow "当前二级域名解析到的IPV6：$domainIP" && sleep 1
-bash /root/.acme.sh/acme.sh  --issue -d ${ym} --standalone -k ec-256 --server letsencrypt --listen-v6
-fi
-if [[ -n $(echo $domainIP | grep nginx) ]]; then
-yellow "域名解析无效，请检查二级域名是否填写正确或稍等几分钟等待解析完成再执行脚本"
-back
-elif [[ -n $(echo $domainIP | grep ":") || -n $(echo $domainIP | grep ".") ]]; then
-if [[ $domainIP != $v4 ]] && [[ $domainIP != $v6 ]]; then
-red "当前二级域名解析的IP与当前VPS使用的IP不匹配"
-green "建议如下："
-yellow "1、请确保Cloudflare小黄云关闭状态(仅限DNS)，其他域名解析网站设置同理"
-yellow "2、请检查域名解析网站设置的IP是否正确"
-back
-fi
-fi
-else
-read -p "当前为泛域名申请证书，请复制Cloudflarer的Global API Key:" GAK
-export CF_Key="$GAK"
-read -p "当前为泛域名申请证书，请输入Cloudflarer的登录邮箱地址:" CFemail
-export CF_Email="$CFemail"
-if [[ $domainIP = $v4 ]]; then
-yellow "当前泛域名解析到的IPV4：$domainIP" && sleep 1
-bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${ym} -d *.${ym} -k ec-256 --server letsencrypt
-fi
-if [[ $domainIP = $v6 ]]; then
-yellow "当前泛域名解析到的IPV6：$domainIP" && sleep 1
-bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${ym} -d *.${ym} -k ec-256 --server letsencrypt --listen-v6
-fi
-fi
-bash /root/.acme.sh/acme.sh --install-cert -d ${ym} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
-checktls
-systemctl start wg-quick@wgcf >/dev/null 2>&1
-back
+    if [[ -n $(echo $domainIP | grep nginx) ]]; then
+    domainIP=$(curl -s ipget.net/?ip="$ym")
+    if [[ $domainIP = $v4 ]]; then
+    yellow "当前二级域名解析到的IPV4：$domainIP" && sleep 1
+    bash /root/.acme.sh/acme.sh  --issue -d ${ym} --standalone -k ec-256 --server letsencrypt
+    fi
+    if [[ $domainIP = $v6 ]]; then
+    yellow "当前二级域名解析到的IPV6：$domainIP" && sleep 1
+    bash /root/.acme.sh/acme.sh  --issue -d ${ym} --standalone -k ec-256 --server letsencrypt --listen-v6
+    fi
+    if [[ -n $(echo $domainIP | grep nginx) ]]; then
+    yellow "域名解析无效，请检查二级域名是否填写正确或稍等几分钟等待解析完成再执行脚本"
+    back
+    elif [[ -n $(echo $domainIP | grep ":") || -n $(echo $domainIP | grep ".") ]]; then
+    if [[ $domainIP != $v4 ]] && [[ $domainIP != $v6 ]]; then
+    red "当前二级域名解析的IP与当前VPS使用的IP不匹配"
+    green "建议如下："
+    yellow "1、请确保Cloudflare小黄云关闭状态(仅限DNS)，其他域名解析网站设置同理"
+    yellow "2、请检查域名解析网站设置的IP是否正确"
+    back
+    fi
+    fi
+    else
+    read -p "当前为泛域名申请证书，请复制Cloudflarer的Global API Key:" GAK
+    export CF_Key="$GAK"
+    read -p "当前为泛域名申请证书，请输入Cloudflarer的登录邮箱地址:" CFemail
+    export CF_Email="$CFemail"
+    if [[ $domainIP = $v4 ]]; then
+    yellow "当前泛域名解析到的IPV4：$domainIP" && sleep 1
+    bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${ym} -d *.${ym} -k ec-256 --server letsencrypt
+    fi
+    if [[ $domainIP = $v6 ]]; then
+    yellow "当前泛域名解析到的IPV6：$domainIP" && sleep 1
+    bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${ym} -d *.${ym} -k ec-256 --server letsencrypt --listen-v6
+    fi
+    fi
+    bash /root/.acme.sh/acme.sh --install-cert -d ${ym} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
+    checktls
+    back
 }
 
 Certificate(){
