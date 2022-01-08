@@ -36,23 +36,6 @@ else
     red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统" && exit 1
 fi
 
-get_char(){
-SAVEDSTTY=`stty -g`
-stty -echo
-stty cbreak
-dd if=/dev/tty bs=1 count=1 2> /dev/null
-stty -raw
-stty echo
-stty $SAVEDSTTY
-}
-
-back(){
-    white "------------------------------------------------------------------------------------------------"
-    white " 回主菜单，请按任意键"
-    white " 退出脚本，请按Ctrl+C"
-    exit 0
-}
-
 checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
@@ -61,12 +44,14 @@ checktls(){
             green "/root/cert.crt"
             yellow "私钥key路径如下，可直接复制"
             green "/root/private.key"
+            exit 0
         else
             red "遗憾，域名证书申请失败"
             green "建议如下（按顺序）："
             yellow "1、检测防火墙是否打开"
             yellow "2、请查看80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
             yellow "3、更换下二级域名名称再尝试执行脚本"
+            exit 0
         fi
     fi
 }
@@ -83,29 +68,29 @@ acme(){
     source ~/.bashrc
     bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
     yellow "注册acme，创建邮箱的随机前缀：$auto@gmail.com"
-    read -p "请输入解析完成的域名:" ym
-    green "已输入的域名:$ym" && sleep 1
-    domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$ym")
+    read -p "请输入解析完成的域名:" domain
+    green "已输入的域名:$domain" && sleep 1
+    domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$domain")
     if [[ -n $(echo $domainIP | grep nginx) ]]; then
-    domainIP=$(curl -s ipget.net/?ip="$ym")
+    domainIP=$(curl -s ipget.net/?ip="$domain")
         if [[ $domainIP = $v4 ]]; then
             yellow "当前二级域名解析到的IPV4：$domainIP" && sleep 1
-            bash /root/.acme.sh/acme.sh  --issue -d ${ym} --standalone -k ec-256 --server letsencrypt
+            bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt
         fi
         if [[ $domainIP = $v6 ]]; then
             yellow "当前二级域名解析到的IPV6：$domainIP" && sleep 1
-            bash /root/.acme.sh/acme.sh  --issue -d ${ym} --standalone -k ec-256 --server letsencrypt --listen-v6
+            bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
         fi
         if [[ -n $(echo $domainIP | grep nginx) ]]; then
             yellow "域名解析无效，请检查二级域名是否填写正确或稍等几分钟等待解析完成再执行脚本"
-            back
+            exit 0
         elif [[ -n $(echo $domainIP | grep ":") || -n $(echo $domainIP | grep ".") ]]; then
             if [[ $domainIP != $v4 ]] && [[ $domainIP != $v6 ]]; then
             red "当前二级域名解析的IP与当前VPS使用的IP不匹配"
             green "建议如下："
             yellow "1、请确保Cloudflare小黄云关闭状态(仅限DNS)，其他域名解析网站设置同理"
             yellow "2、请检查域名解析网站设置的IP是否正确"
-            back
+            exit 0
             fi
         fi
         else
@@ -115,44 +100,44 @@ acme(){
         export CF_Email="$CFemail"
         if [[ $domainIP = $v4 ]]; then
             yellow "当前泛域名解析到的IPV4：$domainIP" && sleep 1
-            bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${ym} -d *.${ym} -k ec-256 --server letsencrypt
+            bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt
         fi
         if [[ $domainIP = $v6 ]]; then
             yellow "当前泛域名解析到的IPV6：$domainIP" && sleep 1
-            bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${ym} -d *.${ym} -k ec-256 --server letsencrypt --listen-v6
+            bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt --listen-v6
         fi
     fi
-    bash /root/.acme.sh/acme.sh --install-cert -d ${ym} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
+    bash /root/.acme.sh/acme.sh --install-cert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
     checktls
-    back
+    exit 0
 }
 
 Certificate(){
-    [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh证书申请，无法执行" && back
+    [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh证书申请，无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
-    read -p "请输入要撤销并删除的域名证书（复制Main_Domain下显示的域名）:" ym
-    if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $ym) ]]; then
-        bash /root/.acme.sh/acme.sh --revoke -d ${ym} --ecc
-        bash /root/.acme.sh/acme.sh --remove -d ${ym} --ecc
-        green "撤销并删除${ym}域名证书成功"
-        back
+    read -p "请输入要撤销并删除的域名证书（复制Main_Domain下显示的域名）:" domain
+    if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
+        bash /root/.acme.sh/acme.sh --revoke -d ${domain} --ecc
+        bash /root/.acme.sh/acme.sh --remove -d ${domain} --ecc
+        green "撤销并删除${domain}域名证书成功"
+        exit 0
     else
-        red "未找到你输入的${ym}域名证书，请自行核实！"
-        back
+        red "未找到你输入的${domain}域名证书，请自行核实！"
+        exit 0
     fi
 }
 
 acmerenew(){
-    [[ -z $(acme.sh -v) ]] && yellow "未安装acme.sh证书申请，无法执行" && back
+    [[ -z $(acme.sh -v) ]] && yellow "未安装acme.sh证书申请，无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
-    read -p "请输入要续期的域名证书（复制Main_Domain下显示的域名）:" ym
-    if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $ym) ]]; then
-        bash /root/.acme.sh/acme.sh --renew -d ${ym} --force --ecc
+    read -p "请输入要续期的域名证书（复制Main_Domain下显示的域名）:" domain
+    if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
+        bash /root/.acme.sh/acme.sh --renew -d ${domain} --force --ecc
         checktls
-        back
+        exit 0
     else
-        red "未找到你输入的${ym}域名证书，请自行核实！"
-        back
+        red "未找到你输入的${domain}域名证书，请自行核实！"
+        exit 0
     fi
 }
 
