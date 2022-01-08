@@ -158,10 +158,19 @@ acmerenew(){
 
 start_menu(){
     clear
-    green " 1.  首次申请证书（自动识别单域名与泛域名） "
-    green " 2.  查询、撤销并删除当前已申请的域名证书 "
-    green " 3.  手动续期域名证书 "
-    green " 0.  退出 "
+    red "=================================="
+    echo "                           "
+    red "    Acme.sh 域名证书一键申请脚本     "
+    red "          by 小御坂的破站           "
+    echo "                           "
+    red "  Site: https://blog.misaka.rest  "
+    echo "                           "
+    red "=================================="
+    echo "                           "
+    green "1.  首次申请证书（自动识别单域名与泛域名）"
+    green "2.  查询、撤销并删除当前已申请的域名证书"
+    green "3.  手动续期域名证书"
+    green "0.  退出"
     read -p "请输入数字:" NumberInput
     case "$NumberInput" in     
         1 ) acme;;
