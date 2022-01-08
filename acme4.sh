@@ -1,26 +1,39 @@
 #!/usr/bin/env bash
 
-red(){ echo -e "\033[31m\033[01m$1\033[0m";}
-green(){ echo -e "\033[32m\033[01m$1\033[0m";}
-yellow(){ echo -e "\033[33m\033[01m$1\033[0m";}
-white(){ echo -e "\033[37m\033[01m$1\033[0m";}
+red(){
+    echo -e "\033[31m\033[01m$1\033[0m";
+}
+
+green(){
+    echo -e "\033[32m\033[01m$1\033[0m";
+}
+
+yellow(){
+    echo -e "\033[33m\033[01m$1\033[0m";
+}
+
+white(){
+    echo -e "\033[37m\033[01m$1\033[0m";
+}
+
 [[ $EUID -ne 0 ]] && yellow "请以root模式运行脚本" && exit 1
+
 if [[ -f /etc/redhat-release ]]; then
-release="Centos"
+    release="Centos"
 elif cat /etc/issue | grep -q -E -i "debian"; then
-release="Debian"
+    release="Debian"
 elif cat /etc/issue | grep -q -E -i "ubuntu"; then
-release="Ubuntu"
+    release="Ubuntu"
 elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
-release="Centos"
+    release="Centos"
 elif cat /proc/version | grep -q -E -i "debian"; then
-release="Debian"
+    release="Debian"
 elif cat /proc/version | grep -q -E -i "ubuntu"; then
-release="Ubuntu"
+    release="Ubuntu"
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
-release="Centos"
+    release="Centos"
 else 
-red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统" && exit 1
+    red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统" && exit 1
 fi
 
 get_char(){
