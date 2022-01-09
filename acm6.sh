@@ -40,9 +40,9 @@ checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
             green "恭喜，域名证书申请成功！域名证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" 
-            yellow "证书crt路径如下，可直接复制"
+            yellow "证书crt路径如下："
             green "/root/cert.crt"
-            yellow "私钥key路径如下，可直接复制"
+            yellow "私钥key路径如下："
             green "/root/private.key"
             exit 0
         else
@@ -51,6 +51,8 @@ checktls(){
             yellow "1、检测防火墙是否打开"
             yellow "2、请查看80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
             yellow "3、更换下二级域名名称再尝试执行脚本"
+            yellow "4. 关闭nginx等网站运行环境"
+            yellow "5. 关闭WARP"
             exit 0
         fi
     fi
@@ -148,7 +150,6 @@ start_menu(){
     red "          by 小御坂的破站           "
     echo "                           "
     red "  Site: https://blog.misaka.rest  "
-    red " 本脚本在kkkyg的原作上进行二次修改 "
     echo "                           "
     red "=================================="
     echo "                           "
