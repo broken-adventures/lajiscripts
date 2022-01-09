@@ -36,7 +36,7 @@ else
     red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统" && exit 1    
 fi
 
-checktls(){
+function checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
             green "恭喜，域名证书申请成功！域名证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" 
@@ -57,7 +57,8 @@ checktls(){
         fi
     fi
 }
-acme(){   
+
+function acme(){   
     green "安装必要依赖及acme……"
     [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
     [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
@@ -113,7 +114,7 @@ acme(){
     exit 0
 }
 
-Certificate(){
+function Certificate(){
     [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh证书申请，无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要撤销并删除的域名证书（复制Main_Domain下显示的域名）:" domain
@@ -128,7 +129,7 @@ Certificate(){
     fi
 }
 
-acmerenew(){
+function acmerenew(){
     [[ -z $(acme.sh -v) ]] && yellow "未安装acme.sh证书申请，无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要续期的域名证书（复制Main_Domain下显示的域名）:" domain
@@ -142,7 +143,7 @@ acmerenew(){
     fi
 }
 
-start_menu(){
+function start_menu(){
     clear
     red "=================================="
     echo "                           "
@@ -165,5 +166,6 @@ start_menu(){
         3 ) acmerenew;;
         0 ) exit 1      
     esac
-}   
-start_menu "first" 
+}
+
+start_menu
