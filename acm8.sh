@@ -40,10 +40,8 @@ function checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
             green "证书申请成功！证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" 
-            yellow "证书crt路径如下："
-            green "/root/cert.crt"
-            yellow "私钥key路径如下："
-            green "/root/private.key"
+            yellow "证书crt路径如下：/root/cert.crt"
+            yellow "私钥key路径如下：/root/private.key"
             exit 0
         else
             red "遗憾，证书申请失败"
