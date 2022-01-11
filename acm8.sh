@@ -115,7 +115,7 @@ function acme(){
 function Certificate(){
     [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
-    read -p "请输入要撤销并删除的域名证书（复制Main_Domain下显示的域名）:" domain
+    read -p "请输入要撤销的域名证书（复制Main_Domain下显示的域名）:" domain
     if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
         bash /root/.acme.sh/acme.sh --revoke -d ${domain} --ecc
         bash /root/.acme.sh/acme.sh --remove -d ${domain} --ecc
