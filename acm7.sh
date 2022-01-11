@@ -66,7 +66,7 @@ function acme(){
     [[ $(type -P binutils) ]] || $yumapt install binutils
     v6=$(curl -s6m3 https://ip.gs)
     v4=$(curl -s4m3 https://ip.gs)
-    read -p "请输入你注册的邮箱：" acmeEmail
+    read -p "请输入注册邮箱：" acmeEmail
     curl https://get.acme.sh | sh -s email=$acmeEmail@gmail.com
     source ~/.bashrc
     bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
