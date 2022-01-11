@@ -16,7 +16,7 @@ white(){
     echo -e "\033[37m\033[01m$1\033[0m";
 }
 
-[[ $EUID -ne 0 ]] && yellow "请以root模式运行脚本" && exit 1
+[[ $EUID -ne 0 ]] && yellow "请在root用户下运行脚本" && exit 1
 
 if [[ -f /etc/redhat-release ]]; then
     release="Centos"
