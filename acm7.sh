@@ -143,7 +143,7 @@ function acmerenew(){
     fi
 }
 
-function start_menu(){
+function menu(){
     clear
     red "=================================="
     echo "                           "
@@ -168,4 +168,4 @@ function start_menu(){
     esac
 }
 
-start_menu
+menu
