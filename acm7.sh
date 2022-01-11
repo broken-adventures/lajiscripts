@@ -88,9 +88,9 @@ function acme(){
             exit 0
         elif [[ -n $(echo $domainIP | grep ":") || -n $(echo $domainIP | grep ".") ]]; then
             if [[ $domainIP != $v4 ]] && [[ $domainIP != $v6 ]]; then
-            red "当前二级域名解析的IP与当前VPS使用的IP不匹配"
+            red "当前二级域名解析的IP与当前VPS的IP不匹配"
             green "建议如下："
-            yellow "1、请确保Cloudflare小黄云关闭状态(仅限DNS)，其他域名解析网站设置同理"
+            yellow "1、请确保Cloudflare小云朵为关闭状态(仅限DNS)，其他域名解析网站设置同理"
             yellow "2、请检查域名解析网站设置的IP是否正确"
             exit 0
             fi
