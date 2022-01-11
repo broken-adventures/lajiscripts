@@ -96,7 +96,7 @@ function acme(){
             fi
         fi
         else
-        read -p "当前为泛域名申请证书，请复输入loudflare Global API Key:" GAK
+        read -p "当前为泛域名申请证书，请输入loudflare Global API Key:" GAK
         export CF_Key="$GAK"
         read -p "当前为泛域名申请证书，请输入Cloudflarer的登录邮箱：" CFemail
         export CF_Email="$CFemail"
