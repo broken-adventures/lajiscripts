@@ -164,7 +164,7 @@ function start_menu(){
         1 ) acme;;
         2 ) Certificate;;
         3 ) acmerenew;;
-        0 ) exit 1      
+        0 ) exit 0    
     esac
 }
 
