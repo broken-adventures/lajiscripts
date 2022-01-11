@@ -96,9 +96,9 @@ function acme(){
             fi
         fi
         else
-        read -p "当前为泛域名申请证书，请输入loudflare Global API Key:" GAK
+        read -p "当前为泛域名申请证书，请输入Cloudflare Global API Key:" GAK
         export CF_Key="$GAK"
-        read -p "当前为泛域名申请证书，请输入Cloudflarer的登录邮箱：" CFemail
+        read -p "当前为泛域名申请证书，请输入Cloudflare登录邮箱：" CFemail
         export CF_Email="$CFemail"
         if [[ $domainIP = $v4 ]]; then
             yellow "当前泛域名解析到的IPV4：$domainIP" && sleep 1
