@@ -76,11 +76,11 @@ function acme(){
     if [[ -n $(echo $domainIP | grep nginx) ]]; then
     domainIP=$(curl -s ipget.net/?ip="$domain")
         if [[ $domainIP = $v4 ]]; then
-            yellow "当前二级域名解析到的IPV4：$domainIP" && sleep 1
+            yellow "当前二级域名解析的IPV4：$domainIP" && sleep 1
             bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt
         fi
         if [[ $domainIP = $v6 ]]; then
-            yellow "当前二级域名解析到的IPV6：$domainIP" && sleep 1
+            yellow "当前二级域名解析的IPV6：$domainIP" && sleep 1
             bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
         fi
         if [[ -n $(echo $domainIP | grep nginx) ]]; then
@@ -101,11 +101,11 @@ function acme(){
         read -p "当前为泛域名申请证书，请输入Cloudflare登录邮箱：" CFemail
         export CF_Email="$CFemail"
         if [[ $domainIP = $v4 ]]; then
-            yellow "当前泛域名解析到的IPV4：$domainIP" && sleep 1
+            yellow "当前泛域名解析的IPV4：$domainIP" && sleep 1
             bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt
         fi
         if [[ $domainIP = $v6 ]]; then
-            yellow "当前泛域名解析到的IPV6：$domainIP" && sleep 1
+            yellow "当前泛域名解析的IPV6：$domainIP" && sleep 1
             bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt --listen-v6
         fi
     fi
