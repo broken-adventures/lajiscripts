@@ -115,7 +115,7 @@ function acme(){
 }
 
 function Certificate(){
-    [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh证书申请，无法执行" && exit 0
+    [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要撤销并删除的域名证书（复制Main_Domain下显示的域名）:" domain
     if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
@@ -130,7 +130,7 @@ function Certificate(){
 }
 
 function acmerenew(){
-    [[ -z $(acme.sh -v) ]] && yellow "未安装acme.sh证书申请，无法执行" && exit 0
+    [[ -z $(acme.sh -v) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要续期的域名证书（复制Main_Domain下显示的域名）:" domain
     if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
@@ -138,7 +138,7 @@ function acmerenew(){
         checktls
         exit 0
     else
-        red "未找到你输入的${domain}域名证书，请自行核实！"
+        red "未找到你输入的${domain}域名证书，请再次检查域名输入正确"
         exit 0
     fi
 }
