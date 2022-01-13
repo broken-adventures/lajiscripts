@@ -74,11 +74,11 @@ function acme(){
     if [[ -n $(echo $domainIP | grep nginx) ]]; then
     domainIP=$(curl -s ipget.net/?ip="$domain")
         if [[ $domainIP = $v4 ]]; then
-            yellow "当前二级域名解析的IPV4地址：$domainIP" && sleep 1
+            yellow "当前二级域名解析的IPV4：$domainIP" && sleep 1
             bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt
         fi
         if [[ $domainIP = $v6 ]]; then
-            yellow "当前二级域名解析的IPV6地址：$domainIP" && sleep 1
+            yellow "当前二级域名解析的IPV6：$domainIP" && sleep 1
             bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
         fi
         if [[ -n $(echo $domainIP | grep nginx) ]]; then
@@ -112,7 +112,7 @@ function acme(){
     exit 0
 }
 
-function Certificate(){
+function certificate(){
     [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要撤销的域名证书（复制Main_Domain下显示的域名）:" domain
@@ -122,7 +122,7 @@ function Certificate(){
         green "撤销并删除${domain}域名证书成功"
         exit 0
     else
-        red "未找到你输入的${domain}域名证书，请再次核对输入是否正确！"
+        red "未找到你输入的${domain}域名证书，请自行核实！"
         exit 0
     fi
 }
@@ -160,7 +160,7 @@ function menu(){
     read -p "请输入数字:" NumberInput
     case "$NumberInput" in     
         1 ) acme;;
-        2 ) Certificate;;
+        2 ) certificate;;
         3 ) acmerenew;;
         0 ) exit 0    
     esac
