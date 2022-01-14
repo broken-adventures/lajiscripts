@@ -47,8 +47,8 @@ function checktls(){
             red "遗憾，证书申请失败"
             green "建议如下："
             yellow "1、检测防火墙是否打开"
-            yellow "2、请查看80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
-            yellow "3、更换下二级域名名称再尝试执行脚本"
+            yellow "2、检查80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
+            yellow "3、更换域名再尝试执行脚本"
             yellow "4. 关闭nginx等运行环境"
             yellow "5. 关闭WARP"
             exit 0
