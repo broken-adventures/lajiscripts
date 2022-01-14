@@ -46,11 +46,10 @@ function checktls(){
         else
             red "遗憾，证书申请失败"
             green "建议如下："
-            yellow "1、检测防火墙是否打开"
-            yellow "2、检查80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
-            yellow "3、更换域名再尝试执行脚本"
-            yellow "4. 关闭nginx等运行环境"
-            yellow "5. 关闭WARP"
+            yellow "1. 检测防火墙是否打开"
+            yellow "2. 检查80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
+            yellow "3. 更换域名再尝试执行脚本"
+            yellow "4. 关闭WARP"
             exit 0
         fi
     fi
@@ -122,7 +121,7 @@ function certificate(){
         green "撤销并删除${domain}域名证书成功"
         exit 0
     else
-        red "未找到你输入的${domain}域名证书，请自行核实！"
+        red "未找到你输入的${domain}域名证书，请自行检查！"
         exit 0
     fi
 }
@@ -152,10 +151,10 @@ function menu(){
     echo "                           "
     red "=================================="
     echo "                           "
-    green "1.  首次申请证书（自动识别单域名与泛域名）"
-    green "2.  查询、撤销并删除当前已申请的域名证书"
-    green "3.  手动续期域名证书"
-    green "0.  退出"
+    green "1. 首次申请证书（自动识别单域名与泛域名）"
+    green "2. 查询、撤销并删除当前已申请的域名证书"
+    green "3. 手动续期域名证书"
+    green "0. 退出"
     echo "         "
     read -p "请输入数字:" NumberInput
     case "$NumberInput" in     
