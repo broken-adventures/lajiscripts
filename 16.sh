@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.1"
-changeLog="新增一些VPS测试脚本"
+ver="2.0.2"
+changeLog="删除宝塔开心版脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
@@ -125,58 +125,13 @@ function docker(){
 # 第二页
 
 function bt(){
-    echo "                   "
-    green "请选择你需要安装的版本"
-    echo "                            "
-    echo "1. 开心版"
-    echo "2. 国际版"
-    echo "                            "
-    read -p "请输入选项:" btNumberInput
-    case "$btNumberInput" in     
-        1 ) btHappy;;
-        2 ) 
-            if [ $release = "Centos" ]; then
-                yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh forum
-            elif [ $release = "Debian" ]; then
-                wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh forum
-            else
-                wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh forum
-            fi
-        ;;
-        0 ) menu;;
-    esac
-}
-
-function btHappy(){
-    echo "                   "
-    green "请选择你需要安装的版本"
-    echo "                   "
-    echo "1. 专业版"
-    echo "2. 企业版"
-    echo "0. 返回主页"
-    echo "                            "
-    read -p "请输入选项:" btHappyNumberInput
-    case "$btHappyNumberInput" in     
-        1 ) 
-            if [ $release = "Centos" ]; then
-                yum install -y wget && wget -O install.sh http://download.moetas.com/ltd/install/install_6.0.sh && sh install.sh
-            elif [ $release = "Debian" ]; then
-                wget -O install.sh http://download.moetas.com/ltd/install/install-ubuntu_6.0.sh && bash install.sh
-            else
-                wget -O install.sh http://download.moetas.com/ltd/install/install-ubuntu_6.0.sh && sudo bash install.sh
-            fi
-        ;;
-        2 ) 
-            if [ $release = "Centos" ]; then
-                yum install -y wget && wget -O install.sh http://download.moetas.com/install/install_6.0.sh && sh install.sh
-            elif [ $release = "Debian" ]; then
-                wget -O install.sh http://download.moetas.com/install/install-ubuntu_6.0.sh && bash install.sh
-            else
-                wget -O install.sh http://download.moetas.com/install/install-ubuntu_6.0.sh && sudo bash install.sh
-            fi
-        ;;
-        0 ) menu;;
-    esac
+    if [ $release = "Centos" ]; then
+        yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh forum
+    elif [ $release = "Debian" ]; then
+        wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh forum
+    else
+        wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh forum
+    fi
 }
 
 function xui(){
