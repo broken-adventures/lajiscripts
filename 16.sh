@@ -97,7 +97,7 @@ function bbr(){
     if [ ${virt} == "kvm" ]; then
         wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
     fi
-    if [[ ${virt} == "lxc" || ${virt} == "openvz" ]]; then
+    if [ ${virt} == "openvz" ]; then
         if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
             green "已开启TUN，准备安装针对OpenVZ / LXC架构的BBR"
             wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
