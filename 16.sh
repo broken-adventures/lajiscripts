@@ -46,8 +46,6 @@ if ! type curl >/dev/null 2>&1; then
     else
         apt-get update -y && apt-get install curl -y
     fi	   
-else
-    green "curl已安装"
 fi
 
 if ! type wget >/dev/null 2>&1; then 
@@ -57,8 +55,6 @@ if ! type wget >/dev/null 2>&1; then
     else
         apt-get update -y && apt-get install wget -y
     fi	   
-else
-    green "wget已安装"
 fi
 
 if ! type sudo >/dev/null 2>&1; then 
@@ -68,8 +64,6 @@ if ! type sudo >/dev/null 2>&1; then
     else
         apt-get update -y && apt-get install sudo -y
     fi	   
-else
-    green "sudo已安装"
 fi
 
 function oraclefirewall(){
