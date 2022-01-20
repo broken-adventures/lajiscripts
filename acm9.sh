@@ -56,13 +56,13 @@ function checktls(){
 }
 
 function acme(){   
-    green "安装依赖及acme……"
+    green "正在安装依赖及acme……"
     [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
     [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
     [[ $(type -P socat) ]] || $yumapt install socat
     [[ $(type -P binutils) ]] || $yumapt install binutils
-    v6=$(curl -s6m3 https://ip.gs)
-    v4=$(curl -s4m3 https://ip.gs)
+    v6=$(curl -s6m2 https://ipget.net)
+    v4=$(curl -s4m2 https://ipget.net)
     read -p "请输入注册邮箱：" acmeEmail
     curl https://get.acme.sh | sh -s email=$acmeEmail
     source ~/.bashrc
