@@ -64,6 +64,11 @@ function acme(){
     v6=$(curl -s6m2 https://ip.gs)
     v4=$(curl -s4m2 https://ip.gs)
     read -p "请输入注册邮箱：" acmeEmail
+    if [ -z $acmeEmail ]; then
+        autoEmail=`head -n 50 /dev/urandom | sed 's/[^a-z]//g' | strings -n 4 | tr '[:upper:]' '[:lower:]' | head -1`
+        acmeEmail=$autoEmail@gmail.com
+        yellow "检测到未输入邮箱，已为你自动生成一个邮箱：$acmeEmail"
+    fi
     curl https://get.acme.sh | sh -s email=$acmeEmail
     source ~/.bashrc
     bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
