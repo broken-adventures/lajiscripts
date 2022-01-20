@@ -63,6 +63,9 @@ function acme(){
     [[ $(type -P binutils) ]] || $yumapt install binutils
     v6=`curl -s6m2 https://ip.gs`
     v4=`curl -s4m2 https://ip.gs`
+    if [ -z $v4 ]; then
+        echo "nameserver 2a00:1098:2b::1" > /etc/resolv.conf
+    fi
     read -p "请输入注册邮箱（例：admin@bilibili.com，或留空自动生成）：" acmeEmail
     if [ -z $acmeEmail ]; then
         autoEmail=`head -n 50 /dev/urandom | sed 's/[^a-z]//g' | strings -n 4 | tr '[:upper:]' '[:lower:]' | head -1`
