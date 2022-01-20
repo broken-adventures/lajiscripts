@@ -211,7 +211,7 @@ function nezha(){
 function serverstatus(){
     wget -N https://raw.githubusercontent.com/cokemine/ServerStatus-Hotaru/master/status.sh
     echo "                            "
-    green "请选择你需要安装的客户端类型"
+    green "请选择你需要安装探针的客户端类型"
     echo "                            "
     echo "1. 服务端"
     echo "2. 监控端"
