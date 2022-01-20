@@ -61,8 +61,8 @@ function acme(){
     [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
     [[ $(type -P socat) ]] || $yumapt install socat
     [[ $(type -P binutils) ]] || $yumapt install binutils
-    v6=$(curl -s6m2 https://ip.gs)
-    v4=$(curl -s4m2 https://ip.gs)
+    v6=`curl -s6m2 https://ip.gs`
+    v4=`curl -s4m2 https://ip.gs`
     read -p "请输入注册邮箱：" acmeEmail
     if [ -z $acmeEmail ]; then
         autoEmail=`head -n 50 /dev/urandom | sed 's/[^a-z]//g' | strings -n 4 | tr '[:upper:]' '[:lower:]' | head -1`
