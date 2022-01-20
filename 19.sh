@@ -2,7 +2,7 @@
 
 # 一些全局变量
 ver="2.0.2"
-changeLog="删除宝塔开心版脚本"
+changeLog="删除宝塔开心版脚本，优化BBR判断规则"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
@@ -40,7 +40,7 @@ else
 fi
 
 if ! type curl >/dev/null 2>&1; then 
-    yellow "curl未安装，安装中"
+    yellow "curl未安装，正在安装中"
     if [ $release = "Centos" ]; then
         yum -y update && yum install curl -y
     else
@@ -49,7 +49,7 @@ if ! type curl >/dev/null 2>&1; then
 fi
 
 if ! type wget >/dev/null 2>&1; then 
-    yellow "wget未安装，安装中"
+    yellow "wget未安装，正在安装中"
     if [ $release = "Centos" ]; then
         yum -y update && yum install wget -y
     else
@@ -58,7 +58,7 @@ if ! type wget >/dev/null 2>&1; then
 fi
 
 if ! type sudo >/dev/null 2>&1; then 
-    yellow "sudo未安装，安装中"
+    yellow "sudo未安装，正在安装中"
     if [ $release = "Centos" ]; then
         yum -y update && yum install sudo -y
     else
@@ -99,7 +99,7 @@ function bbr(){
     fi
     if [ ${virt} == "openvz" ]; then
         if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
-            green "已开启TUN，准备安装针对OpenVZ / LXC架构的BBR"
+            green "已开启TUN，准备安装针对OpenVZ架构的BBR脚本"
             wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
         else
             red "未开启TUN，请在VPS后台设置以开启TUN"
