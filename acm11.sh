@@ -56,7 +56,7 @@ function checktls(){
 }
 
 function acme(){   
-    green "正在安装依赖及acme……"
+    green "正在安装依赖及acme.sh……"
     [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
     [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
     [[ $(type -P socat) ]] || $yumapt install socat
