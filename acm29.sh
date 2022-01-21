@@ -12,10 +12,6 @@ yellow(){
     echo -e "\033[33m\033[01m$1\033[0m";
 }
 
-white(){
-    echo -e "\033[37m\033[01m$1\033[0m";
-}
-
 [[ $EUID -ne 0 ]] && yellow "请在root用户下运行脚本" && exit 1
 
 if [[ -f /etc/redhat-release ]]; then
@@ -37,7 +33,7 @@ else
 fi
 
 function checkwarp(){
-    green "正在检测WARP状态（本脚本只支持fscarmen的warp脚本检测并自动开关闭）"
+    green "检测WARP状态....."
     [[ -n $(wg) ]] && wg-quick down wgcf && yellow "检测到VPS目前已打开WARP，已为你自动关闭WARP以确保证书申请正常执行"
 }
 
@@ -54,14 +50,13 @@ function checktls(){
             yellow "1. 检测防火墙是否打开"
             yellow "2. 检查80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
             yellow "3. 更换域名再尝试执行脚本"
-            yellow "4. 关闭WARP"
             exit 0
         fi
     fi
 }
 
 function acme(){   
-    green "正在安装依赖及acme.sh……"
+    green "正在安装依赖及acme.sh......"
     [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
     [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
     [[ $(type -P socat) ]] || $yumapt install socat
