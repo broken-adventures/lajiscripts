@@ -29,7 +29,7 @@ elif cat /proc/version | grep -q -E -i "ubuntu"; then
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
     release="Centos"
 else 
-    red "不支持当前系统，请使用Ubuntu，Debian，Centos系统" && exit 1    
+    red "不支持VPS的当前系统，请使用Ubuntu，Debian，Centos系统" && exit 1    
 fi
 
 function checkwarp(){
@@ -171,7 +171,6 @@ function menu(){
         1 ) acme;;
         2 ) certificate;;
         3 ) acmerenew;;
-        4 ) checkwarp;;
         0 ) exit 0    
     esac
 }
