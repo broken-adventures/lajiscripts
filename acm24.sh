@@ -37,7 +37,7 @@ else
 fi
 
 function checkwarp(){
-    green "正在检查WARP状态（本脚本只支持fscarmen的warp脚本检测并自动开关闭）"
+    green "正在检测WARP状态（本脚本只支持fscarmen的warp脚本检测并自动开关闭）"
     if warp h; then
         warp o
     fi
