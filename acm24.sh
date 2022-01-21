@@ -37,32 +37,20 @@ else
 fi
 
 function checkwarp(){
-    WARPV4Status=`curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace | grep warp | sed "s/warp=//g"`
-    WARPV6Status=`curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace | grep warp | sed "s/warp=//g"`
     green "正在检测WARP状态（本脚本只支持fscarmen的warp脚本检测并自动开关闭）"
-    if [ $WARPV4Status = "on" ]; then
-    fi
-    if [ $WARPV6Status = "on" ]; then
-    fi
-    if [ $WARPV4Status = "plus" ]; then
-    fi
-    if [ $WARPV6Status = "plus" ]; then
-    fi
-    if [ $WARPV4Status = "on" && $WARPV6Status = "on" ]; then
-    fi
-    if [ $WARPV4Status = "plus" && $WARPV6Status = "plus" ]; then
-    fi
-    if warp h; then
-        warp o
-    else
-        red "检测到WARP已开启，但是我没办法调用你所使用的脚本自动关闭WARP，请自行去你所使用的脚本处关闭WARP"
+    if [ -n (wg) ]; then
+        if warp h; then
+            warp o
+            yellow "检测到你使用的是fscarmen脚本并启用WARP，已为你自动关闭WARP"
+        else
+            red "检测到WARP已开启，但是我没办法调用你所使用的脚本自动关闭WARP，请自行去你所使用的脚本处关闭WARP"
+        fi
     fi
 }
 
 function checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
-            checkwarp
             green "证书申请成功！证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" 
             yellow "证书crt路径如下：/root/cert.crt"
             yellow "私钥key路径如下：/root/private.key"
