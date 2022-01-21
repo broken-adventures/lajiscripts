@@ -26,7 +26,7 @@ elif cat /proc/version | grep -q -E -i "debian"; then
     release="Debian"
 elif cat /proc/version | grep -q -E -i "ubuntu"; then
     release="Ubuntu"
-elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
+elif cat /proc/version | grep -q -E -i "centos|red hat|redhat|rockylinux"; then
     release="Centos"
 else 
     red "不支持VPS的当前系统，请使用Ubuntu，Debian，Centos系统" && exit 1    
