@@ -46,6 +46,7 @@ function checkwarp(){
 function checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
+            checkwarp
             green "证书申请成功！证书（cert.crt）和私钥（private.key）已保存到 /root 文件夹" 
             yellow "证书crt路径如下：/root/cert.crt"
             yellow "私钥key路径如下：/root/private.key"
@@ -124,7 +125,6 @@ function acme(){
     fi
     bash /root/.acme.sh/acme.sh --install-cert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
     checktls
-    checkwarp
     exit 0
 }
 
@@ -148,6 +148,7 @@ function acmerenew(){
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要续期的域名证书（复制Main_Domain下显示的域名）:" domain
     if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
+        checkwarp
         bash /root/.acme.sh/acme.sh --renew -d ${domain} --force --ecc
         checktls
         exit 0
