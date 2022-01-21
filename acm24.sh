@@ -40,6 +40,14 @@ function checkwarp(){
     WARPV4Status=`curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace | grep warp | sed "s/warp=//g"`
     WARPV6Status=`curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace | grep warp | sed "s/warp=//g"`
     green "正在检测WARP状态（本脚本只支持fscarmen的warp脚本检测并自动开关闭）"
+    if [ $WARPV4Status = "on" ]; then
+    fi
+    if [ $WARPV6Status = "on" ]; then
+    fi
+    if [ $WARPV4Status = "plus" ]; then
+    fi
+    if [ $WARPV6Status = "plus" ]; then
+    fi
     if warp h; then
         warp o
     else
