@@ -21,4 +21,4 @@ for ((int=0; int<${#REGEX[@]}; int++)); do
 done
 [[ -z $SYSTEM ]] && red "not support" && exit 1
 
-type -P curl >/dev/null 2>&1 || (yellow " ${T[${L}7]} " && ${PACKAGE_INSTALL[int]} curl) || (yellow " ${T[${L}8]} " && ${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} curl)
+type -P curl >/dev/null 2>&1 || (${PACKAGE_INSTALL[int]} curl) || ${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} curl)
