@@ -37,7 +37,7 @@ else
 fi
 
 function checkwarp(){
-    if [[ -f /etc/redhat-release ]]; then
+    if [[ -f warp ]]; then
         warp o
     fi
 }
