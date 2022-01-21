@@ -67,6 +67,7 @@ function acme(){
     [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
     [[ $(type -P socat) ]] || $yumapt install socat
     [[ $(type -P binutils) ]] || $yumapt install binutils
+    checkwarp
     v6=`curl -s6m2 https://ip.gs`
     v4=`curl -s4m2 https://ip.gs`
     if [ -z $v4 ]; then
