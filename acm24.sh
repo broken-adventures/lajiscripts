@@ -40,6 +40,8 @@ function checkwarp(){
     green "正在检测WARP状态（本脚本只支持fscarmen的warp脚本检测并自动开关闭）"
     if warp h; then
         warp o
+    else
+        red "检测到WARP已开启，但是我没办法调用你所使用的脚本自动关闭WARP，请自行去你所使用的脚本处关闭WARP"
     fi
 }
 
