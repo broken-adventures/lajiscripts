@@ -1,3 +1,3 @@
-# 我好想做嘉然小姐的狗啊
+# 垃圾脚本，别看了
 
-https://cdn.jsdelivr.net/gh/misakano7545/jiaran233@master
+https://cdn.jsdelivr.net/gh/misakano7545/lajiscripts@master
