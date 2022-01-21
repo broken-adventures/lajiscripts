@@ -36,6 +36,12 @@ else
     red "不支持当前系统，请使用Ubuntu，Debian，Centos系统" && exit 1    
 fi
 
+function checkwarp(){
+    if [[ -f /etc/redhat-release ]]; then
+        warp o
+    fi
+}
+
 function checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
@@ -169,6 +175,7 @@ function menu(){
         1 ) acme;;
         2 ) certificate;;
         3 ) acmerenew;;
+        4 ) checkwarp;;
         0 ) exit 0    
     esac
 }
