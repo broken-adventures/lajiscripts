@@ -37,7 +37,7 @@ else
 fi
 
 function checkwarp(){
-    if [[ -f warp ]]; then
+    if [[ -f warp h ]]; then
         warp o
     fi
 }
