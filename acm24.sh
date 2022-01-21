@@ -48,6 +48,10 @@ function checkwarp(){
     fi
     if [ $WARPV6Status = "plus" ]; then
     fi
+    if [ $WARPV4Status = "on" && $WARPV6Status = "on" ]; then
+    fi
+    if [ $WARPV4Status = "plus" && $WARPV6Status = "plus" ]; then
+    fi
     if warp h; then
         warp o
     else
