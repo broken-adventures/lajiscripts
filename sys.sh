@@ -1,6 +1,5 @@
 REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
 RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
-COMPANY=("" "" "" "amazon" "")
 PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
 PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y install" "apk add -f")
 
@@ -17,7 +16,7 @@ for i in "${CMD[@]}"; do
 done
 
 for ((int=0; int<${#REGEX[@]}; int++)); do
-	[[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && COMPANY="${COMPANY[int]}" && [[ -n $SYSTEM ]] && break
+	[[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && [[ -n $SYSTEM ]] && break
 done
 [[ -z $SYSTEM ]] && red "not support" && exit 1
 
