@@ -44,6 +44,7 @@ function checkwarp(){
             yellow "检测到你使用的是fscarmen的脚本并启用WARP，已为你自动关闭WARP"
         else
             red "检测到WARP已开启，但是我没办法调用你所使用的脚本自动关闭WARP，请自行去你所使用的脚本处关闭WARP"
+            exit 0
         fi
     fi
 }
