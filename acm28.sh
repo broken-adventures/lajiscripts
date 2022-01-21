@@ -39,7 +39,7 @@ fi
 function checkwarp(){
     green "正在检测WARP状态（本脚本只支持fscarmen的warp脚本检测并自动开关闭）"
     if [[ -n $(wg) ]]; then
-        if warp h; then
+        if [[ -e /etc/wireguard/menu.sh ]]; then
             warp o
             yellow "检测到你使用的是fscarmen的脚本并启用WARP，已为你自动关闭WARP"
         else
