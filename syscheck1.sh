@@ -9,3 +9,12 @@ CMD=(	"$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)"
 for i in "${CMD[@]}"; do
 	SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
 done
+
+REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
+RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
+COMPANY=("" "" "" "amazon" "")
+
+for ((int=0; int<${#REGEX[@]}; int++)); do
+	[[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && COMPANY="${COMPANY[int]}" && [[ -n $SYSTEM ]] && break
+done
+[[ -z $SYSTEM ]] && red "not support" && exit 1
