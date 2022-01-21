@@ -7,6 +7,5 @@ CMD=(	"$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)"
 	)
 
 for i in "${CMD[@]}"; do
-	SYS="$i" && [[ -n $SYS ]] && break
-        echo $SYS
+	SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
 done
