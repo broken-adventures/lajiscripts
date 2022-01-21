@@ -86,7 +86,7 @@ function acme(){
         fi
         if [[ $domainIP = $v6 ]]; then
             yellow "当前域名解析的IPV6：$domainIP" && sleep 1
-            bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
+            bash /root/.acme.sh/acme.sh --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --listen-v6
         fi
         if [[ -n $(echo $domainIP | grep nginx) ]]; then
             yellow "域名解析无效，请检查域名是否填写正确或等待解析完成再执行脚本"
@@ -120,7 +120,7 @@ function acme(){
 }
 
 function certificate(){
-    [[ -z $(acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh无法执行" && exit 0
+    [[ -z $(/root/.acme.sh/acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要撤销的域名证书（复制Main_Domain下显示的域名）:" domain
     if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
@@ -135,7 +135,7 @@ function certificate(){
 }
 
 function acmerenew(){
-    [[ -z $(acme.sh -v) ]] && yellow "未安装acme.sh无法执行" && exit 0
+    [[ -z $(/root/.acme.sh/acme.sh -v) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
     read -p "请输入要续期的域名证书（复制Main_Domain下显示的域名）:" domain
     if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
