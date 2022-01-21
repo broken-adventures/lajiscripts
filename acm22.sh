@@ -124,6 +124,7 @@ function acme(){
     fi
     bash /root/.acme.sh/acme.sh --install-cert -d ${domain} --key-file /root/private.key --fullchain-file /root/cert.crt --ecc
     checktls
+    checkwarp
     exit 0
 }
 
