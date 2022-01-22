@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.2"
-changeLog="删除宝塔开心版脚本，优化BBR判断规则"
+ver="2.0.3"
+changeLog="优化系统判断机制"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
@@ -202,7 +202,7 @@ function menu(){
     yellow "检测到VPS信息如下"
     yellow "处理器架构：$arch"
     yellow "虚拟化架构：$virt"
-    yellow "操作系统：$release"
+    yellow "操作系统：$SYSTEM"
     yellow "内核版本：$kernelVer"
     echo "                            "
     green "下面是脚本分类，请选择对应的分类后进入到相对应的菜单中"
