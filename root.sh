@@ -29,6 +29,7 @@ for ((int=0; int<${#REGEX[@]}; int++)); do
 done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
+
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} sudo
 
