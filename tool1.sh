@@ -80,7 +80,7 @@ function bbr(){
         fi
     fi
     if [ ${virt} == "lxc" ]; then
-        red "抱歉，你的VPS暂时不支持目前的bbr加速"
+        red "抱歉，你的VPS暂时不支持bbr加速脚本"
     fi
 }
 
