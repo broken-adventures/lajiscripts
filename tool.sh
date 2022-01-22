@@ -36,8 +36,10 @@ done
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
+#第一页
+
 function oraclefirewall(){
-    if [ $release = "Centos" ]; then
+    if [ $RELEASE = "CentOS" ]; then
         systemctl stop oracle-cloud-agent
         systemctl disable oracle-cloud-agent
         systemctl stop oracle-cloud-agent-updater
@@ -52,8 +54,6 @@ function oraclefirewall(){
         apt-get purge netfilter-persistent -y
     fi
 }
-
-#第一页
 
 function rootLogin(){
     wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/rootLogin@master/root.sh && chmod -R 777 root.sh && bash root.sh
