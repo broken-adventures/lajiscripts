@@ -29,24 +29,24 @@ for ((int=0; int<${#REGEX[@]}; int++)); do
 done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
-
-if ! type sudo >/dev/null 2>&1; then 
-yellow "检测到sudo未安装，安装中 "
-if [ $release = "Centos" ]; then
-yum -y update && yum install sudo -y
-else
-apt-get update -y && apt-get install sudo -y
-fi	   
-else
-green "sudo已安装"
-fi
+${PACKAGE_UPDATE[int]}
+${PACKAGE_INSTALL[int]} sudo
 
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo chattr -i /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo chattr -a /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 
-green "VPS设置root密码登录脚本"
+clear
+red "=================================="
+echo "                           "
+red "    VPS一键修改root密码登录脚本     "
+red "          by 小御坂的破站           "
+echo "                           "
+red "  Site: https://owo.misaka.rest  "
+echo "                           "
+red "=================================="
+echo "                           "
 read -p "设置root密码:" password
 echo root:$password | sudo chpasswd root
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
