@@ -21,3 +21,4 @@ done
 [[ -z $SYSTEM ]] && red "not support" && exit 1
 
 type -P curl >/dev/null 2>&1 || (${PACKAGE_INSTALL[int]} curl) || (${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} curl)
+type -P wget >/dev/null 2>&1 || (${PACKAGE_INSTALL[int]} wget) || (${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} wget)
