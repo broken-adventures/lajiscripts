@@ -203,7 +203,7 @@ function menu(){
     yellow "检测到VPS信息如下"
     yellow "处理器架构：$arch"
     yellow "虚拟化架构：$virt"
-    yellow "操作系统：$SYSTEM"
+    yellow "操作系统：$CMD"
     yellow "内核版本：$kernelVer"
     echo "                            "
     green "下面是脚本分类，请选择对应的分类后进入到相对应的菜单中"
