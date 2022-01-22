@@ -34,7 +34,7 @@ fi
 
 function checkwarp(){
     green "检测WARP状态....."
-    [[ -n $(wg) ]] && wg-quick down wgcf && yellow "检测到VPS目前已打开WARP，已为你自动关闭WARP以确保证书申请正常执行"
+    [[ -n $(wg) ]] && wg-quick down wgcf && yellow "目前VPS已打开WARP，为了能够正常申请证书，已为你自动关闭WARP以确保证书申请正常执行"
 }
 
 function checktls(){
