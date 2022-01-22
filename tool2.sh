@@ -26,7 +26,7 @@ yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
 
-# 判断系统
+# 判断系统，此部分代码感谢fscarmen的技术指导
 for i in "${CMD[@]}"; do
     SYS="$i" && [[ -n $SYS ]] && break
 done
