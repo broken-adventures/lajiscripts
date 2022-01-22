@@ -61,10 +61,10 @@ function checktls(){
 
 function acme(){   
     green "正在安装acme.sh及其依赖......"
-    [[ $(type -P yum) ]] && yumapt='yum -y' || yumapt='apt -y'
-    [[ $(type -P curl) ]] || $yumapt update;$yumapt install curl
-    [[ $(type -P socat) ]] || $yumapt install socat
-    [[ $(type -P binutils) ]] || $yumapt install binutils
+	type -P curl >/dev/null 2>&1 || (${PACKAGE_INSTALL[int]} curl) || (${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} curl)
+	type -P wget >/dev/null 2>&1 || (${PACKAGE_INSTALL[int]} wget) || (${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} wget)
+	type -P socat >/dev/null 2>&1 || (${PACKAGE_INSTALL[int]} curl) || (${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} socat)
+	type -P binutils >/dev/null 2>&1 || (${PACKAGE_INSTALL[int]} wget) || (${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} binutils)
     checkwarp
     v6=`curl -s6m2 https://ip.gs`
     v4=`curl -s4m2 https://ip.gs`
