@@ -117,6 +117,10 @@ function aria2(){
     wget -N git.io/aria2.sh && chmod +x aria2.sh && bash aria2.sh
 }
 
+function cyberpanel(){
+
+}
+
 # 第三页
 function macka(){
     wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
