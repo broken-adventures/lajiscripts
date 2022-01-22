@@ -150,6 +150,10 @@ function acmerenew(){
     fi
 }
 
+function upgrade(){
+    wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/acme-1key@master/acme1key.sh && chmod -R 777 acme1key.sh && bash acme1key.sh
+}
+
 function menu(){
     clear
     red "=================================="
@@ -164,6 +168,7 @@ function menu(){
     green "1. 申请证书（自动识别单域名与泛域名）"
     green "2. 查询、撤销并删除当前已申请的域名证书"
     green "3. 手动续期域名证书"
+    green "4. 更新脚本"
     green "0. 退出"
     echo "         "
     read -p "请输入数字:" NumberInput
@@ -171,6 +176,7 @@ function menu(){
         1 ) acme;;
         2 ) certificate;;
         3 ) acmerenew;;
+        4 ) upgrade ;;
         0 ) exit 0    
     esac
 }
