@@ -71,6 +71,7 @@ function bbr(){
         wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
     fi
     if [ ${virt} == "openvz" ]; then
+        TUN=`cat /dev/net/tun`
         if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
             green "已开启TUN，准备安装针对OpenVZ架构的BBR脚本"
             wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
