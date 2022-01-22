@@ -6,6 +6,7 @@ changeLog="优化系统判断机制"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
+TUN=`cat /dev/net/tun`
 REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
 RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
 PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
@@ -71,7 +72,6 @@ function bbr(){
         wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
     fi
     if [ ${virt} == "openvz" ]; then
-        TUN=`cat /dev/net/tun`
         if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
             green "已开启TUN，准备安装针对OpenVZ架构的BBR脚本"
             wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
