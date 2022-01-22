@@ -14,23 +14,27 @@ yellow(){
 
 [[ $EUID -ne 0 ]] && yellow "请在root用户下运行脚本" && exit 1
 
-if [[ -f /etc/redhat-release ]]; then
-    release="Centos"
-elif cat /etc/issue | grep -q -E -i "debian"; then
-    release="Debian"
-elif cat /etc/issue | grep -q -E -i "ubuntu"; then
-    release="Ubuntu"
-elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
-    release="Centos"
-elif cat /proc/version | grep -q -E -i "debian"; then
-    release="Debian"
-elif cat /proc/version | grep -q -E -i "ubuntu"; then
-    release="Ubuntu"
-elif cat /proc/version | grep -q -E -i "centos|red hat|redhat|rockylinux"; then
-    release="Centos"
-else 
-    red "不支持VPS的当前系统，请使用主流操作系统" && exit 1    
-fi
+REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
+RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
+PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
+PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y install" "apk add -f")
+
+CMD=("$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)"
+	"$(hostnamectl 2>/dev/null | grep -i system | cut -d : -f2)"
+	"$(lsb_release -sd 2>/dev/null)"
+	"$(grep -i description /etc/lsb-release 2>/dev/null | cut -d \" -f2)"
+	"$(grep . /etc/redhat-release 2>/dev/null)"
+	"$(grep . /etc/issue 2>/dev/null | cut -d \\ -f1 | sed '/^[ ]*$/d')"
+)
+
+for i in "${CMD[@]}"; do
+	SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
+done
+
+for ((int=0; int<${#REGEX[@]}; int++)); do
+	[[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && [[ -n $SYSTEM ]] && break
+done
+[[ -z $SYSTEM ]] && red "not support" && exit 1
 
 function checkwarp(){
     green "检测WARP状态....."
