@@ -6,6 +6,11 @@ changeLog="删除宝塔开心版脚本，优化BBR判断规则"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
+REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
+RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
+PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
+PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y install" "apk add -f")
+CMD=("$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)" "$(hostnamectl 2>/dev/null | grep -i system | cut -d : -f2)" "$(lsb_release -sd 2>/dev/null)" "$(grep -i description /etc/lsb-release 2>/dev/null | cut -d \" -f2)" "$(grep . /etc/redhat-release 2>/dev/null)" "$(grep . /etc/issue 2>/dev/null | cut -d \\ -f1 | sed '/^[ ]*$/d')")
 
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
@@ -19,52 +24,17 @@ yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
 
-if [[ -f /etc/redhat-release ]]; then
-    release="Centos"
-elif cat /etc/issue | grep -q -E -i "debian"; then
-    release="Debian"
-elif cat /etc/issue | grep -q -E -i "ubuntu"; then
-    release="Ubuntu"
-elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
-    release="Centos"
-elif cat /proc/version | grep -q -E -i "debian"; then
-    release="Debian"
-elif cat /proc/version | grep -q -E -i "ubuntu"; then
-    release="Ubuntu"
-elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
-    release="Centos"
-else 
-    red "不支持你当前系统，请使用Ubuntu、Debian、Centos的主流系统"
-    rm -f MisakaToolbox.sh
-    exit 1
-fi
+for i in "${CMD[@]}"; do
+    SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
+done
 
-if ! type curl >/dev/null 2>&1; then 
-    yellow "curl未安装，正在安装中"
-    if [ $release = "Centos" ]; then
-        yum -y update && yum install curl -y
-    else
-        apt-get update -y && apt-get install curl -y
-    fi	   
-fi
+for ((int=0; int<${#REGEX[@]}; int++)); do
+    [[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && [[ -n $SYSTEM ]] && break
+done
+[[ -z $SYSTEM ]] && red "not support" && exit 1
 
-if ! type wget >/dev/null 2>&1; then 
-    yellow "wget未安装，正在安装中"
-    if [ $release = "Centos" ]; then
-        yum -y update && yum install wget -y
-    else
-        apt-get update -y && apt-get install wget -y
-    fi	   
-fi
-
-if ! type sudo >/dev/null 2>&1; then 
-    yellow "sudo未安装，正在安装中"
-    if [ $release = "Centos" ]; then
-        yum -y update && yum install sudo -y
-    else
-        apt-get update -y && apt-get install sudo -y
-    fi	   
-fi
+${PACKAGE_UPDATE[int]}
+${PACKAGE_INSTALL[int]} curl wget sudo
 
 function oraclefirewall(){
     if [ $release = "Centos" ]; then
