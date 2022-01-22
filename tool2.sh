@@ -2,7 +2,7 @@
 
 # 一些全局变量
 ver="2.0.3"
-changeLog="优化系统判断机制"
+changeLog="优化系统判断机制，增加本博客的Acme.sh证书申请脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
@@ -91,6 +91,10 @@ function warp(){
 
 function docker(){
     curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+}
+
+function acmesh(){
+    wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/acme-1key@master/acme1key.sh && chmod -R 777 acme1key.sh && bash acme1key.sh
 }
 
 # 第二页
