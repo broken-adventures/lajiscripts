@@ -244,6 +244,7 @@ function page1(){
     echo "4. 开启BBR"
     echo "5. 启用WARP"
     echo "6. 安装docker"
+    echo "7. Acme.sh 证书申请脚本"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
@@ -254,6 +255,7 @@ function page1(){
         4 ) bbr ;;
         5 ) warp ;;
         6 ) docker ;;
+        7 ) acmesh ;;
         0 ) menu
     esac
 }
