@@ -48,6 +48,9 @@ function checktls(){
             yellow "私钥key路径如下：/root/private.key"
             exit 0
         else
+            if [[ -e /etc/wireguard/menu.sh ]]; then
+                warp o
+            fi
             red "抱歉，证书申请失败"
             green "建议如下："
             yellow "1. 检测防火墙是否打开"
