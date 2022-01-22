@@ -188,13 +188,14 @@ function serverstatus(){
 
 function menu(){
     clear
-    red "============================"
-    red "                            "
-    red "    Misaka Linux Toolbox    "
-    echo "                            "
-    red "  https://owo.misaka.rest  "
-    echo "                            "
-    red "============================"
+    red "=================================="
+    echo "                           "
+    red "       Misaka Linux Toolbox        "
+    red "          by 小御坂的破站           "
+    echo "                           "
+    red "  Site: https://owo.misaka.rest  "
+    echo "                           "
+    red "=================================="
     echo "                            "
     green "检测到您当前运行的工具箱版本是：$ver"
     green "更新日志：$changeLog"
