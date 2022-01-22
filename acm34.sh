@@ -49,7 +49,7 @@ function checktls(){
             green "建议如下："
             yellow "1. 检测防火墙是否打开"
             yellow "2. 检查80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
-            yellow "3. 域名触发风控，更换域名再尝试执行脚本"
+            yellow "3. 域名触发Acme.sh官方风控，更换域名或等待7天后再尝试执行脚本"
             exit 0
         fi
     fi
