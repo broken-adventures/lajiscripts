@@ -45,7 +45,7 @@ function checktls(){
             yellow "私钥key路径如下：/root/private.key"
             exit 0
         else
-            red "遗憾，证书申请失败"
+            red "抱歉，证书申请失败"
             green "建议如下："
             yellow "1. 检测防火墙是否打开"
             yellow "2. 检查80端口是否被占用（先lsof -i :80 后kill -9 进程id）"
