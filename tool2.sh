@@ -34,14 +34,14 @@ done
 for ((int=0; int<${#REGEX[@]}; int++)); do
     [[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && [[ -n $SYSTEM ]] && break
 done
+
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
 
-# 更新系统及安装依赖
+# 更新系统及安装依赖，此部分代码感谢fscarmen的技术指导
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
 #第一页
-
 function oraclefirewall(){
     if [ $SYSTEM = "CentOS" ]; then
         systemctl stop oracle-cloud-agent
@@ -94,7 +94,6 @@ function docker(){
 }
 
 # 第二页
-
 function bt(){
     if [ $SYSTEM = "CentOS" ]; then
         yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh forum
@@ -115,7 +114,6 @@ function aria2(){
 }
 
 # 第三页
-
 function macka(){
     wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
 }
@@ -135,7 +133,6 @@ function tgMTProxy(){
 }
 
 # 第四页
-
 function vpsBench(){
     echo "                            "
     green "请选择你接下来使用的脚本"
@@ -167,7 +164,6 @@ function updateScript(){
 }
 
 # 第五页
-
 function nezha(){
     curl -L https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh  -o nezha.sh && chmod +x nezha.sh
     sudo ./nezha.sh
@@ -190,6 +186,7 @@ function serverstatus(){
     esac
 }
 
+# 菜单
 function menu(){
     clear
     red "=================================="
