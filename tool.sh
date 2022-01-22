@@ -106,16 +106,7 @@ function xui(){
 }
 
 function aria2(){
-    if ! type ca-certificates >/dev/null 2>&1; then 
-        yellow "ca-certificates未安装，安装中"
-        if [ $release = "CentOS" ]; then
-            yum -y update && yum install ca-certificates -y
-        else
-            apt-get update -y && apt-get install ca-certificates -y
-        fi	   
-    else
-        green "ca-certificates已安装"
-    fi
+    ${PACKAGE_INSTALL[int]} ca-certificates
     wget -N git.io/aria2.sh && chmod +x aria2.sh && bash aria2.sh
 }
 
