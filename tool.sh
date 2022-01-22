@@ -77,7 +77,7 @@ function bbr(){
         fi
     fi
     if [ ${virt} == "lxc" ]; then
-        red "你的VPS暂时不支持目前的bbr加速，抱歉！"
+        red "抱歉，你的VPS暂时不支持目前的bbr加速"
     fi
 }
 
@@ -92,9 +92,9 @@ function docker(){
 # 第二页
 
 function bt(){
-    if [ $release = "Centos" ]; then
+    if [ $RELEASE = "CentOS" ]; then
         yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh forum
-    elif [ $release = "Debian" ]; then
+    elif [ $RELEASE = "Debian" ]; then
         wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh forum
     else
         wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh forum
@@ -108,7 +108,7 @@ function xui(){
 function aria2(){
     if ! type ca-certificates >/dev/null 2>&1; then 
         yellow "ca-certificates未安装，安装中"
-        if [ $release = "Centos" ]; then
+        if [ $release = "CentOS" ]; then
             yum -y update && yum install ca-certificates -y
         else
             apt-get update -y && apt-get install ca-certificates -y
