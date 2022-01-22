@@ -42,7 +42,7 @@ ${PACKAGE_INSTALL[int]} curl wget sudo
 #第一页
 
 function oraclefirewall(){
-    if [ $RELEASE = "CentOS" ]; then
+    if [ $SYSTEM = "CentOS" ]; then
         systemctl stop oracle-cloud-agent
         systemctl disable oracle-cloud-agent
         systemctl stop oracle-cloud-agent-updater
@@ -95,9 +95,9 @@ function docker(){
 # 第二页
 
 function bt(){
-    if [ $RELEASE = "CentOS" ]; then
+    if [ $SYSTEM = "CentOS" ]; then
         yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh forum
-    elif [ $RELEASE = "Debian" ]; then
+    elif [ $SYSTEM = "Debian" ]; then
         wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh forum
     else
         wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh forum
