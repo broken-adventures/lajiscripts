@@ -131,6 +131,22 @@ function acme(){
 function acmefun(){
     ${PACKAGE_UPDATE[int]}
     ${PACKAGE_INSTALL[int]} curl wget socat binutils
+    checkwarp
+    # 自动为IPV6 Only的VPS设置DNS64服务器
+    if [ -z $v4 ]; then
+        echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
+        yellow "检测到你的VPS为IPV6 Only，已为你自动设置DNS64服务器以确保Acme.sh正常申请证书"
+    fi
+    read -p "请输入注册邮箱（例：admin@bilibili.com，或留空自动生成）：" acmeEmail
+    if [ -z $acmeEmail ]; then
+        autoEmail=`date +%s%N |md5sum | cut -c 1-32`
+        acmeEmail=$autoEmail@autossl.com
+        yellow "检测到未输入邮箱，脚本已为你自动生成一个邮箱以完成接下来的注册流程，邮箱地址为$acmeEmail"
+    fi
+    curl https://get.acme.sh | sh -s email=$acmeEmail
+    source ~/.bashrc
+    bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
+    read -p "请输入解析完成的域名:" domain
 }
 
 # 撤销证书
