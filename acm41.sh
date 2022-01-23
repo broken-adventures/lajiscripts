@@ -127,6 +127,7 @@ function acme(){
     exit 0
 }
 
+# 撤销证书
 function certificate(){
     [[ -z $(/root/.acme.sh/acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
@@ -142,6 +143,7 @@ function certificate(){
     fi
 }
 
+# 续期证书
 function acmerenew(){
     [[ -z $(/root/.acme.sh/acme.sh -v) ]] && yellow "未安装acme.sh无法执行" && exit 0
     bash /root/.acme.sh/acme.sh --list
