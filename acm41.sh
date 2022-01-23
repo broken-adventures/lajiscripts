@@ -66,11 +66,8 @@ function acme(){
     ${PACKAGE_UPDATE[int]}
     ${PACKAGE_INSTALL[int]} curl wget socat binutils
     checkwarp
-    v6=`curl -s6m2 https://ip.gs`
-    v4=`curl -s4m2 https://ip.gs`
-    # 如ip.gs不可用，自动切换到ipget.net API获取IP
-    [ -z $v6 ] && v6=`curl -s6m2 http://ipget.net`
-    [ -z $v4 ] && v6=`curl -s4m2 http://ipget.net`
+    v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
+    v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
     # 自动为IPV6 Only的VPS设置DNS64服务器
     if [ -z $v4 ]; then
         echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
