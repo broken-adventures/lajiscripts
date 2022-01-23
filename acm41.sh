@@ -68,6 +68,7 @@ function acme(){
     checkwarp
     v6=`curl -s6m2 https://ip.gs`
     v4=`curl -s4m2 https://ip.gs`
+    # 如ip.gs不可用，自动切换到ipget.net API获取IP
     [ -z $v6 ] && v6=`curl -s6m2 http://ipget.net`
     [ -z $v4 ] && v6=`curl -s4m2 http://ipget.net`
     if [ -z $v4 ]; then
