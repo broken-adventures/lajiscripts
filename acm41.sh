@@ -6,6 +6,10 @@ RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
 PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
 PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y install" "apk add -f")
 
+# 检测IPv4和IPv6地址
+v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
+v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
+
 # 控制台字体
 red(){
     echo -e "\033[31m\033[01m$1\033[0m";
@@ -65,8 +69,6 @@ function acme(){
     ${PACKAGE_UPDATE[int]}
     ${PACKAGE_INSTALL[int]} curl wget socat binutils
     checkwarp
-    v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
-    v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
     # 自动为IPV6 Only的VPS设置DNS64服务器
     if [ -z $v4 ]; then
         echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
