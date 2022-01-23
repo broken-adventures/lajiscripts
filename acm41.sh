@@ -126,6 +126,11 @@ function acme(){
     exit 0
 }
 
+# 泛域名申请证书
+function acmefun(){
+
+}
+
 # 撤销证书
 function certificate(){
     [[ -z $(/root/.acme.sh/acme.sh -v 2>/dev/null) ]] && yellow "未安装acme.sh无法执行" && exit 0
