@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.3.1"
-changeLog="解决修复OpenVZ的BBR，TUN模块判断问题"
+ver="2.0.4"
+changeLog="增加安装ShadowSocks脚本，BBR支持IBM LinuxONE"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
@@ -69,7 +69,10 @@ function screenManager(){
 
 function bbr(){
     if [ ${virt} == "kvm" ]; then
-        wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+        wget -N --no-check-certificate "https://raw.githubusercontents.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+    fi
+    if [ ${virt} == "zvm" ]; then
+        wget -N --no-check-certificate "https://raw.githubusercontents.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
     fi
     if [ ${virt} == "openvz" ]; then
         [[ ! $TUN =~ 'in bad state' ]] && [[ ! $TUN =~ '处于错误状态' ]] && red "未开启TUN，请去VPS后台开启" && exit 1
