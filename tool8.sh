@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.3"
-changeLog="优化系统判断机制，增加本博客的Acme.sh证书申请脚本"
+ver="2.0.3.1"
+changeLog="解决修复OpenVZ的BBR，TUN模块判断问题"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
