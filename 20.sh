@@ -52,20 +52,7 @@ go_ciphers=(aes-256-cfb aes-192-cfb aes-128-cfb aes-256-ctr aes-192-ctr aes-128-
 r_ciphers=(none aes-256-cfb aes-192-cfb aes-128-cfb aes-256-cfb8 aes-192-cfb8 aes-128-cfb8 aes-256-ctr aes-192-ctr aes-128-ctr chacha20-ietf chacha20 salsa20 xchacha20 xsalsa20 rc4-md5)
 
 # Protocol
-protocols=(
-origin
-verify_deflate
-auth_sha1_v4
-auth_sha1_v4_compatible
-auth_aes128_md5
-auth_aes128_sha1
-auth_chain_a
-auth_chain_b
-auth_chain_c
-auth_chain_d
-auth_chain_e
-auth_chain_f
-)
+protocols=(origin verify_deflate auth_sha1_v4 auth_sha1_v4_compatible auth_aes128_md5 auth_aes128_sha1 auth_chain_a auth_chain_b auth_chain_c auth_chain_d auth_chain_e auth_chain_f)
 # obfs
 obfs=(
 plain
