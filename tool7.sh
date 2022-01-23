@@ -72,13 +72,8 @@ function bbr(){
         wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
     fi
     if [ ${virt} == "openvz" ]; then
-        if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
-            green "已开启TUN，准备安装针对OpenVZ架构的BBR脚本"
-            wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
-        else
-            red "未开启TUN，请在VPS后台设置以开启TUN"
-            exit 1
-        fi
+        [[ ! $TUN =~ 'in bad state' ]] && [[ ! $TUN =~ '处于错误状态' ]] && red "未开启TUN，请去VPS后台开启" && exit 1
+        wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
     fi
     if [ ${virt} == "lxc" ]; then
         red "抱歉，你的VPS暂时不支持bbr加速脚本"
