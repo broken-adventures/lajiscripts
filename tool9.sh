@@ -126,7 +126,7 @@ function boy233(){
 }
 
 function hijk(){
-    bash <(curl -sL https://raw.githubusercontents.com/Misaka-blog/hijk-backup/master/xray.sh)
+    bash <(curl -sL https://raw.githubusercontents.com/hijkpw/scripts/master/xray.sh)
 }
 
 function tgMTProxy(){
