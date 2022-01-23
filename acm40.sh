@@ -61,6 +61,8 @@ function acme(){
     checkwarp
     v6=`curl -s6m2 https://ip.gs`
     v4=`curl -s4m2 https://ip.gs`
+    [ -z $v6 ] && v6=`curl -s6m2 http://ipget.net`
+    [ -z $v4 ] && v6=`curl -s4m2 http://ipget.net`
     if [ -z $v4 ]; then
         echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
         yellow "检测到你的VPS为IPV6 Only，已为你自动设置DNS64服务器以确保Acme.sh正常申请证书"
