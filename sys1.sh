@@ -12,7 +12,7 @@ CMD=("$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)"
 )
 
 for i in "${CMD[@]}"; do
-	SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
+	SYS="$i" && [[ -n $SYS ]] && break
 done
 
 for ((int=0; int<${#REGEX[@]}; int++)); do
