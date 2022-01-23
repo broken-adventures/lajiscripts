@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.3"
+ver="2.0.4"
 changeLog="优化系统判断机制，增加本博客的Acme.sh证书申请脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
