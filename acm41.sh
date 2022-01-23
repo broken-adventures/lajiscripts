@@ -71,6 +71,7 @@ function acme(){
     # 如ip.gs不可用，自动切换到ipget.net API获取IP
     [ -z $v6 ] && v6=`curl -s6m2 http://ipget.net`
     [ -z $v4 ] && v6=`curl -s4m2 http://ipget.net`
+    # 自动为IPV6 Only的VPS设置DNS64服务器
     if [ -z $v4 ]; then
         echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
         yellow "检测到你的VPS为IPV6 Only，已为你自动设置DNS64服务器以确保Acme.sh正常申请证书"
