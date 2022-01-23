@@ -62,7 +62,6 @@ function checktls(){
 
 # Acme.sh操作区
 function acme(){   
-    green "正在安装acme.sh及其依赖......"
     ${PACKAGE_UPDATE[int]}
     ${PACKAGE_INSTALL[int]} curl wget socat binutils
     checkwarp
@@ -128,7 +127,8 @@ function acme(){
 
 # 泛域名申请证书
 function acmefun(){
-
+    ${PACKAGE_UPDATE[int]}
+    ${PACKAGE_INSTALL[int]} curl wget socat binutils
 }
 
 # 撤销证书
