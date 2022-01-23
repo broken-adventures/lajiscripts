@@ -54,17 +54,7 @@ r_ciphers=(none aes-256-cfb aes-192-cfb aes-128-cfb aes-256-cfb8 aes-192-cfb8 ae
 # Protocol
 protocols=(origin verify_deflate auth_sha1_v4 auth_sha1_v4_compatible auth_aes128_md5 auth_aes128_sha1 auth_chain_a auth_chain_b auth_chain_c auth_chain_d auth_chain_e auth_chain_f)
 # obfs
-obfs=(
-plain
-http_simple
-http_simple_compatible
-http_post
-http_post_compatible
-tls1.2_ticket_auth
-tls1.2_ticket_auth_compatible
-tls1.2_ticket_fastauth
-tls1.2_ticket_fastauth_compatible
-)
+obfs=(plain http_simple http_simple_compatible http_post http_post_compatible tls1.2_ticket_auth tls1.2_ticket_auth_compatible tls1.2_ticket_fastauth tls1.2_ticket_fastauth_compatible)
 # libev obfuscating
 obfs_libev=(http tls)
 # initialization parameter
