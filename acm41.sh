@@ -80,7 +80,7 @@ function acme(){
     green "已输入的域名:$domain" && sleep 1
     domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$domain")
     if [[ -n $(echo $domainIP | grep nginx) ]]; then
-    domainIP=$(curl -s ipget.net/?ip="$domain")
+    	domainIP=$(curl -s ipget.net/?ip="$domain")
         if [[ $domainIP = $v4 ]]; then
             yellow "当前域名解析的IPV4：$domainIP" && sleep 1
             bash /root/.acme.sh/acme.sh  --issue -d ${domain} --standalone -k ec-256 --server letsencrypt --force
