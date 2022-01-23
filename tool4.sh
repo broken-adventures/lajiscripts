@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.4"
+ver="2.0.3"
 changeLog="优化系统判断机制，增加本博客的Acme.sh证书申请脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
@@ -118,7 +118,7 @@ function aria2(){
 }
 
 function cyberpanel(){
-
+    sh <(curl https://cyberpanel.net/install.sh || wget -O - https://cyberpanel.net/install.sh)
 }
 
 # 第三页
