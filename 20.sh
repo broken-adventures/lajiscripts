@@ -47,59 +47,10 @@ shadowsocks_libev_centos='https://raw.githubusercontent.com/teddysun/shadowsocks
 shadowsocks_libev_debian='https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev-debian'
 
 # Stream Ciphers
-common_ciphers=(
-aes-256-gcm
-aes-192-gcm
-aes-128-gcm
-aes-256-ctr
-aes-192-ctr
-aes-128-ctr
-aes-256-cfb
-aes-192-cfb
-aes-128-cfb
-camellia-128-cfb
-camellia-192-cfb
-camellia-256-cfb
-xchacha20-ietf-poly1305
-chacha20-ietf-poly1305
-chacha20-ietf
-chacha20
-salsa20
-rc4-md5
-)
-go_ciphers=(
-aes-256-cfb
-aes-192-cfb
-aes-128-cfb
-aes-256-ctr
-aes-192-ctr
-aes-128-ctr
-chacha20-ietf
-chacha20
-salsa20
-rc4-md5
-)
-r_ciphers=(
-none
-aes-256-cfb
-aes-192-cfb
-aes-128-cfb
-aes-256-cfb8
-aes-192-cfb8
-aes-128-cfb8
-aes-256-ctr
-aes-192-ctr
-aes-128-ctr
-chacha20-ietf
-chacha20
-salsa20
-xchacha20
-xsalsa20
-rc4-md5
-)
-# Reference URL:
-# https://github.com/shadowsocksr-rm/shadowsocks-rss/blob/master/ssr.md
-# https://github.com/shadowsocksrr/shadowsocksr/commit/a3cf0254508992b7126ab1151df0c2f10bf82680
+common_ciphers=(aes-256-gcm aes-192-gcm aes-128-gcm aes-256-ctr aes-192-ctr aes-128-ctr aes-256-cfb aes-192-cfb aes-128-cfb camellia-128-cfb camellia-192-cfb camellia-256-cfb xchacha20-ietf-poly1305 chacha20-ietf-poly1305 chacha20-ietf chacha20 salsa20 rc4-md5)
+go_ciphers=(aes-256-cfb aes-192-cfb aes-128-cfb aes-256-ctr aes-192-ctr aes-128-ctr chacha20-ietf chacha20 salsa20 rc4-md5)
+r_ciphers=(none aes-256-cfb aes-192-cfb aes-128-cfb aes-256-cfb8 aes-192-cfb8 aes-128-cfb8 aes-256-ctr aes-192-ctr aes-128-ctr chacha20-ietf chacha20 salsa20 xchacha20 xsalsa20 rc4-md5)
+
 # Protocol
 protocols=(
 origin
