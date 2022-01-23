@@ -505,22 +505,22 @@ install_select(){
     clear
     while true
     do
-    echo  "Which Shadowsocks server you'd select:"
+    echo  "你想要安装什么类型的ShadowsSocks服务器"
     for ((i=1;i<=${#software[@]};i++ )); do
         hint="${software[$i-1]}"
         echo -e "${green}${i}${plain}) ${hint}"
     done
-    read -p "Please enter a number (Default ${software[0]}):" selected
+    read -p "请输入数字 (默认为 ${software[0]}):" selected
     [ -z "${selected}" ] && selected='1'
     case "${selected}" in
         1|2|3|4)
         echo
-        echo "You choose = ${software[${selected}-1]}"
+        echo "你选择了 ${software[${selected}-1]} 选项"
         echo
         break
         ;;
         *)
-        echo -e "[${red}Error${plain}] Please only enter a number [1-4]"
+        echo -e "请输入[1-4]之间的选项"
         ;;
     esac
     done
