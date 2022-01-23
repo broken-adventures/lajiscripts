@@ -35,11 +35,13 @@ done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
 
+# 检测WARP状态，以保证正常申请证书
 function checkwarp(){
     green "检测WARP状态....."
     [[ -n $(wg) ]] && wg-quick down wgcf && yellow "目前VPS已开启WARP，为了能够正常申请证书，已为你自动关闭WARP以确保证书申请正常执行"
 }
 
+# 检测证书和私钥是否存在
 function checktls(){
     if [[ -f /root/cert.crt && -f /root/private.key ]]; then
         if [[ -s /root/cert.crt && -s /root/private.key ]]; then
@@ -58,6 +60,7 @@ function checktls(){
     fi
 }
 
+# Acme.sh操作区
 function acme(){   
     green "正在安装acme.sh及其依赖......"
     ${PACKAGE_UPDATE[int]}
