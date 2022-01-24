@@ -91,7 +91,7 @@ function warp(){
     echo "                            "
     green "请选择你接下来使用的脚本"
     echo "                            "
-    echo "1. fscarmen"
+    echo "1. 【推荐使用，稳定】 fscarmen"
     echo "2. kkkyg（甬哥）"
     echo "3. P3TERX"
     echo "                            "
