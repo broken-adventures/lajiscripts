@@ -59,6 +59,10 @@ function oraclefirewall(){
     fi
 }
 
+function euservDig9(){
+    echo -e "search blue.kundencontroller.de\noptions rotate\nnameserver 2a02:180:6:5::1c\nnameserver 2a02:180:6:5::4\nnameserver 2a02:180:6:5::1e\nnameserver 2a02:180:6:5::1d" > /etc/resolv.conf
+}
+
 function rootLogin(){
     wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/rootLogin@master/root.sh && chmod -R 777 root.sh && bash root.sh
 }
@@ -261,23 +265,25 @@ function page1(){
     green "请选择你接下来的操作"
     echo "                            "
     echo "1. Oracle 原生系统关闭防火墙"
-    echo "2. 修改登录方式为 root + 密码 登录"
-    echo "3. Screen 后台任务管理"
-    echo "4. 开启BBR"
-    echo "5. 启用WARP"
-    echo "6. 安装docker"
-    echo "7. Acme.sh 证书申请脚本"
+    echo "2. 德鸡DiG9正常访问网络解决方案"
+    echo "3. 修改登录方式为 root + 密码 登录"
+    echo "4. Screen 后台任务管理"
+    echo "5. 开启BBR"
+    echo "6. 启用WARP"
+    echo "7. 安装docker"
+    echo "8. Acme.sh 证书申请脚本"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
     case "$page1NumberInput" in
         1 ) oraclefirewall ;;
-        2 ) rootLogin ;;
-        3 ) screenManager ;;
-        4 ) bbr ;;
-        5 ) warp ;;
-        6 ) docker ;;
-        7 ) acmesh ;;
+        2 ) euservDig9 ;;
+        3 ) rootLogin ;;
+        4 ) screenManager ;;
+        5 ) bbr ;;
+        6 ) warp ;;
+        7 ) docker ;;
+        8 ) acmesh ;;
         0 ) menu
     esac
 }
