@@ -151,9 +151,9 @@ function acmefun(){
     export CF_Key="$GAK"
     read -p "当前为泛域名申请证书，请输入Cloudflare登录邮箱：" CFemail
     export CF_Email="$CFemail"
-    bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt
+    bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt --debug
     if [ -z $v4 ]; then
-        bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt --listen-v6
+        bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt --listen-v6 --debug
     fi
     checktls
     exit 0
