@@ -84,7 +84,21 @@ function bbr(){
 }
 
 function warp(){
-    wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh
+    echo "                            "
+    green "请选择你接下来使用的脚本"
+    echo "                            "
+    echo "1. fscarmen"
+    echo "2. kkkyg（甬哥）"
+    echo "3. P3TERX"
+    echo "                            "
+    echo "0. 返回主菜单"
+    read -p "请输入选项:" warpNumberInput
+    case "$warpNumberInput" in
+        1 ) wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh
+        2 ) wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh && bash CFwarp.sh
+        3 ) bash <(curl -fsSL git.io/warp.sh)
+        0 ) menu
+    esac
 }
 
 function docker(){
