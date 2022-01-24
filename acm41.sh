@@ -147,6 +147,18 @@ function acmefun(){
     source ~/.bashrc
     bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
     read -p "请输入解析完成的域名:" domain
+    read -p "当前为泛域名申请证书，请输入Cloudflare Global API Key:" GAK
+    export CF_Key="$GAK"
+    read -p "当前为泛域名申请证书，请输入Cloudflare登录邮箱：" CFemail
+    export CF_Email="$CFemail"
+            if [[ $domainIP = $v4 ]]; then
+                yellow "当前泛域名解析的IPV4：$domainIP" && sleep 1
+                bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt
+            fi
+            if [[ $domainIP = $v6 ]]; then
+                yellow "当前泛域名解析的IPV6：$domainIP" && sleep 1
+                bash /root/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} -k ec-256 --server letsencrypt --listen-v6
+            fi
 }
 
 # 撤销证书
