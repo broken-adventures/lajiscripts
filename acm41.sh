@@ -218,6 +218,7 @@ function menu(){
         2 ) certificate;;
         3 ) acmerenew;;
         4 ) upgrade ;;
+        5 ) acmefun ;;
         0 ) exit 0    
     esac
 }
