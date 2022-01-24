@@ -210,7 +210,7 @@ function menu(){
     echo "                           "
     red "=================================="
     echo "                            "
-    green "当前工具箱版本：$ver"
+    green "当前工具箱版本：v$ver"
     green "更新日志：$changeLog"
     echo "                            "
     yellow "检测到VPS信息如下"
