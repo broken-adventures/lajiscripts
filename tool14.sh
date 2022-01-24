@@ -94,9 +94,9 @@ function warp(){
     echo "0. 返回主菜单"
     read -p "请输入选项:" warpNumberInput
     case "$warpNumberInput" in
-        1 ) wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh
-        2 ) wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh && bash CFwarp.sh
-        3 ) bash <(curl -fsSL git.io/warp.sh)
+        1 ) wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh ;;
+        2 ) wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh && bash CFwarp.sh ;;
+        3 ) bash <(curl -fsSL git.io/warp.sh) ;;
         0 ) menu
     esac
 }
