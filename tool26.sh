@@ -2,7 +2,7 @@
 
 # 一些全局变量
 ver="2.0.6"
-changeLog="增加DD系统"
+changeLog="增加DD系统选项（选项仅在KVM VPS显示）"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
