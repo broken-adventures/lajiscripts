@@ -245,7 +245,7 @@ function menu(){
     echo "4. VPS测试"
     echo "5. VPS探针"
     if [ ${virt} == "kvm" ]; then
-        echo "6. DD系统"
+        echo "6. VPS DD系统"
     fi
     echo "                            "
     echo "9. 更新脚本"
