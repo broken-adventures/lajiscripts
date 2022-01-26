@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 一些全局变量
-ver="2.0.5"
-changeLog="添加不同作者的WARP脚本，给予用户更多选择。增加德鸡DiG9网络解决方案"
+ver="2.0.6"
+changeLog="增加DD系统"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
