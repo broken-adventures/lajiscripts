@@ -244,6 +244,9 @@ function menu(){
     echo "3. 节点相关"
     echo "4. VPS测试"
     echo "5. VPS探针"
+    if [ $virt = "kvm"]; then
+        echo "6. DD系统"
+    fi
     echo "                            "
     echo "9. 更新脚本"
     echo "0. 退出脚本"
@@ -361,6 +364,21 @@ function page5(){
         1 ) nezha ;;
         2 ) serverstatus ;;
         0 ) menu
+    esac
+}
+
+function page6(){
+    echo "                            "
+    green "请选择你接下来使用的脚本"
+    echo "                            "
+    echo "1. 使用MoeClub的脚本"
+    echo "2. 使用cxthhhhh的脚本"
+    echo "                            "
+    echo "0. 返回主菜单"
+    read -p "请输入选项:" page6NumberInput
+    case "$page6NumberInput" in
+        1 ) macka ;;
+        2 ) boy233 ;;
     esac
 }
 
