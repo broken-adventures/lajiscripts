@@ -258,6 +258,7 @@ function menu(){
         3 ) page3 ;;
         4 ) page4 ;;
         5 ) page5 ;;
+        6 ) page6 ;;
         9 ) updateScript ;;
         0 ) exit 0
     esac
