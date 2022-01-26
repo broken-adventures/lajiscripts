@@ -370,7 +370,7 @@ function page5(){
 
 function page6(){
     if [ ${virt} != "kvm" ]; then
-        red "抱歉，目前除了KVM，其他的都DD不了系统！！！"
+        red "抱歉，目前除了KVM，其他的架构都DD不了系统！！！"
         exit 0
     fi
     echo "                            "
