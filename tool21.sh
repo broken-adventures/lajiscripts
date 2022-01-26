@@ -258,7 +258,7 @@ function menu(){
         3 ) page3 ;;
         4 ) page4 ;;
         5 ) page5 ;;
-        6 ) page6 ;;
+        6 ) wget --no-check-certificate -qO ~/Network-Reinstall-System-Modify.sh 'https://www.cxthhhhh.com/CXT-Library/Network-Reinstall-System-Modify/Network-Reinstall-System-Modify.sh' && chmod a+x ~/Network-Reinstall-System-Modify.sh && bash ~/Network-Reinstall-System-Modify.sh -UI_Options ;; ;;
         9 ) updateScript ;;
         0 ) exit 0
     esac
@@ -367,24 +367,3 @@ function page5(){
         0 ) menu
     esac
 }
-
-function page6(){
-    if [ ${virt} != "kvm" ]; then
-        red "抱歉，目前除了KVM，其他的架构都DD不了系统！！！"
-        exit 0
-    fi
-    echo "                            "
-    green "请选择你接下来使用的脚本"
-    echo "                            "
-    echo "1. 使用MoeClub的脚本"
-    echo "2. 使用cxthhhhh的脚本"
-    echo "                            "
-    echo "0. 返回主菜单"
-    read -p "请输入选项:" page6NumberInput
-    case "$page6NumberInput" in
-        1 ) macka ;;
-        2 ) wget --no-check-certificate -qO ~/Network-Reinstall-System-Modify.sh 'https://www.cxthhhhh.com/CXT-Library/Network-Reinstall-System-Modify/Network-Reinstall-System-Modify.sh' && chmod a+x ~/Network-Reinstall-System-Modify.sh && bash ~/Network-Reinstall-System-Modify.sh -UI_Options ;;
-    esac
-}
-
-menu
