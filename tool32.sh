@@ -49,12 +49,14 @@ done
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
+IP4="$WAN4 （$COUNTRY4 $ASNORG4）"
+IP6="$WAN6 （$COUNTRY6 $ASNORG6）"
 # 判断IP地址状态
-if [ -z $v4 ]; then
-    v4="当前VPS没有IPv4地址"
+if [ -z $WAN4 ]; then
+    IP4="当前VPS没有IPv4地址"
 fi
-if [ -z $v6 ]; then
-    v6="当前VPS没有IPv6地址"
+if [ -z $WAN6 ]; then
+    IP6="当前VPS没有IPv6地址"
 fi
 
 #第一页
@@ -252,8 +254,8 @@ function menu(){
     yellow "虚拟化架构：$virt"
     yellow "操作系统：$CMD"
     yellow "内核版本：$kernelVer"
-    yellow "IPv4地址：$WAN4（$COUNTRY4 $ASNORG4）"
-    yellow "IPv6地址：$WAN6（$COUNTRY6 $ASNORG6）"
+    yellow "IPv4地址：$IP4"
+    yellow "IPv6地址：$IP6"
     echo "                            "
     green "下面是脚本分类，请选择对应的分类后进入到相对应的菜单中"
     echo "                            "
