@@ -56,10 +56,10 @@ ${PACKAGE_INSTALL[int]} curl wget sudo
 IP4="$WAN4 （$COUNTRY4 $ASNORG4）"
 IP6="$WAN6 （$COUNTRY6 $ASNORG6）"
 if [ -z $WAN4 ]; then
-    IP4="当前VPS没有IPv4地址"
+    IP4="当前VPS未检测到IPv4地址"
 fi
 if [ -z $WAN6 ]; then
-    IP6="当前VPS没有IPv6地址"
+    IP6="当前VPS未检测到IPv6地址"
 fi
 
 #第一页
