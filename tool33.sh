@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 一些全局变量
+# 全局变量
 ver="2.0.6"
 changeLog="增加DD系统选项（选项仅在KVM VPS显示）"
 arch=`uname -m`
@@ -33,6 +33,9 @@ red(){
 yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
+
+# 必须以root运行脚本
+[[ $(id -u) != 0 ]] && red "请登陆root用户后执行工具箱脚本！！！" && exit 1
 
 # 判断系统，此部分代码感谢fscarmen的技术指导
 for i in "${CMD[@]}"; do
