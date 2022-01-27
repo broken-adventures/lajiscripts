@@ -246,6 +246,8 @@ function menu(){
     yellow "虚拟化架构：$virt"
     yellow "操作系统：$CMD"
     yellow "内核版本：$kernelVer"
+    yellow "IPv4地址：$v4"
+    yellow "IPv6地址：$v6"
     echo "                            "
     green "下面是脚本分类，请选择对应的分类后进入到相对应的菜单中"
     echo "                            "
