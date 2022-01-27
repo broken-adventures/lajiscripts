@@ -50,12 +50,14 @@ function oraclefirewall(){
         systemctl disable oracle-cloud-agent-updater
         systemctl stop firewalld.service
         systemctl disable firewalld.service
+        yellow "Oracle Cloud原生系统防火墙禁用成功"
     else
         iptables -P INPUT ACCEPT
         iptables -P FORWARD ACCEPT
         iptables -P OUTPUT ACCEPT
         iptables -F
         apt-get purge netfilter-persistent -y
+        yellow "Oracle Cloud原生系统防火墙禁用成功"
     fi
 }
 
@@ -266,7 +268,7 @@ function page1(){
     echo "                            "
     green "请选择你接下来的操作"
     echo "                            "
-    echo "1. Oracle 原生系统关闭防火墙"
+    echo "1. Oracle Cloud原生系统关闭防火墙"
     echo "2. 德鸡DiG9正常访问网络解决方案"
     echo "3. 修改登录方式为 root + 密码 登录"
     echo "4. Screen 后台任务管理"
