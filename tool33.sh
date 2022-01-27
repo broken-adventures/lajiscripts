@@ -52,9 +52,9 @@ done
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
+# 判断IP地址状态
 IP4="$WAN4 （$COUNTRY4 $ASNORG4）"
 IP6="$WAN6 （$COUNTRY6 $ASNORG6）"
-# 判断IP地址状态
 if [ -z $WAN4 ]; then
     IP4="当前VPS没有IPv4地址"
 fi
