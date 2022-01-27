@@ -241,7 +241,7 @@ function menu(){
     green "当前工具箱版本：v$ver"
     green "更新日志：$changeLog"
     echo "                            "
-    yellow "检测到VPS信息如下"
+    red "检测到VPS信息如下："
     yellow "处理器架构：$arch"
     yellow "虚拟化架构：$virt"
     yellow "操作系统：$CMD"
