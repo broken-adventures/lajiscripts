@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 全局变量
-ver="2.0.6"
-changeLog="增加DD系统选项（选项仅在KVM VPS显示）"
+ver="2.0.7"
+changeLog="增加脚本运行次数统计"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
