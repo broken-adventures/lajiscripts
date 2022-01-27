@@ -11,8 +11,8 @@ v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
 v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
 isp4=`curl -s4m2 https://api.ip.sb/geoip/$v4 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
 isp6=`curl -s6m2 https://api.ip.sb/geoip/$v6 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
-country4=$(expr `curl -s4m2 https://ip.gs/json` : '.*country\":\"\([^"]*\).*')
-country6=$(expr `curl -s6m2 https://ip.gs/json` : '.*country\":\"\([^"]*\).*')
+# country4=$(expr `curl -s4m2 https://ip.gs/json` : '.*country\":\"\([^"]*\).*')
+# country6=$(expr `curl -s6m2 https://ip.gs/json` : '.*country\":\"\([^"]*\).*')
 REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
 RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
 PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
@@ -250,8 +250,8 @@ function menu(){
     yellow "虚拟化架构：$virt"
     yellow "操作系统：$CMD"
     yellow "内核版本：$kernelVer"
-    yellow "IPv4地址：$v4（$country4 $isp4）"
-    yellow "IPv6地址：$v6（$country6 $isp6）"
+    yellow "IPv4地址：$v4（$isp4）"
+    yellow "IPv6地址：$v6（$isp6）"
     echo "                            "
     green "下面是脚本分类，请选择对应的分类后进入到相对应的菜单中"
     echo "                            "
