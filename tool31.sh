@@ -7,12 +7,14 @@ arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
 TUN=$(cat /dev/net/tun 2>&1 | tr '[:upper:]' '[:lower:]')
-v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
-v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
-isp4=`curl -s4m2 https://api.ip.sb/geoip/$v4 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
-isp6=`curl -s6m2 https://api.ip.sb/geoip/$v6 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
-# country4=$(expr `curl -s4m2 https://ip.gs/json` : '.*country\":\"\([^"]*\).*')
-# country6=$(expr `curl -s6m2 https://ip.gs/json` : '.*country\":\"\([^"]*\).*')
+IP4=$(curl -s4m2 https://ip.gs/json)
+IP6=$(curl -s6m2 https://ip.gs/json)
+WAN4=$(expr "$IP4" : '.*ip\":\"\([^"]*\).*')
+WAN6=$(expr "$IP6" : '.*ip\":\"\([^"]*\).*')
+COUNTRY4=$(expr "$IP4" : '.*country\":\"\([^"]*\).*')
+COUNTRY6=$(expr "$IP6" : '.*country\":\"\([^"]*\).*')
+ASNORG4=$(expr "$IP4" : '.*asn_org\":\"\([^"]*\).*')
+ASNORG6=$(expr "$IP6" : '.*asn_org\":\"\([^"]*\).*')
 REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
 RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
 PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
@@ -250,8 +252,8 @@ function menu(){
     yellow "虚拟化架构：$virt"
     yellow "操作系统：$CMD"
     yellow "内核版本：$kernelVer"
-    yellow "IPv4地址：$v4（$isp4）"
-    yellow "IPv6地址：$v6（$isp6）"
+    yellow "IPv4地址：$WAN4（$COUNTRY4 $ASNORG4）"
+    yellow "IPv6地址：$WAN6（$COUNTRY6 $ASNORG6）"
     echo "                            "
     green "下面是脚本分类，请选择对应的分类后进入到相对应的菜单中"
     echo "                            "
