@@ -43,6 +43,14 @@ done
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
+# 判断IP地址状态
+if [ -z $v4 ]; then
+    v4="当前VPS没有IPv4地址"
+fi
+if [ -z $v6 ]; then
+    v6="当前VPS没有IPv6地址"
+fi
+
 #第一页
 function oraclefirewall(){
     if [ $SYSTEM = "CentOS" ]; then
