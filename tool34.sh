@@ -35,7 +35,7 @@ yellow(){
 }
 
 # 必须以root运行脚本
-[[ $(id -u) != 0 ]] && red "请登陆root用户后执行工具箱脚本！！！" && exit 1
+[[ $(id -u) != 0 ]] && red "请使用“sudo -i”登录root用户后执行工具箱脚本！！！" && exit 1
 
 # 判断系统，此部分代码感谢fscarmen的技术指导
 for i in "${CMD[@]}"; do
