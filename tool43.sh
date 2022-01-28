@@ -51,7 +51,6 @@ done
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
 
 # 更新系统及安装依赖，此部分代码感谢fscarmen的技术指导
-green "请稍等，正在检测并安装必要的依赖"
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
