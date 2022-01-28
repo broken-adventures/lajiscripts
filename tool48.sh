@@ -2,7 +2,7 @@
 
 # 全局变量
 ver="2.0.8"
-changeLog="增加青龙面板，修复纯净Debian系统获取不到VPS IP地址的问题"
+changeLog="增加Trojan面板"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
@@ -187,6 +187,10 @@ function qlPanel(){
     fi
 }
 
+function trojanpanel(){
+    source <(curl -sL https://git.io/trojan-install)
+}
+
 # 第三页
 function macka(){
     wget -P /root -N --no-check-certificate "https://raw.githubusercontents.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
@@ -350,6 +354,7 @@ function page2(){
     echo "3. 安装aria2面板"
     echo "4. 安装CyberPanel面板"
     echo "5. 安装青龙面板"
+    echo "6. 安装Trojan面板"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page2NumberInput
@@ -359,6 +364,7 @@ function page2(){
         3 ) aria2 ;;
         4 ) cyberpanel ;;
         5 ) qlPanel ;;
+        6 ) trojanpanel ;;
         0 ) menu
     esac
 }
