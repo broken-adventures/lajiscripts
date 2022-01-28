@@ -54,6 +54,8 @@ done
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
+# 获取IP地址
+
 # 判断IP地址状态
 IP4="$WAN4 （$COUNTRY4 $ASNORG4）"
 IP6="$WAN6 （$COUNTRY6 $ASNORG6）"
