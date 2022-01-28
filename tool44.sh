@@ -166,8 +166,8 @@ function cyberpanel(){
 
 function qlPanel(){
     if [[ -z $(docker -v) ]]; then
-        red "请先安装Docker后再安装青龙面板！！！"
-        exit 0
+        yellow "检测到VPS未安装Docker环境，正在自动安装docker"
+        curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
     fi
     docker run -dit --name QL --hostname QL --restart always -p 5700:5700 -v $PWD/QL/config:/ql/config -v $PWD/QL/log:/ql/log -v $PWD/QL/db:/ql/db -v $PWD/QL/scripts:/ql/scripts -v $PWD/QL/jbot:/ql/jbot whyour/qinglong:latest
     yellow "青龙面板安装成功！！！"
