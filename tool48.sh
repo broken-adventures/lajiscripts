@@ -2,7 +2,7 @@
 
 # 全局变量
 ver="2.0.8"
-changeLog="增加青龙面板，修复纯净Debian获取不到VPS IP地址的问题"
+changeLog="增加青龙面板，修复纯净Debian系统获取不到VPS IP地址的问题"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
