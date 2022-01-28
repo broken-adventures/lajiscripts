@@ -175,7 +175,7 @@ function qlPanel(){
         green "IPv4访问地址为：http://$WAN4:5700"
     fi
     if [ -n $WAN6 ]; then
-        green "IPv6访问地址为：http://$WAN6:5700"
+        green "IPv6访问地址为：http://[$WAN6]:5700"
     fi
 }
 
