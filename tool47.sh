@@ -7,21 +7,11 @@ arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
 TUN=$(cat /dev/net/tun 2>&1 | tr '[:upper:]' '[:lower:]')
-IP4=$(curl -s4m2 https://ip.gs/json)
-IP6=$(curl -s6m2 https://ip.gs/json)
-WAN4=$(expr "$IP4" : '.*ip\":\"\([^"]*\).*')
-WAN6=$(expr "$IP6" : '.*ip\":\"\([^"]*\).*')
-COUNTRY4=$(expr "$IP4" : '.*country\":\"\([^"]*\).*')
-COUNTRY6=$(expr "$IP6" : '.*country\":\"\([^"]*\).*')
-ASNORG4=$(expr "$IP4" : '.*asn_org\":\"\([^"]*\).*')
-ASNORG6=$(expr "$IP6" : '.*asn_org\":\"\([^"]*\).*')
 REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
 RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
 PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
 PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y install" "apk add -f")
 CMD=("$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)" "$(hostnamectl 2>/dev/null | grep -i system | cut -d : -f2)" "$(lsb_release -sd 2>/dev/null)" "$(grep -i description /etc/lsb-release 2>/dev/null | cut -d \" -f2)" "$(grep . /etc/redhat-release 2>/dev/null)" "$(grep . /etc/issue 2>/dev/null | cut -d \\ -f1 | sed '/^[ ]*$/d')")
-COUNT=$(curl -sm2 "https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FMisaka-blog%2FMisakaLinuxToolbox%40master%2FMisakaToolbox.sh&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false" 2>&1) &&
-TODAY=$(expr "$COUNT" : '.*\s\([0-9]\{1,\}\)\s/.*') && TOTAL=$(expr "$COUNT" : '.*/\s\([0-9]\{1,\}\)\s.*')
 
 # 控制台字体
 green(){
@@ -54,7 +44,15 @@ done
 ${PACKAGE_UPDATE[int]}
 ${PACKAGE_INSTALL[int]} curl wget sudo
 
-# 获取IP地址
+# 获取IP地址及其信息
+IP4=$(curl -s4m2 https://ip.gs/json)
+IP6=$(curl -s6m2 https://ip.gs/json)
+WAN4=$(expr "$IP4" : '.*ip\":\"\([^"]*\).*')
+WAN6=$(expr "$IP6" : '.*ip\":\"\([^"]*\).*')
+COUNTRY4=$(expr "$IP4" : '.*country\":\"\([^"]*\).*')
+COUNTRY6=$(expr "$IP6" : '.*country\":\"\([^"]*\).*')
+ASNORG4=$(expr "$IP4" : '.*asn_org\":\"\([^"]*\).*')
+ASNORG6=$(expr "$IP6" : '.*asn_org\":\"\([^"]*\).*')
 
 # 判断IP地址状态
 IP4="$WAN4 （$COUNTRY4 $ASNORG4）"
@@ -65,6 +63,10 @@ fi
 if [ -z $WAN6 ]; then
     IP6="当前VPS未检测到IPv6地址"
 fi
+
+# 获取脚本运行次数
+COUNT=$(curl -sm2 "https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FMisaka-blog%2FMisakaLinuxToolbox%40master%2FMisakaToolbox.sh&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false" 2>&1) &&
+TODAY=$(expr "$COUNT" : '.*\s\([0-9]\{1,\}\)\s/.*') && TOTAL=$(expr "$COUNT" : '.*/\s\([0-9]\{1,\}\)\s.*')
 
 #第一页
 function oraclefirewall(){
