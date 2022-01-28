@@ -133,7 +133,7 @@ function warp(){
     esac
 }
 
-function docker(){
+function dockerInstall(){
     curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 }
 
@@ -317,7 +317,7 @@ function page1(){
         4 ) screenManager ;;
         5 ) bbr ;;
         6 ) warp ;;
-        7 ) docker ;;
+        7 ) dockerInstall ;;
         8 ) acmesh ;;
         0 ) menu
     esac
