@@ -171,10 +171,14 @@ function qlPanel(){
     fi
     docker run -dit --name QL --hostname QL --restart always -p 5700:5700 -v $PWD/QL/config:/ql/config -v $PWD/QL/log:/ql/log -v $PWD/QL/db:/ql/db -v $PWD/QL/scripts:/ql/scripts -v $PWD/QL/jbot:/ql/jbot whyour/qinglong:latest
     yellow "青龙面板安装成功！！！"
-    if [ $IP4 != "当前VPS未检测到IPv4地址" ]; then
+    if [ -z $WAN4 ]; then
+        green "IPv4访问地址为："
+    else
         green "IPv4访问地址为：http://$WAN4:5700"
     fi
-    if [ $IP6 != "当前VPS未检测到IPv6地址" ]; then
+    if [ -z $WAN6 ]; then
+        green "IPv6访问地址为："
+    else
         green "IPv6访问地址为：http://[$WAN6]:5700"
     fi
 }
