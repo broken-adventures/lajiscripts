@@ -166,18 +166,7 @@ function cyberpanel(){
 }
 
 function qlPanel(){
-    docker run -dit \
-  -v $PWD/ql/config:/ql/config \
-  -v $PWD/ql/log:/ql/log \
-  -v $PWD/ql/db:/ql/db \
-  -v $PWD/ql/repo:/ql/repo \
-  -v $PWD/ql/raw:/ql/raw \
-  -v $PWD/ql/scripts:/ql/scripts \
-  -p 5700:5700 \
-  --name qinglong \
-  --hostname qinglong \
-  --restart unless-stopped \
-  whyour/qinglong:latest
+    docker run -dit --name QL --hostname QL --restart always -p 5700:5700 -v $PWD/QL/config:/ql/config -v $PWD/QL/log:/ql/log -v $PWD/QL/db:/ql/db -v $PWD/QL/scripts:/ql/scripts -v $PWD/QL/jbot:/ql/jbot whyour/qinglong:latest
 }
 
 # 第三页
