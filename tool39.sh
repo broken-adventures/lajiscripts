@@ -351,7 +351,7 @@ function page2(){
         2 ) xui ;;
         3 ) aria2 ;;
         4 ) cyberpanel ;;
-        5 ) qlpanel ;;
+        5 ) qlPanel ;;
         0 ) menu
     esac
 }
