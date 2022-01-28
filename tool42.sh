@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 全局变量
-ver="2.0.7"
+ver="2.0.8"
 changeLog="增加青龙面板"
 arch=`uname -m`
 virt=`systemd-detect-virt`
