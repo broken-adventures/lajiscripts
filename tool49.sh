@@ -251,11 +251,6 @@ function speedTest(){
 }
 
 # 第五页
-function nezha(){
-    curl -L https://raw.githubusercontents.com/naiba/nezha/master/script/install.sh  -o nezha.sh && chmod +x nezha.sh
-    sudo ./nezha.sh
-}
-
 function serverstatus(){
     wget -N https://raw.githubusercontents.com/cokemine/ServerStatus-Hotaru/master/status.sh
     echo "                            "
@@ -429,7 +424,7 @@ function page5(){
     echo "0. 返回主菜单"
     read -p "请输入选项:" page5NumberInput
     case "$page5NumberInput" in
-        1 ) nezha ;;
+        1 ) curl -L https://raw.githubusercontents.com/naiba/nezha/master/script/install.sh  -o nezha.sh && chmod +x nezha.sh && sudo ./nezha.sh ;;
         2 ) serverstatus ;;
         3 ) wget https://raw.githubusercontent.com/nkeonkeo/nekonekostatus/main/install.sh -O install.sh && bash install.sh ;;
         0 ) menu
