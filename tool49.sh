@@ -424,12 +424,14 @@ function page5(){
     echo "                            "
     echo "1. 哪吒面板"
     echo "2. 可乐ServerStatus-Horatu"
+    echo "3. Neko Neko Status"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page5NumberInput
     case "$page5NumberInput" in
         1 ) nezha ;;
         2 ) serverstatus ;;
+        3 ) wget https://raw.githubusercontent.com/nkeonkeo/nekonekostatus/main/install.sh -O install.sh && bash install.sh ;;
         0 ) menu
     esac
 }
