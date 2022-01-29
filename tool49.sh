@@ -148,6 +148,7 @@ function acmesh(){
 
 function dns64server(){
     echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
+    yellow "设置DNS64服务器完成"
 }
 
 # 第二页
