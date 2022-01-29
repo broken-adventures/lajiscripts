@@ -122,7 +122,7 @@ function warp(){
     echo "                            "
     echo "1. 【推荐】 fscarmen"
     echo "2. fscarmen-docker"
-    echo "3. fscarmen warp解锁奈飞"
+    echo "3. fscarmen warp解锁奈飞流媒体脚本"
     echo "4. kkkyg（甬哥）"
     echo "5. P3TERX"
     echo "                            "
@@ -144,6 +144,10 @@ function dockerInstall(){
 
 function acmesh(){
     wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/acme-1key@master/acme1key.sh && chmod -R 777 acme1key.sh && bash acme1key.sh
+}
+
+function dns64server(){
+    echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
 }
 
 # 第二页
@@ -328,9 +332,10 @@ function page1(){
     echo "3. 修改登录方式为 root + 密码 登录"
     echo "4. Screen 后台任务管理"
     echo "5. 开启BBR"
-    echo "6. 安装WARP"
-    echo "7. 安装docker"
-    echo "8. Acme.sh 证书申请脚本"
+    echo "6. 设置DNS64服务器"
+    echo "7. 安装WARP"
+    echo "8. 安装docker"
+    echo "9. Acme.sh 证书申请脚本"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
@@ -340,9 +345,10 @@ function page1(){
         3 ) rootLogin ;;
         4 ) screenManager ;;
         5 ) bbr ;;
-        6 ) warp ;;
-        7 ) dockerInstall ;;
-        8 ) acmesh ;;
+        6 ) dns64server ;;
+        7 ) warp ;;
+        8 ) dockerInstall ;;
+        9 ) acmesh ;;
         0 ) menu
     esac
 }
