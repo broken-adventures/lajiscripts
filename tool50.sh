@@ -132,8 +132,8 @@ function warp(){
         1 ) wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/menu.sh && bash menu.sh ;;
         2 ) wget -N https://cdn.jsdelivr.net/gh/fscarmen/warp/docker.sh && bash docker.sh ;;
         3 ) bash <(curl -sSL https://raw.githubusercontent.com/fscarmen/warp_unlock/main/unlock.sh) ;;
-        3 ) wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh && bash CFwarp.sh ;;
-        4 ) bash <(curl -fsSL git.io/warp.sh) ;;
+        4 ) wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh && bash CFwarp.sh ;;
+        5 ) bash <(curl -fsSL git.io/warp.sh) ;;
         0 ) menu
     esac
 }
@@ -251,6 +251,11 @@ function speedTest(){
 }
 
 # 第五页
+function nezha(){
+    curl -L https://raw.githubusercontents.com/naiba/nezha/master/script/install.sh  -o nezha.sh && chmod +x nezha.sh
+    sudo ./nezha.sh
+}
+
 function serverstatus(){
     wget -N https://raw.githubusercontents.com/cokemine/ServerStatus-Hotaru/master/status.sh
     echo "                            "
@@ -419,14 +424,12 @@ function page5(){
     echo "                            "
     echo "1. 哪吒面板"
     echo "2. 可乐ServerStatus-Horatu"
-    echo "3. Neko Neko Status"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page5NumberInput
     case "$page5NumberInput" in
-        1 ) curl -L https://raw.githubusercontents.com/naiba/nezha/master/script/install.sh  -o nezha.sh && chmod +x nezha.sh && sudo ./nezha.sh ;;
+        1 ) nezha ;;
         2 ) serverstatus ;;
-        3 ) wget https://raw.githubusercontent.com/nkeonkeo/nekonekostatus/main/install.sh -O install.sh && bash install.sh ;;
         0 ) menu
     esac
 }
