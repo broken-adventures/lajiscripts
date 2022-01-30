@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 全局变量
-ver="2.0.9"
-changeLog="增加Trojan面板，fscarmen的warp流媒体解锁脚本"
+ver="2.1.0"
+changeLog="集成修改root+密码脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
