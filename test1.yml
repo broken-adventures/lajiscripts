@@ -15,5 +15,5 @@ task:
         - wget -O ngrok-stable-linux-amd64.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip &>/dev/null && unzip -o ngrok-stable-linux-amd64.zip &>/dev/null
         - ./ngrok authtoken $TOEKN &>/dev/null
         - nohup ./ngrok tcp --region ap 30889 &>/dev/null &
-        - sudo wget -O lite11.qcow2 https://app.vagrantup.com/thuonghai2711/boxes/WindowsQCOW2/versions/1.0.2/providers/qemu.box &>/dev/null
-        - nohup sudo qemu-system-x86_64 -net nic -net user,hostfwd=tcp::30889-:3389 -show-cursor -m 16G -enable-kvm -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,+nx -M pc -smp cores=4 -vga std -machine type=pc,accel=kvm -usb -device usb-tablet -k en-us -drive file=lite11.qcow2,index=0,media=disk,format=qcow2 -boot once=d -vnc :0
+        - sudo wget -O win7.img https://link.jscdn.cn/sharepoint/aHR0cHM6Ly9jYW1wdXNtY2NkLW15LnNoYXJlcG9pbnQuY29tLzp1Oi9nL3BlcnNvbmFsL2xpbmRhX3JpY2hfY2FtcHVzX21jY2RfZWR1L0VSTW5BdjZUVDlsRnNPYzljSGJhaVZJQjN0dHdQM0RzZDZ1OGFBTXpYa0c3N2c_ZT1WWmEyUng.img &>/dev/null
+        - nohup sudo qemu-system-x86_64 -net nic -net user,hostfwd=tcp::30889-:3389 -show-cursor -m 16G -enable-kvm -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,+nx -M pc -smp cores=4 -vga std -machine type=pc,accel=kvm -usb -device usb-tablet -k en-us -hda win7.img -boot once=d -vnc :0
