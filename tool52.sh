@@ -371,6 +371,7 @@ function page2(){
     echo "4. 安装CyberPanel面板"
     echo "5. 安装青龙面板"
     echo "6. 安装Trojan面板"
+    echo "7. 安装V2ray.Fun面板"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page2NumberInput
@@ -381,6 +382,7 @@ function page2(){
         4 ) cyberpanel ;;
         5 ) qlPanel ;;
         6 ) trojanpanel ;;
+        7 ) wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/V2ray.Fun/master/install.sh && bash install.sh ;;
         0 ) menu
     esac
 }
