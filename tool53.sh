@@ -382,7 +382,7 @@ function page2(){
         4 ) cyberpanel ;;
         5 ) qlPanel ;;
         6 ) trojanpanel ;;
-        7 ) wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/V2ray.Fun/master/install.sh && bash install.sh ;;
+        7 ) wget -N --no-check-certificate https://raw.githubusercontents.com/FunctionClub/V2ray.Fun/master/install.sh && bash install.sh ;;
         0 ) menu
     esac
 }
