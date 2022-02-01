@@ -296,12 +296,12 @@ print_end_time() {
     if [ ${time} -gt 60 ]; then
         min=$(expr $time / 60)
         sec=$(expr $time % 60)
-        echo " Finished in        : ${min} min ${sec} sec"
+        echo " 总共花费        : ${min} 分 ${sec} 秒"
     else
-        echo " Finished in        : ${time} sec"
+        echo " 总共花费        : ${time} 秒"
     fi
     date_time=$(date +%Y-%m-%d" "%H:%M:%S)
-    echo " Timestamp          : $date_time"
+    echo " 时间          : $date_time"
 }
 
 ! _exists "wget" && _red "Error: wget command not found.\n" && exit 1
