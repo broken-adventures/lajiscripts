@@ -77,8 +77,6 @@ speed() {
     speed_test '24215' '法国巴黎'
     speed_test '28922' '荷兰阿姆斯特丹'
     speed_test '21541' '美国洛杉矶'
-    speed_test '43860' '美国达拉斯'
-    speed_test '40879' '加拿大蒙特利尔'   
 }
 
 io_test() {
@@ -323,7 +321,7 @@ ipv4_info
 next
 print_io_test
 next
-install_speedtest && printf "%-26s%-14s%-20s%-20s\n" " 测速点位置" "上传速度" "下载速度" "延迟"
+install_speedtest && printf "%-16s%-14s%-20s%-20s\n" " 测速点位置" "上传速度" "下载速度" "延迟"
 speed && rm -fr speedtest-cli
 next
 print_end_time
