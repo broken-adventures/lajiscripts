@@ -247,7 +247,7 @@ print_system_info() {
     fi
     echo " CPU 核心数        : $(_blue "$cores")"
     if [ -n "$freq" ]; then
-        echo " CPU 频率        : $(_blue "$freq MHz")"
+        echo " CPU 频率          : $(_blue "$freq MHz")"
     fi
     if [ -n "$ccache" ]; then
         echo " CPU 缓存          : $(_blue "$ccache")"
