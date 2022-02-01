@@ -155,7 +155,7 @@ ipv4_info() {
     local country="$(wget -q -T10 -O- ipinfo.io/country)"
     local region="$(wget -q -T10 -O- ipinfo.io/region)"
     if [[ -n "$org" ]]; then
-        echo " ASN组织          : $(_blue "$org")"
+        echo " ASN组织           : $(_blue "$org")"
     fi
     if [[ -n "$city" && -n "country" ]]; then
         echo " 位置              : $(_blue "$city / $country")"
