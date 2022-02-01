@@ -80,30 +80,45 @@ checkspeedtest() {
 }
 
 speed_test(){
-	speedLog="./speedtest.log"
-	true > $speedLog
+	if [[ $1 == '' ]]; then
+		speedtest-cli/speedtest -p no --accept-license > $speedLog 2>&1
+		is_upload=$(cat $speedLog | grep 'Upload')
+		result_speed=$(cat $speedLog | awk -F ' ' '/Result/{print $3}')
+		if [[ ${is_upload} ]]; then
+	        local REDownload=$(cat $speedLog | awk -F ' ' '/Download/{print $3}')
+	        local reupload=$(cat $speedLog | awk -F ' ' '/Upload/{print $3}')
+	        local relatency=$(cat $speedLog | awk -F ' ' '/Latency/{print $2}')
+
+	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        	if [[ ${temp} -gt 50 ]]; then
+            	relatency="(*)"${relatency}
+        	fi
+	        local nodeName=$2
+
+	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
+	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
+	        	printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload} Mbit/s" "${REDownload} Mbit/s" "${relatency} ms" | tee -a $log
+	        fi
+		else
+	        local cerror="ERROR"
+		fi
+	else
 		speedtest-cli/speedtest -p no -s $1 --accept-license > $speedLog 2>&1
 		is_upload=$(cat $speedLog | grep 'Upload')
 		if [[ ${is_upload} ]]; then
 	        local REDownload=$(cat $speedLog | awk -F ' ' '/Download/{print $3}')
 	        local reupload=$(cat $speedLog | awk -F ' ' '/Upload/{print $3}')
 	        local relatency=$(cat $speedLog | awk -F ' ' '/Latency/{print $2}')
-	        
-			local nodeID=$1
-			local nodeLocation=$2
-			local nodeISP=$3
-			
-			strnodeLocation="${nodeLocation}　　　　　　"
-			LANG=C
-			#echo $LANG
-			
-			temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
+	        local nodeName=$2
+
+	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%s%-10s${BLUE}%s%-10s${PURPLE}%-8s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "↑ " "${reupload}" "↓ " "${REDownload}" "${relatency}" | tee -a $log
+	        	printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload} Mbit/s" "${REDownload} Mbit/s" "${relatency} ms" | tee -a $log
 			fi
 		else
 	        local cerror="ERROR"
 		fi
+	fi
 }
 
 preinfo() {
