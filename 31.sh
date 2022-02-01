@@ -252,10 +252,10 @@ print_system_info() {
     if [ -n "$ccache" ]; then
         echo " CPU 缓存          : $(_blue "$ccache")"
     fi
-    echo " 硬盘空间         : $(_yellow "$disk_total_size GB") $(_blue "($disk_used_size GB 可用)")"
-    echo " 内存             : $(_yellow "$tram MB") $(_blue "($uram MB 可用)")"
-    echo " Swap             : $(_blue "$swap MB ($uswap MB 可用)")"
-    echo " 系统启动时间    : $(_blue "$up")"
+    echo " 硬盘空间          : $(_yellow "$disk_total_size GB") $(_blue "($disk_used_size GB 可用)")"
+    echo " 内存              : $(_yellow "$tram MB") $(_blue "($uram MB 可用)")"
+    echo " Swap              : $(_blue "$swap MB ($uswap MB 可用)")"
+    echo " 系统启动时间      : $(_blue "$up")"
     echo " 负载               : $(_blue "$load")"
     echo " 系统               : $(_blue "$opsy")"
     echo " 架构               : $(_blue "$arch ($lbit Bit)")"
