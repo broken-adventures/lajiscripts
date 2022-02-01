@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+ver="1.0"
+changeLog=""
+
 trap _exit INT QUIT TERM
 
 _red() {
@@ -206,6 +209,8 @@ install_speedtest() {
 print_intro() {
     echo "-------------------- A Bench Script By Misaka No -------------------"
     echo "                   Blog: https://owo.misaka.rest                    "
+    echo "版本号：$ver"
+    echo "更新日志：$changeLog"
 }
 
 # Get System information
