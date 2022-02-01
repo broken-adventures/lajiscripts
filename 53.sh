@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ver="1.0.1"
-changeLog="删除部分境外测速节点"
+changeLog="删除部分境外测速节点，修改境内测速点为国际出口"
 
 trap _exit INT QUIT TERM
 
