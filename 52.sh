@@ -66,16 +66,14 @@ speed_test() {
 }
 
 speed() {
-    speed_test '' 'Speedtest.net'
+    speed_test '' 'speedtest'
     speed_test '47066' '广州移动'
+    speed_test '25637' '上海移动'
     speed_test '3633' '上海联通'
-    speed_test '26352' '中国南京'
     speed_test '32155' '中国香港'
     speed_test '15047' '日本东京'
-    speed_test '6527'  '韩国首尔'
     speed_test '25960' '新加坡'
-    speed_test '24215' '法国巴黎'
-    speed_test '28922' '荷兰阿姆斯特丹'
+    speed_test '4769' '卢森堡'
     speed_test '21541' '美国洛杉矶'
 }
 
