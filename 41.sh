@@ -207,8 +207,8 @@ install_speedtest() {
 }
 
 print_intro() {
-    echo "-------------------- A Bench Script By Misaka No -------------------"
-    echo "                   Blog: https://owo.misaka.rest                    "
+    echo "--------------------- A Bench Script By Misaka No --------------------"
+    echo "                     Blog: https://owo.misaka.rest                    "
     echo "版本号：$ver"
     echo "更新日志：$changeLog"
 }
