@@ -155,16 +155,16 @@ ipv4_info() {
     local country="$(wget -q -T10 -O- ipinfo.io/country)"
     local region="$(wget -q -T10 -O- ipinfo.io/region)"
     if [[ -n "$org" ]]; then
-        echo " ASN       : $(_blue "$org")"
+        echo " ASN组织       : $(_blue "$org")"
     fi
     if [[ -n "$city" && -n "country" ]]; then
-        echo " 位置           : $(_blue "$city / $country")"
+        echo " 位置              : $(_blue "$city / $country")"
     fi
     if [[ -n "$region" ]]; then
-        echo " 地区             : $(_yellow "$region")"
+        echo " 地区              : $(_yellow "$region")"
     fi
     if [[ -z "$org" ]]; then
-        echo " Region             : $(_red "No ISP detected")"
+        echo " 地区              : $(_red "无法获取ISP信息")"
     fi
 }
 
