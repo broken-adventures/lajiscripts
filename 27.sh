@@ -155,13 +155,13 @@ ipv4_info() {
     local country="$(wget -q -T10 -O- ipinfo.io/country)"
     local region="$(wget -q -T10 -O- ipinfo.io/region)"
     if [[ -n "$org" ]]; then
-        echo " Organization       : $(_blue "$org")"
+        echo " ASN       : $(_blue "$org")"
     fi
     if [[ -n "$city" && -n "country" ]]; then
-        echo " Location           : $(_blue "$city / $country")"
+        echo " 位置           : $(_blue "$city / $country")"
     fi
     if [[ -n "$region" ]]; then
-        echo " Region             : $(_yellow "$region")"
+        echo " 地区             : $(_yellow "$region")"
     fi
     if [[ -z "$org" ]]; then
         echo " Region             : $(_red "No ISP detected")"
@@ -318,7 +318,7 @@ ipv4_info
 next
 print_io_test
 next
-install_speedtest && printf "%-20s%-18s%-20s%-12s\n" " 测速点位置及名称" "上传速度" "下载速度" "延迟"
+install_speedtest && printf "%-26s%-18s%-20s%-12s\n" " 测速点位置及名称" "上传速度" "下载速度" "延迟"
 speed && rm -fr speedtest-cli
 next
 print_end_time
