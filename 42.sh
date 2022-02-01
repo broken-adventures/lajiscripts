@@ -3,25 +3,21 @@
 ver="1.0"
 changeLog=""
 
-trap _exit INT QUIT TERM
+trap exit INT QUIT TERM
 
-_red() {
+red() {
     printf '\033[0;31;31m%b\033[0m' "$1"
 }
 
-_green() {
-    printf '\033[0;31;32m%b\033[0m' "$1"
-}
-
-_yellow() {
+yellow() {
     printf '\033[0;31;33m%b\033[0m' "$1"
 }
 
-_blue() {
+blue() {
     printf '\033[0;31;36m%b\033[0m' "$1"
 }
 
-_exists() {
+exists() {
     local cmd="$1"
     if eval type type > /dev/null 2>&1; then
         eval type "$cmd" > /dev/null 2>&1
@@ -34,8 +30,8 @@ _exists() {
     return ${rt}
 }
 
-_exit() {
-    _red "\n检测到退出操作，脚本终止！\n"
+exit() {
+    red "\n检测到退出操作，脚本终止！\n"
     # clean up
     rm -fr speedtest.tgz speedtest-cli benchtest_*
     exit 1
@@ -101,8 +97,8 @@ calc_disk() {
 }
 
 check_virt(){
-    _exists "dmesg" && virtualx="$(dmesg 2>/dev/null)"
-    if _exists "dmidecode"; then
+    exists "dmesg" && virtualx="$(dmesg 2>/dev/null)"
+    if exists "dmidecode"; then
         sys_manu="$(dmidecode -s system-manufacturer 2>/dev/null)"
         sys_product="$(dmidecode -s system-product-name 2>/dev/null)"
         sys_ver="$(dmidecode -s system-version 2>/dev/null)"
@@ -158,16 +154,16 @@ ipv4_info() {
     local country="$(wget -q -T10 -O- ipinfo.io/country)"
     local region="$(wget -q -T10 -O- ipinfo.io/region)"
     if [[ -n "$org" ]]; then
-        echo " ASN组织           : $(_blue "$org")"
+        echo " ASN组织           : $(blue "$org")"
     fi
     if [[ -n "$city" && -n "country" ]]; then
-        echo " 位置              : $(_blue "$city / $country")"
+        echo " 位置              : $(blue "$city / $country")"
     fi
     if [[ -n "$region" ]]; then
-        echo " 地区              : $(_yellow "$region")"
+        echo " 地区              : $(yellow "$region")"
     fi
     if [[ -z "$org" ]]; then
-        echo " 地区              : $(_red "无法获取ISP信息")"
+        echo " 地区              : $(red "无法获取ISP信息")"
     fi
 }
 
@@ -193,13 +189,13 @@ install_speedtest() {
         if [ "${sysarch}" = "armv6" ]; then
             sys_bit="armel"
         fi
-        [ -z "${sys_bit}" ] && _red "Error: Unsupported system architecture (${sysarch}).\n" && exit 1
+        [ -z "${sys_bit}" ] && red "Error: Unsupported system architecture (${sysarch}).\n" && exit 1
         url1="https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-${sys_bit}.tgz"
         url2="https://dl.lamp.sh/files/ookla-speedtest-1.1.1-linux-${sys_bit}.tgz"
         wget --no-check-certificate -q -T10 -O speedtest.tgz ${url1}
         if [ $? -ne 0 ]; then
             wget --no-check-certificate -q -T10 -O speedtest.tgz ${url2}
-            [ $? -ne 0 ] && _red "Error: Failed to download speedtest-cli.\n" && exit 1
+            [ $? -ne 0 ] && red "Error: Failed to download speedtest-cli.\n" && exit 1
         fi
         mkdir -p speedtest-cli && tar zxf speedtest.tgz -C ./speedtest-cli && chmod +x ./speedtest-cli/speedtest
         rm -f speedtest.tgz
@@ -224,14 +220,14 @@ get_system_info() {
     swap=$( LANG=C; free -m | awk '/Swap/ {print $2}' )
     uswap=$( LANG=C; free -m | awk '/Swap/ {print $3}' )
     up=$( awk '{a=$1/86400;b=($1%86400)/3600;c=($1%3600)/60} {printf("%d days, %d hour %d min\n",a,b,c)}' /proc/uptime )
-    if _exists "w"; then
+    if exists "w"; then
         load=$( LANG=C; w | head -1 | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
-    elif _exists "uptime"; then
+    elif exists "uptime"; then
         load=$( LANG=C; uptime | head -1 | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
     fi
     opsy=$( get_opsy )
     arch=$( uname -m )
-    if _exists "getconf"; then
+    if exists "getconf"; then
         lbit=$( getconf LONG_BIT )
     else
         echo ${arch} | grep -q "64" && lbit="64" || lbit="32"
@@ -246,27 +242,27 @@ get_system_info() {
 # Print System information
 print_system_info() {
     if [ -n "$cname" ]; then
-        echo " CPU 型号          : $(_blue "$cname")"
+        echo " CPU 型号          : $(blue "$cname")"
     else
-        echo " CPU 型号          : $(_blue "无法检测到CPU型号")"
+        echo " CPU 型号          : $(blue "无法检测到CPU型号")"
     fi
-    echo " CPU 核心数        : $(_blue "$cores")"
+    echo " CPU 核心数        : $(blue "$cores")"
     if [ -n "$freq" ]; then
-        echo " CPU 频率          : $(_blue "$freq MHz")"
+        echo " CPU 频率          : $(blue "$freq MHz")"
     fi
     if [ -n "$ccache" ]; then
-        echo " CPU 缓存          : $(_blue "$ccache")"
+        echo " CPU 缓存          : $(blue "$ccache")"
     fi
-    echo " 硬盘空间          : $(_yellow "$disk_total_size GB") $(_blue "($disk_used_size GB 已用)")"
-    echo " 内存              : $(_yellow "$tram MB") $(_blue "($uram MB 已用)")"
-    echo " Swap              : $(_blue "$swap MB ($uswap MB 已用)")"
-    echo " 系统在线时间      : $(_blue "$up")"
-    echo " 负载              : $(_blue "$load")"
-    echo " 系统              : $(_blue "$opsy")"
-    echo " 架构              : $(_blue "$arch ($lbit Bit)")"
-    echo " 内核              : $(_blue "$kern")"
-    echo " TCP加速方式       : $(_yellow "$tcpctrl")"
-    echo " 虚拟化架构        : $(_blue "$virt")"
+    echo " 硬盘空间          : $(yellow "$disk_total_size GB") $(blue "($disk_used_size GB 已用)")"
+    echo " 内存              : $(yellow "$tram MB") $(blue "($uram MB 已用)")"
+    echo " Swap              : $(blue "$swap MB ($uswap MB 已用)")"
+    echo " 系统在线时间      : $(blue "$up")"
+    echo " 负载              : $(blue "$load")"
+    echo " 系统              : $(blue "$opsy")"
+    echo " 架构              : $(blue "$arch ($lbit Bit)")"
+    echo " 内核              : $(blue "$kern")"
+    echo " TCP加速方式       : $(yellow "$tcpctrl")"
+    echo " 虚拟化架构        : $(blue "$virt")"
 }
 
 print_io_test() {
@@ -277,11 +273,11 @@ print_io_test() {
     if [ ${freespace} -gt 1024 ]; then
         writemb=2048
         io1=$( io_test ${writemb} )
-        echo " 磁盘I/O (第一次) : $(_yellow "$io1")"
+        echo " 磁盘I/O (第一次) : $(yellow "$io1")"
         io2=$( io_test ${writemb} )
-        echo " 磁盘I/O (第二次) : $(_yellow "$io2")"
+        echo " 磁盘I/O (第二次) : $(yellow "$io2")"
         io3=$( io_test ${writemb} )
-        echo " 磁盘I/O (第三次) : $(_yellow "$io3")"
+        echo " 磁盘I/O (第三次) : $(yellow "$io3")"
         ioraw1=$( echo $io1 | awk 'NR==1 {print $1}' )
         [ "`echo $io1 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
         ioraw2=$( echo $io2 | awk 'NR==1 {print $1}' )
@@ -290,9 +286,9 @@ print_io_test() {
         [ "`echo $io3 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw3=$( awk 'BEGIN{print '$ioraw3' * 1024}' )
         ioall=$( awk 'BEGIN{print '$ioraw1' + '$ioraw2' + '$ioraw3'}' )
         ioavg=$( awk 'BEGIN{printf "%.1f", '$ioall' / 3}' )
-        echo " 磁盘I/O (平均结果) : $(_yellow "$ioavg MB/s")"
+        echo " 磁盘I/O (平均结果) : $(yellow "$ioavg MB/s")"
     else
-        echo " $(_red "Not enough space for I/O Speed test!")"
+        echo " $(red "Not enough space for I/O Speed test!")"
     fi
 }
 
@@ -310,8 +306,8 @@ print_end_time() {
     echo " 时间          : $date_time"
 }
 
-! _exists "wget" && _red "Error: wget command not found.\n" && exit 1
-! _exists "free" && _red "Error: free command not found.\n" && exit 1
+! exists "wget" && red "Error: wget command not found.\n" && exit 1
+! exists "free" && red "Error: free command not found.\n" && exit 1
 start_time=$(date +%s)
 get_system_info
 check_virt
