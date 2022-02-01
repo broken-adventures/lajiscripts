@@ -321,7 +321,7 @@ ipv4_info
 next
 print_io_test
 next
-install_speedtest && printf "%-20s%-20s%-20s%-20s\n" " 测速点位置" "上传速度" "下载速度" "延迟"
+install_speedtest && printf "%-20s%-20s%-20s%-26s\n" " 测速点位置" "上传速度" "下载速度" "延迟"
 speed && rm -fr speedtest-cli
 next
 print_end_time
