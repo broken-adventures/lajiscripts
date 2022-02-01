@@ -255,13 +255,13 @@ print_system_info() {
     echo " 硬盘空间          : $(_yellow "$disk_total_size GB") $(_blue "($disk_used_size GB 已用)")"
     echo " 内存              : $(_yellow "$tram MB") $(_blue "($uram MB 已用)")"
     echo " Swap              : $(_blue "$swap MB ($uswap MB 已用)")"
-    echo " 系统启动时间       : $(_blue "$up")"
+    echo " 系统启动时间      : $(_blue "$up")"
     echo " 负载              : $(_blue "$load")"
     echo " 系统              : $(_blue "$opsy")"
     echo " 架构              : $(_blue "$arch ($lbit Bit)")"
     echo " 内核              : $(_blue "$kern")"
-    echo " TCP加速方式         : $(_yellow "$tcpctrl")"
-    echo " 虚拟化架构          : $(_blue "$virt")"
+    echo " TCP加速方式       : $(_yellow "$tcpctrl")"
+    echo " 虚拟化架构        : $(_blue "$virt")"
 }
 
 print_io_test() {
