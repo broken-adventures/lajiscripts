@@ -205,6 +205,7 @@ install_speedtest() {
 
 print_intro() {
     echo "-------------------- A Bench Script By Misaka No -------------------"
+    echo "                   Blog: https://owo.misaka.rest                    "
 }
 
 # Get System information
@@ -240,27 +241,27 @@ get_system_info() {
 # Print System information
 print_system_info() {
     if [ -n "$cname" ]; then
-        echo " CPU Model          : $(_blue "$cname")"
+        echo " CPU 型号          : $(_blue "$cname")"
     else
-        echo " CPU Model          : $(_blue "CPU model not detected")"
+        echo " CPU 型号          : $(_blue "CPU model not detected")"
     fi
-    echo " CPU Cores          : $(_blue "$cores")"
+    echo " CPU 核心数          : $(_blue "$cores")"
     if [ -n "$freq" ]; then
-        echo " CPU Frequency      : $(_blue "$freq MHz")"
+        echo " CPU 频率        : $(_blue "$freq MHz")"
     fi
     if [ -n "$ccache" ]; then
-        echo " CPU Cache          : $(_blue "$ccache")"
+        echo " CPU 缓存          : $(_blue "$ccache")"
     fi
-    echo " Total Disk         : $(_yellow "$disk_total_size GB") $(_blue "($disk_used_size GB Used)")"
-    echo " Total Mem          : $(_yellow "$tram MB") $(_blue "($uram MB Used)")"
-    echo " Total Swap         : $(_blue "$swap MB ($uswap MB Used)")"
-    echo " System uptime      : $(_blue "$up")"
-    echo " Load average       : $(_blue "$load")"
-    echo " OS                 : $(_blue "$opsy")"
-    echo " Arch               : $(_blue "$arch ($lbit Bit)")"
-    echo " Kernel             : $(_blue "$kern")"
-    echo " TCP CC             : $(_yellow "$tcpctrl")"
-    echo " Virtualization     : $(_blue "$virt")"
+    echo " 硬盘空间           : $(_yellow "$disk_total_size GB") $(_blue "($disk_used_size GB 可用)")"
+    echo " 内存               : $(_yellow "$tram MB") $(_blue "($uram MB 可用)")"
+    echo " Swap               : $(_blue "$swap MB ($uswap MB 可用)")"
+    echo " 系统启动时间        : $(_blue "$up")"
+    echo " 负载               : $(_blue "$load")"
+    echo " 系统               : $(_blue "$opsy")"
+    echo " 架构               : $(_blue "$arch ($lbit Bit)")"
+    echo " 内核               : $(_blue "$kern")"
+    echo " TCP加速方式         : $(_yellow "$tcpctrl")"
+    echo " 虚拟化架构          : $(_blue "$virt")"
 }
 
 print_io_test() {
@@ -271,11 +272,11 @@ print_io_test() {
     if [ ${freespace} -gt 1024 ]; then
         writemb=2048
         io1=$( io_test ${writemb} )
-        echo " I/O Speed(1st run) : $(_yellow "$io1")"
+        echo " 磁盘I/O (第一次) : $(_yellow "$io1")"
         io2=$( io_test ${writemb} )
-        echo " I/O Speed(2nd run) : $(_yellow "$io2")"
+        echo " 磁盘I/O (第二次) : $(_yellow "$io2")"
         io3=$( io_test ${writemb} )
-        echo " I/O Speed(3rd run) : $(_yellow "$io3")"
+        echo " 磁盘I/O (第三次) : $(_yellow "$io3")"
         ioraw1=$( echo $io1 | awk 'NR==1 {print $1}' )
         [ "`echo $io1 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
         ioraw2=$( echo $io2 | awk 'NR==1 {print $1}' )
@@ -284,7 +285,7 @@ print_io_test() {
         [ "`echo $io3 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw3=$( awk 'BEGIN{print '$ioraw3' * 1024}' )
         ioall=$( awk 'BEGIN{print '$ioraw1' + '$ioraw2' + '$ioraw3'}' )
         ioavg=$( awk 'BEGIN{printf "%.1f", '$ioall' / 3}' )
-        echo " I/O Speed(average) : $(_yellow "$ioavg MB/s")"
+        echo " 磁盘I/O (平均结果) : $(_yellow "$ioavg MB/s")"
     else
         echo " $(_red "Not enough space for I/O Speed test!")"
     fi
@@ -317,7 +318,7 @@ ipv4_info
 next
 print_io_test
 next
-install_speedtest && printf "%-18s%-18s%-20s%-12s\n" " 测速点位置及名称" "上传速度" "下载速度" "延迟"
+install_speedtest && printf "%-20s%-18s%-20s%-12s\n" " 测速点位置及名称" "上传速度" "下载速度" "延迟"
 speed && rm -fr speedtest-cli
 next
 print_end_time
