@@ -255,7 +255,7 @@ print_system_info() {
     echo " 硬盘空间          : $(_yellow "$disk_total_size GB") $(_blue "($disk_used_size GB 已用)")"
     echo " 内存              : $(_yellow "$tram MB") $(_blue "($uram MB 已用)")"
     echo " Swap              : $(_blue "$swap MB ($uswap MB 已用)")"
-    echo " 系统启动时间      : $(_blue "$up")"
+    echo " 系统在线时间      : $(_blue "$up")"
     echo " 负载              : $(_blue "$load")"
     echo " 系统              : $(_blue "$opsy")"
     echo " 架构              : $(_blue "$arch ($lbit Bit)")"
@@ -318,7 +318,7 @@ ipv4_info
 next
 print_io_test
 next
-install_speedtest && printf "%-26s%-22s%-20s%-12s\n" " 测速点位置及名称" "上传速度" "下载速度" "延迟"
+install_speedtest && printf "%-26s%-22s%-20s%-20s\n" " 测速点位置及名称" "上传速度" "下载速度" "延迟"
 speed && rm -fr speedtest-cli
 next
 print_end_time
