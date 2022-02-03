@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-ver="1.0.1"
-changeLog="删除部分境外测速节点，修改境内测速点为国际出口"
+ver="1.0.2"
+changeLog="修复美国测速节点"
 
 trap _exit INT QUIT TERM
 
@@ -74,7 +74,7 @@ speed() {
     speed_test '15047' '日本东京'
     speed_test '25960' '新加坡'
     speed_test '4769' '卢森堡'
-    speed_test '21541' '美国洛杉矶'
+    speed_test '16610' '美国纽约'
 }
 
 io_test() {
