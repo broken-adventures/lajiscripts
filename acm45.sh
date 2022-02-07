@@ -67,7 +67,7 @@ function checktls(){
 # Acme.sh操作区
 function acme(){   
     ${PACKAGE_UPDATE[int]}
-    ${PACKAGE_INSTALL[int]} curl wget socat binutils
+    ${PACKAGE_INSTALL[int]} curl wget socat binutils cron
     checkwarp
     # 自动为IPV6 Only的VPS设置DNS64服务器
     if [ -z $v4 ]; then
