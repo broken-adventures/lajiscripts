@@ -49,3 +49,8 @@ fi
 ## 检测VPS IP地址
 v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
 v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
+
+## 自动为IPv6 Only的机器设置DNS64服务器
+if [ -z $v4 ]; then
+    echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
+fi
