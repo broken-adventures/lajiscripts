@@ -34,3 +34,12 @@ for ((int=0; int<${#REGEX[@]}; int++)); do
 done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流的操作系统" && exit 1
+
+## 更新系统及安装系统依赖
+
+${PACKAGE_UPDATE[int]}
+${PACKAGE_INSTALL[int]} curl wget sudo
+
+## 检测VPS IP地址
+v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
+v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
