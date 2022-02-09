@@ -55,6 +55,16 @@ if [ -z $v4 ]; then
     echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
 fi
 
+acme(){
+    read -p "请输入注册邮箱（例：admin@bilibili.com，或留空自动生成）：" acmeEmail
+    if [ -z $acmeEmail ]; then
+        autoEmail=`date +%s%N |md5sum | cut -c 1-32`
+        acmeEmail=$autoEmail@autossl.com
+        yellow "检测到未输入邮箱，脚本已为你自动生成一个邮箱以完成接下来的注册流程，邮箱地址为$acmeEmail"
+    fi
+    curl https://get.acme.sh | sh -s email=$acmeEmail
+}
+
 menu(){
     clear
     red "=================================="
