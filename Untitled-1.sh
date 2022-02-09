@@ -54,3 +54,30 @@ v4=`curl -s4m2 https://ip.gs || curl -s4m2 http://ipget.net`
 if [ -z $v4 ]; then
     echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
 fi
+
+menu(){
+    clear
+    red "=================================="
+    echo "                           "
+    red "    Acme.sh 域名证书一键申请脚本     "
+    red "          by 小御坂的破站           "
+    echo "                           "
+    red "  Site: https://owo.misaka.rest  "
+    echo "                           "
+    red "=================================="
+    echo "                           "
+    green "1. 申请证书（自动识别单域名与泛域名）"
+    green "2. 查询、撤销并删除当前已申请的域名证书"
+    green "3. 手动续期域名证书"
+    green "4. 更新脚本"
+    green "0. 退出"
+    echo "         "
+    read -p "请输入数字:" NumberInput
+    case "$NumberInput" in     
+        1 ) acme;;
+        2 ) certificate;;
+        3 ) acmerenew;;
+        4 ) upgrade ;;
+        0 ) exit 0    
+    esac
+}
