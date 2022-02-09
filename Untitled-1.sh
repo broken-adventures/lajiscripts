@@ -38,7 +38,13 @@ done
 ## 更新系统及安装系统依赖
 
 ${PACKAGE_UPDATE[int]}
-${PACKAGE_INSTALL[int]} curl wget sudo
+${PACKAGE_INSTALL[int]} curl wget sudo socat binutils
+
+## 检测warp状态
+
+if [[ -n $(wg) ]]; then
+    wg-quick down wgcf
+fi
 
 ## 检测VPS IP地址
 v6=`curl -s6m2 https://ip.gs || curl -s6m2 http://ipget.net`
