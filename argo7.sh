@@ -49,7 +49,7 @@ TOTAL=$(expr "$COUNT" : '.*/\s\([0-9]\{1,\}\)\s.*')
 install(){
     if [[ -n $(cloudflared -help) ]]; then
         red "检测到已安装CloudFlare Argo Tunnel，无需重复安装！！"
-        exit 0
+        exit 1
     fi
     ${PACKAGE_UPDATE[int]}
     if [ $ARCH = "x86_64" ]; then
@@ -67,7 +67,7 @@ install(){
 tryTunnel(){
     if [[ -z $(cloudflared -help) ]]; then
         red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 0
+        exit 1
     fi
     read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
     if [ -z $httpPort ]; then
@@ -79,11 +79,11 @@ tryTunnel(){
 cfargoLogin(){
     if [[ -z $(cloudflared -help) ]]; then
         red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 0
+        exit 1
     fi
     if [[ -f /root/.cloudflared/cert.pem ]]; then
         red "已登录CloudFlare Argo Tunnel客户端，无需重复登录！！！"
-        exit 0
+        exit 1
     fi
     green "请访问下方提示的网址，登录自己的CloudFlare账号"
     green "然后授权自己的域名给CloudFlare Argo Tunnel即可"
@@ -109,11 +109,11 @@ tunnelConfig(){
 tunnelSelection(){
     if [[ -z $(cloudflared -help) ]]; then
         red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 0
+        exit 1
     fi
     if [ ! -f /root/.cloudflared/cert.pem ]; then
         red "请登录CloudFlare Argo Tunnel客户端后再执行操作！！！"
-        exit 0
+        exit 1
     fi
     echo "1. 创建隧道"
     echo "2. 删除隧道"
@@ -125,18 +125,18 @@ tunnelSelection(){
         2 ) deleteTunnel ;;
         3 ) tunnelConfig ;;
         4 ) cloudflared tunnel list ;;
-        0 ) exit 0
+        0 ) exit 1
     esac
 }
 
 runTunnel(){
     if [[ -z $(cloudflared -help) ]]; then
         red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 0
+        exit 1
     fi
     if [ ! -f /root/.cloudflared/cert.pem ]; then
         red "请登录CloudFlare Argo Tunnel客户端后再执行操作！！！"
-        exit 0
+        exit 1
     fi
     read -p "请输入需要运行的隧道名称：" tunnelName
     read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
@@ -176,7 +176,7 @@ menu(){
         5 ) runTunnel ;;
         6 ) ${PACKAGE_REMOVE[int]} cloudflared ;;
         9 ) wget -N https://raw.githubusercontents.com/Misaka-blog/argo-tunnel-script/master/argo.sh && bash argo.sh ;;
-        0 ) exit 0
+        0 ) exit 1
     esac
 }
 
