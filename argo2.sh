@@ -41,10 +41,10 @@ install(){
         ARCH="amd64"
     fi
     if [ $RELEASE == "CentOS" ]; then
-        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${ARCH}.rpm
+        wget -N https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${ARCH}.rpm
         rpm -i cloudflared-linux-${ARCH}.rpm
     else
-        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${ARCH}.deb
+        wget -N https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${ARCH}.deb
         dpkg -i cloudflared-linux-${ARCH}.deb
     fi
 }
