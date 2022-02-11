@@ -77,6 +77,22 @@ cfargoLogin(){
     cloudflared tunnel login
 }
 
+createTunnel(){
+    read -p "请输入需要创建的隧道名称：" tunnelName
+    cloudflared tunnel create $tunnelName
+}
+
+deleteTunnel(){
+    read -p "请输入需要删除的隧道名称：" tunnelName
+    cloudflared tunnel delete $tunnelName
+}
+
+tunnelConfig(){
+    read -p "请输入需要配置的隧道名称：" tunnelName
+    read -p "请输入需要配置的域名：" tunnelDomain
+    cloudflared tunnel route dns $tunnelName $tunnelDomain
+}
+
 tunnelSelection(){
     if [[ -z $(cloudflared -help) ]]; then
         red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
@@ -87,9 +103,9 @@ tunnelSelection(){
     echo "4. 列出隧道"
     read -p "请输入选项:" tunnelNumberInput
     case "$menuNumberInput" in
-        1 ) read -p "请输入需要创建的隧道名称：" tunnelName && cloudflared tunnel create $tunnelName ;;
-        2 ) read -p "请输入需要删除的隧道名称：" tunnelName && cloudflared tunnel delete $tunnelName ;;
-        3 ) read -p "请输入需要配置的隧道名称：" tunnelName && read -p "请输入需要配置的域名：" tunnelDomain && cloudflared tunnel route dns $tunnelName $tunnelDomain ;;
+        1 ) createTunnel ;;
+        2 ) deleteTunnel ;;
+        3 ) tunnelConfig ;;
         4 ) cloudflared tunnel list ;;
         0 ) exit 0
     esac
