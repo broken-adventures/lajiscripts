@@ -130,7 +130,7 @@ menu(){
     echo "2. 体验CloudFlare Argo Tunnel隧道"
     echo "3. 登录CloudFlare Argo Tunnel客户端"
     echo "4. 创建、删除、配置和列出隧道"
-    echo "5. 运行隧道"
+    echo "5. 运行HTTP隧道"
     echo "6. 卸载CloudFlare Argo Tunnel客户端"
     echo "9. 更新脚本"
     echo "0. 退出脚本"
