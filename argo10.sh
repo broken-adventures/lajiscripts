@@ -60,14 +60,14 @@ tryHTTPTunnel(){
     [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
     read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
     [ -z $httpPort ] && httpPort=80
-    cloudflared tunnel --url http://localhost:$httpPort
+    cloudflared tunnel --url http://127.0.0.1:$httpPort
 }
 
 tryTCPTunnel(){
     [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
     read -p "请输入你需要穿透的tcp端口号（默认80）：" tcpPort
     [ -z $tcpPort ] && tcpPort=80
-    cloudflared tunnel --url tcp://localhost:$tcpPort
+    cloudflared tunnel --url tcp://127.0.0.1:$tcpPort
 }
 
 cfargoLogin(){
@@ -117,7 +117,7 @@ runHTTPTunnel(){
     read -p "请输入需要运行的隧道名称：" tunnelName
     read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
     [ -z $httpPort ] && httpPort=80
-    cloudflared tunnel run --url http://localhost:$httpPort $tunnelName
+    cloudflared tunnel run --url http://127.0.0.1:$httpPort $tunnelName
 }
 
 runTCPTunnel(){
@@ -126,7 +126,7 @@ runTCPTunnel(){
     read -p "请输入需要运行的隧道名称：" tunnelName
     read -p "请输入你需要穿透的tcp端口号（默认80）：" tcpPort
     [ -z $tcpPort ] && tcpPort=80
-    cloudflared tunnel run --url tcp://localhost:$tcpPort $tunnelName
+    cloudflared tunnel run --url tcp://127.0.0.1:$tcpPort $tunnelName
 }
 
 menu(){
