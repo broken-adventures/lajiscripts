@@ -66,7 +66,7 @@ tryHTTPTunnel(){
 tryTCPTunnel(){
     [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
     read -p "请输入你需要穿透的tcp端口号（默认80）：" tcpPort
-    [ -z $tcpPort ] && tcPort=80
+    [ -z $tcpPort ] && tcpPort=80
     cloudflared tunnel --url tcp://localhost:$tcpPort
 }
 
