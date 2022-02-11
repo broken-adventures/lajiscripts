@@ -65,6 +65,9 @@ tryTunnel(){
 }
 
 cfargoLogin(){
+    if [[ -z $(cloudflared -help) ]]; then
+        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
+    fi
     if [[ -f /root/.cloudflared/cert.pem ]]; then
         red "已登录CloudFlare Argo Tunnel客户端，无需重复登录！！！"
     fi
@@ -74,6 +77,9 @@ cfargoLogin(){
 }
 
 tunnelSelection(){
+    if [[ -z $(cloudflared -help) ]]; then
+        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
+    fi
     echo "1. 创建隧道"
     echo "2. 删除隧道"
     echo "3. 配置隧道"
@@ -89,6 +95,9 @@ tunnelSelection(){
 }
 
 runTunnel(){
+    if [[ -z $(cloudflared -help) ]]; then
+        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
+    fi
     read -p "请输入需要运行的隧道名称：" tunnelName
     read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
     if [ -z $httpPort ]; then
@@ -107,6 +116,7 @@ menu(){
     red "  Site: https://owo.misaka.rest  "
     echo "                           "
     red "=================================="
+    echo "            "
     echo "1. 安装CloudFlare Argo Tunnel客户端"
     echo "2. 体验CloudFlare Argo Tunnel隧道"
     echo "3. 登录CloudFlare Argo Tunnel客户端"
