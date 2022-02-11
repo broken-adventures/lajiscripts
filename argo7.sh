@@ -36,6 +36,11 @@ done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流的操作系统" && exit 1
 
+## 统计脚本运行次数
+COUNT=$(curl -sm1 "https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FMisaka-blog%2Fargo-tunnel-script%40master%2Fargo.sh&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false" 2>&1) &&
+TODAY=$(expr "$COUNT" : '.*\s\([0-9]\{1,\}\)\s/.*')
+TOTAL=$(expr "$COUNT" : '.*/\s\([0-9]\{1,\}\)\s.*')
+
 install(){
     if [[ -n $(cloudflared -help) ]]; then
         red "检测到已安装CloudFlare Argo Tunnel，无需重复安装！！"
@@ -146,6 +151,8 @@ menu(){
     red "  Site: https://owo.misaka.rest  "
     echo "                           "
     red "=================================="
+    echo "            "
+    yellow "今日运行次数：$TODAY   总共运行次数：$TOTAL"
     echo "            "
     echo "1. 安装CloudFlare Argo Tunnel客户端"
     echo "2. 体验CloudFlare Argo Tunnel隧道"
