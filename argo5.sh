@@ -53,6 +53,17 @@ install(){
     fi
 }
 
+tryTunnel(){
+    if [[ -z $(cloudflared -help) ]];; then
+        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
+    fi
+    read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
+    if [ -z $httpPort ]; then
+        httpPort=80
+    fi
+    cloudflared tunnel --url localhost:$httpPort
+}
+
 menu(){
     echo "1. 安装Argo Tunnel客户端"
     echo "2. 体验Argo Tunnel隧道"
