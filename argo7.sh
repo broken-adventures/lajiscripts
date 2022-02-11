@@ -17,6 +17,7 @@ yellow(){
 REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'")
 RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
 PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update")
+PACKAGE_REMOVE=("apt -y remove" "apt -y remove" "yum -y remove" "yum -y remove")
 ARCH=`uname -m`
 
 # 判断是否为root用户
@@ -122,6 +123,7 @@ menu(){
     echo "3. 登录CloudFlare Argo Tunnel客户端"
     echo "4. 创建、删除、配置和列出隧道"
     echo "5. 运行隧道"
+    echo "6. 卸载CloudFlare Argo Tunnel客户端"
     read -p "请输入选项:" menuNumberInput
     case "$menuNumberInput" in
         1 ) install ;;
@@ -129,6 +131,7 @@ menu(){
         3 ) cfargoLogin ;;
         4 ) tunnelSelection ;;
         5 ) runTunnel ;;
+        6 ) ${PACKAGE_REMOVE[int]} cloudflared ;;
         0 ) exit 0
     esac
 }
