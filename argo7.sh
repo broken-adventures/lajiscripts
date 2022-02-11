@@ -102,7 +102,7 @@ tunnelSelection(){
     echo "3. 配置隧道"
     echo "4. 列出隧道"
     read -p "请输入选项:" tunnelNumberInput
-    case "$menuNumberInput" in
+    case "$tunnelNumberInput" in
         1 ) createTunnel ;;
         2 ) deleteTunnel ;;
         3 ) tunnelConfig ;;
