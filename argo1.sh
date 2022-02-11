@@ -55,3 +55,5 @@ menu(){
         0 ) exit 0
     esac
 }
+
+menu
