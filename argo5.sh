@@ -36,7 +36,7 @@ done
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流的操作系统" && exit 1
 
 install(){
-    if [[ -n $(cloudflared) ]]; then
+    if [[ -n $(cloudflared -help) ]]; then
         red "已安装CloudFlare Argo Tunnel，无需重复安装！！"
         exit 0
     fi
