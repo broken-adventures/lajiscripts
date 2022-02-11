@@ -64,9 +64,19 @@ tryTunnel(){
     cloudflared tunnel --url localhost:$httpPort
 }
 
+cfargoLogin(){
+    if [[ -f /root/.cloudflared/cert.pem ]]; then
+        red "已登录CloudFlare Argo Tunnel客户端，无需重复登录！！！"
+    fi
+    green "请访问下方提示的网址，登录自己的CloudFlare账号"
+    green "然后授权自己的域名给CloudFlare Argo Tunnel即可"
+    cloudflared tunnel login
+}
+
 menu(){
-    echo "1. 安装Argo Tunnel客户端"
-    echo "2. 体验Argo Tunnel隧道"
+    echo "1. 安装CloudFlare Argo Tunnel客户端"
+    echo "2. 体验CloudFlare Argo Tunnel隧道"
+    echo "3. 登录CloudFlare Argo Tunnel客户端"
     read -p "请输入选项:" menuNumberInput
     case "$menuNumberInput" in
         1 ) install ;;
