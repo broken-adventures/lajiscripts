@@ -36,10 +36,8 @@ done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流的操作系统" && exit 1
 
-if [ $ARCH == "s390x" ]; then
-    red "不支持VPS的当前系统架构，请换用主流的VPS架构"
-    exit 1
-fi
+[ $ARCH == "s390x" ] && red "不支持VPS的当前系统架构，请换用主流的VPS架构" && exit 1
+[ $ARCH = "x86_64" ] && ARCH="amd64"
 
 ## 统计脚本运行次数
 COUNT=$(curl -sm1 "https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FMisaka-blog%2Fargo-tunnel-script%40master%2Fargo.sh&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false" 2>&1) &&
@@ -47,14 +45,8 @@ TODAY=$(expr "$COUNT" : '.*\s\([0-9]\{1,\}\)\s/.*')
 TOTAL=$(expr "$COUNT" : '.*/\s\([0-9]\{1,\}\)\s.*')
 
 install(){
-    if [[ -n $(cloudflared -help) ]]; then
-        red "检测到已安装CloudFlare Argo Tunnel，无需重复安装！！"
-        exit 1
-    fi
+    [[ -n $(cloudflared -help) ]] && red "检测到已安装CloudFlare Argo Tunnel，无需重复安装！！" && exit 1
     ${PACKAGE_UPDATE[int]}
-    if [ $ARCH = "x86_64" ]; then
-        ARCH="amd64"
-    fi
     if [ $RELEASE == "CentOS" ]; then
         wget -N https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${ARCH}.rpm
         rpm -i cloudflared-linux-${ARCH}.rpm
@@ -65,26 +57,15 @@ install(){
 }
 
 tryTunnel(){
-    if [[ -z $(cloudflared -help) ]]; then
-        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 1
-    fi
+    [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
     read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
-    if [ -z $httpPort ]; then
-        httpPort=80
-    fi
+    [ -z $httpPort ] && httpPort=80
     cloudflared tunnel --url localhost:$httpPort
 }
 
 cfargoLogin(){
-    if [[ -z $(cloudflared -help) ]]; then
-        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 1
-    fi
-    if [[ -f /root/.cloudflared/cert.pem ]]; then
-        red "已登录CloudFlare Argo Tunnel客户端，无需重复登录！！！"
-        exit 1
-    fi
+    [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
+    [[ -f /root/.cloudflared/cert.pem ]] && red "已登录CloudFlare Argo Tunnel客户端，无需重复登录！！！" && exit 1
     green "请访问下方提示的网址，登录自己的CloudFlare账号"
     green "然后授权自己的域名给CloudFlare Argo Tunnel即可"
     cloudflared tunnel login
@@ -107,10 +88,7 @@ tunnelConfig(){
 }
 
 tunnelSelection(){
-    if [[ -z $(cloudflared -help) ]]; then
-        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 1
-    fi
+    [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
     if [ ! -f /root/.cloudflared/cert.pem ]; then
         red "请登录CloudFlare Argo Tunnel客户端后再执行操作！！！"
         exit 1
@@ -130,10 +108,7 @@ tunnelSelection(){
 }
 
 runTunnel(){
-    if [[ -z $(cloudflared -help) ]]; then
-        red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！"
-        exit 1
-    fi
+    [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
     if [ ! -f /root/.cloudflared/cert.pem ]; then
         red "请登录CloudFlare Argo Tunnel客户端后再执行操作！！！"
         exit 1
