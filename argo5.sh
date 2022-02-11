@@ -73,13 +73,52 @@ cfargoLogin(){
     cloudflared tunnel login
 }
 
+tunnelSelection(){
+    echo "1. 创建隧道"
+    echo "2. 删除隧道"
+    echo "3. 配置隧道"
+    echo "4. 列出隧道"
+    read -p "请输入选项:" tunnelNumberInput
+    case "$menuNumberInput" in
+        1 ) read -p "请输入需要创建的隧道名称：" tunnelName && cloudflared tunnel create $tunnelName ;;
+        2 ) read -p "请输入需要删除的隧道名称：" tunnelName && cloudflared tunnel delete $tunnelName ;;
+        3 ) read -p "请输入需要配置的隧道名称：" tunnelName && read -p "请输入需要配置的域名：" tunnelDomain && cloudflared tunnel route dns $tunnelName $tunnelDomain ;;
+        4 ) cloudflared tunnel list ;;
+        0 ) exit 0
+    esac
+}
+
+runTunnel(){
+    read -p "请输入需要运行的隧道名称：" tunnelName
+    read -p "请输入你需要穿透的http端口号（默认80）：" httpPort
+    if [ -z $httpPort ]; then
+        httpPort=80
+    fi
+    cloudflared tunnel run --url localhost:$httpPort $tunnelName
+}
+
 menu(){
+    clear
+    red "=================================="
+    echo "                           "
+    red "  CloudFlare Argo Tunnel一键脚本   "
+    red "          by 小御坂的破站           "
+    echo "                           "
+    red "  Site: https://owo.misaka.rest  "
+    echo "                           "
+    red "=================================="
     echo "1. 安装CloudFlare Argo Tunnel客户端"
     echo "2. 体验CloudFlare Argo Tunnel隧道"
     echo "3. 登录CloudFlare Argo Tunnel客户端"
+    echo "4. 创建、删除、配置和列出隧道"
+    echo "5. 运行隧道"
     read -p "请输入选项:" menuNumberInput
     case "$menuNumberInput" in
         1 ) install ;;
+        2 ) tryTunnel ;;
+        3 ) cfargoLogin ;;
+        4 ) tunnelSelection ;;
+        5 ) runTunnel ;;
         0 ) exit 0
     esac
 }
