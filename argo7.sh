@@ -160,6 +160,8 @@ menu(){
     echo "4. 创建、删除、配置和列出隧道"
     echo "5. 运行隧道"
     echo "6. 卸载CloudFlare Argo Tunnel客户端"
+    echo "9. 更新脚本"
+    echo "0. 退出脚本"
     read -p "请输入选项:" menuNumberInput
     case "$menuNumberInput" in
         1 ) install ;;
@@ -168,6 +170,7 @@ menu(){
         4 ) tunnelSelection ;;
         5 ) runTunnel ;;
         6 ) ${PACKAGE_REMOVE[int]} cloudflared ;;
+        9 ) wget -N https://raw.githubusercontents.com/Misaka-blog/argo-tunnel-script/master/argo.sh && bash argo.sh ;;
         0 ) exit 0
     esac
 }
