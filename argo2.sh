@@ -37,6 +37,9 @@ done
 
 install(){
     ${PACKAGE_UPDATE[int]}
+    if [ $ARCH = "x86_64" ]; then
+        ARCH = "amd64"
+    fi
     if [ $RELEASE == "CentOS" ]; then
         wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-${ARCH}.rpm
         rpm -i cloudflared-linux-${ARCH}.rpm
