@@ -89,10 +89,7 @@ tunnelConfig(){
 
 tunnelSelection(){
     [[ -z $(cloudflared -help) ]] && red "检测到未安装CloudFlare Argo Tunnel客户端，无法执行操作！！！" && exit 1
-    if [ ! -f /root/.cloudflared/cert.pem ]; then
-        red "请登录CloudFlare Argo Tunnel客户端后再执行操作！！！"
-        exit 1
-    fi
+    [ ! -f /root/.cloudflared/cert.pem ] && red "请登录CloudFlare Argo Tunnel客户端后再执行操作！！！" && exit 1
     echo "1. 创建隧道"
     echo "2. 删除隧道"
     echo "3. 配置隧道"
