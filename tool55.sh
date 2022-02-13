@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 全局变量
-ver="2.1.1"
-changeLog="增加misakabench测试脚本"
+ver="2.1.2"
+changeLog="增加CloudFlare Argo Tunnel一键脚本"
 arch=`uname -m`
 virt=`systemd-detect-virt`
 kernelVer=`uname -r`
