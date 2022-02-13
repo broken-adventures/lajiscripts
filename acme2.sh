@@ -59,7 +59,7 @@ function acme() {
 	[[ -z $v4 ]] && echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
 	read -p "请输入注册邮箱（例：admin@bilibili.com，或留空自动生成）：" acmeEmail
 	[ -z $acmeEmail ] && autoEmail=$(date +%s%N | md5sum | cut -c 1-32) && acmeEmail=$autoEmail@gmail.com
-	[ -z $(/root/.acme.sh/acme.sh -v 2>/dev/null) ] && curl https://get.acme.sh | sh -s email=$acmeEmail && source ~/.bashrc && bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
+	[[ -z $(/root/.acme.sh/acme.sh -v 2>/dev/null) ]] && curl https://get.acme.sh | sh -s email=$acmeEmail && source ~/.bashrc && bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
 	read -p "请输入解析完成的域名:" domain
 	green "已输入的域名: $domain" && sleep 1
 	domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$domain")
