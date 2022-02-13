@@ -58,11 +58,7 @@ function acme() {
 	v4=$(curl -s4m2 https://ip.gs)
 	[[ -z $v4 ]] && echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
 	read -p "请输入注册邮箱（例：admin@bilibili.com，或留空自动生成）：" acmeEmail
-	if [ -z $acmeEmail ]; then
-		autoEmail=$(date +%s%N | md5sum | cut -c 1-32)
-		acmeEmail=$autoEmail@autossl.com
-		yellow "检测到未输入邮箱，脚本已为你自动生成一个邮箱以完成接下来的注册流程，邮箱地址为$acmeEmail"
-	fi
+	[ -z $acmeEmail ] && autoEmail=$(date +%s%N | md5sum | cut -c 1-32) && acmeEmail=$autoEmail@gmail.com
 	curl https://get.acme.sh | sh -s email=$acmeEmail
 	source ~/.bashrc
 	bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
