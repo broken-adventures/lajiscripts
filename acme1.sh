@@ -31,11 +31,6 @@ done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
 
-function checkwarp() {
-	green "检测WARP状态....."
-	[[ -n $(wg) ]] && wg-quick down wgcf && yellow "目前VPS已开启WARP，为了能够正常申请证书，已为你自动关闭WARP以确保证书申请正常执行"
-}
-
 function checktls() {
 	if [[ -f /root/cert.crt && -f /root/private.key ]]; then
 		if [[ -s /root/cert.crt && -s /root/private.key ]]; then
@@ -58,7 +53,7 @@ function acme() {
 	green "正在安装acme.sh及其依赖......"
 	${PACKAGE_UPDATE[int]}
 	${PACKAGE_INSTALL[int]} curl wget socat binutils
-	checkwarp
+	[[ -n $(wg) ]] && wg-quick down wgcf && yellow "目前VPS已开启WARP，已为你自动关闭WARP以确保证书申请正常"
 	v6=$(curl -s6m2 https://ip.gs)
 	v4=$(curl -s4m2 https://ip.gs)
 	[[ -z $v4 ]] && echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
