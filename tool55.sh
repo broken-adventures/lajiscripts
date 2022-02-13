@@ -69,7 +69,7 @@ COUNT=$(curl -sm2 "https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=http
 TODAY=$(expr "$COUNT" : '.*\s\([0-9]\{1,\}\)\s/.*') && TOTAL=$(expr "$COUNT" : '.*/\s\([0-9]\{1,\}\)\s.*')
 
 #第一页
-function oraclefirewall(){
+oraclefirewall(){
     if [ $SYSTEM = "CentOS" ]; then
         systemctl stop oracle-cloud-agent
         systemctl disable oracle-cloud-agent
@@ -88,11 +88,11 @@ function oraclefirewall(){
     fi
 }
 
-function euservDig9(){
+euservDig9(){
     echo -e "search blue.kundencontroller.de\noptions rotate\nnameserver 2a02:180:6:5::1c\nnameserver 2a02:180:6:5::4\nnameserver 2a02:180:6:5::1e\nnameserver 2a02:180:6:5::1d" > /etc/resolv.conf
 }
 
-function rootLogin(){
+rootLogin(){
     read -p "请输入需要设置的root密码:" password
     echo root:$password | sudo chpasswd root
     sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
@@ -103,11 +103,11 @@ function rootLogin(){
     yellow "请妥善保管好登录信息！然后重启VPS确保设置已保存！"
 }
 
-function screenManager(){
+screenManager(){
     wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/screenManager@master/screen.sh && chmod -R 777 screen.sh && bash screen.sh
 }
 
-function bbr(){
+bbr(){
     if [ ${virt} == "kvm" ]; then
         wget -N --no-check-certificate "https://raw.githubusercontents.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
     fi
@@ -123,7 +123,7 @@ function bbr(){
     fi
 }
 
-function warp(){
+warp(){
     echo "                            "
     green "请选择你接下来使用的脚本"
     echo "                            "
@@ -145,21 +145,21 @@ function warp(){
     esac
 }
 
-function dockerInstall(){
+dockerInstall(){
     curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 }
 
-function acmesh(){
+acmesh(){
     wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/acme-1key@master/acme1key.sh && chmod -R 777 acme1key.sh && bash acme1key.sh
 }
 
-function dns64server(){
+dns64server(){
     echo -e "nameserver 2001:67c:2b0::4\nnameserver 2001:67c:2b0::6" > /etc/resolv.conf
     yellow "设置DNS64服务器完成"
 }
 
 # 第二页
-function bt(){
+bt(){
     if [ $SYSTEM = "CentOS" ]; then
         yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh forum
     elif [ $SYSTEM = "Debian" ]; then
@@ -169,20 +169,20 @@ function bt(){
     fi
 }
 
-function xui(){
+xui(){
     bash <(curl -Ls https://raw.githubusercontents.com/vaxilu/x-ui/master/install.sh)
 }
 
-function aria2(){
+aria2(){
     ${PACKAGE_INSTALL[int]} ca-certificates
     wget -N git.io/aria2.sh && chmod +x aria2.sh && bash aria2.sh
 }
 
-function cyberpanel(){
+cyberpanel(){
     sh <(curl https://cyberpanel.net/install.sh || wget -O - https://cyberpanel.net/install.sh)
 }
 
-function qlPanel(){
+qlPanel(){
     if [[ -z $(docker -v) ]]; then
         yellow "检测到VPS未安装Docker环境，正在自动安装docker"
         curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
@@ -201,37 +201,37 @@ function qlPanel(){
     fi
 }
 
-function trojanpanel(){
+trojanpanel(){
     source <(curl -sL https://git.io/trojan-install)
 }
 
 # 第三页
-function macka(){
+macka(){
     wget -P /root -N --no-check-certificate "https://raw.githubusercontents.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
 }
 
-function boy233(){
+boy233(){
     bash <(curl -s -L https://git.io/v2ray.sh)
 }
 
-function hijk(){
+hijk(){
     bash <(curl -sL https://raw.githubusercontents.com/hijkpw/scripts/master/xray.sh)
 }
 
-function tgMTProxy(){
+tgMTProxy(){
     mkdir /home/mtproxy && cd /home/mtproxy
     curl -s -o mtproxy.sh https://raw.githubusercontents.com/sunpma/mtp/master/mtproxy.sh && chmod +x mtproxy.sh && bash mtproxy.sh
     bash mtproxy.sh start
 }
 
-function shadowsocks(){
+shadowsocks(){
     wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontents.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
     chmod +x shadowsocks-all.sh
     ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
 }
 
 # 第四页
-function vpsBench(){
+vpsBench(){
     echo "                            "
     green "请选择你接下来使用的脚本"
     echo "                            "
@@ -251,21 +251,21 @@ function vpsBench(){
     esac
 }
 
-function mediaUnblockTest(){
+mediaUnblockTest(){
     bash <(curl -L -s https://raw.githubusercontents.com/lmc999/RegionRestrictionCheck/main/check.sh)
 }
 
-function speedTest(){
+speedTest(){
     bash <(curl -Lso- https://git.io/superspeed)
 }
 
 # 第五页
-function nezha(){
+nezha(){
     curl -L https://raw.githubusercontents.com/naiba/nezha/master/script/install.sh  -o nezha.sh && chmod +x nezha.sh
     sudo ./nezha.sh
 }
 
-function serverstatus(){
+serverstatus(){
     wget -N https://raw.githubusercontents.com/cokemine/ServerStatus-Hotaru/master/status.sh
     echo "                            "
     green "请选择你需要安装探针的客户端类型"
@@ -283,7 +283,7 @@ function serverstatus(){
 }
 
 # 菜单
-function menu(){
+menu(){
     clear
     red "=================================="
     echo "                           "
@@ -313,9 +313,7 @@ function menu(){
     echo "3. 节点相关"
     echo "4. VPS测试"
     echo "5. VPS探针"
-    if [ ${virt} == "kvm" ]; then
-        echo "6. VPS DD系统"
-    fi
+    [ ${virt} == "kvm" ] && echo "6. VPS DD系统"
     echo "                            "
     echo "9. 更新脚本"
     echo "0. 退出脚本"
@@ -333,7 +331,7 @@ function menu(){
     esac
 }
 
-function page1(){
+page1(){
     echo "                            "
     green "请选择你接下来的操作"
     echo "                            "
@@ -363,7 +361,7 @@ function page1(){
     esac
 }
 
-function page2(){
+page2(){
     echo "                            "
     green "请选择你准备安装的面板"
     echo "                            "
@@ -389,7 +387,7 @@ function page2(){
     esac
 }
 
-function page3(){
+page3(){
     echo "                            "
     green "请选择你接下来使用的脚本"
     echo "                            "
@@ -411,7 +409,7 @@ function page3(){
     esac
 }
 
-function page4(){
+page4(){
     echo "                            "
     green "请选择你接下来的操作"
     echo "                            "
@@ -429,7 +427,7 @@ function page4(){
     esac
 }
 
-function page5(){
+page5(){
     echo "                            "
     green "请选择你需要的探针"
     echo "                            "
