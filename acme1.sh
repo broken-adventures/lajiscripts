@@ -63,7 +63,7 @@ function acme() {
 	source ~/.bashrc
 	bash /root/.acme.sh/acme.sh --upgrade --auto-upgrade
 	read -p "请输入解析完成的域名:" domain
-	green "已输入的域名:$domain" && sleep 1
+	green "已输入的域名: $domain" && sleep 1
 	domainIP=$(curl -s ipget.net/?ip="cloudflare.1.1.1.1.$domain")
 	if [[ -n $(echo $domainIP | grep nginx) ]]; then
 		domainIP=$(curl -s ipget.net/?ip="$domain")
