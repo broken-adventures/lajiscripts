@@ -187,8 +187,8 @@ qlPanel(){
     read -p "请输入将要安装的青龙面板容器名称：" qlPanelName
     docker run -dit --name $qlPanelName --hostname $qlPanelName --restart always -p 5700:5700 -v $PWD/QL/config:/ql/config -v $PWD/QL/log:/ql/log -v $PWD/QL/db:/ql/db -v $PWD/QL/scripts:/ql/scripts -v $PWD/QL/jbot:/ql/jbot whyour/qinglong:latest
     yellow "青龙面板安装成功！！！"
-    [ -n $WAN4 ] && green "IPv4访问地址为：http://$WAN4:5700"
-    [ -n $WAN6 ] && green "IPv6访问地址为：http://[$WAN6]:5700"
+    [ -n $COUNTRY4 ] && green "IPv4访问地址为：http://$WAN4:5700"
+    [ -n $COUNTRY6 ] && green "IPv6访问地址为：http://[$WAN6]:5700"
     yellow "请稍等1-3分钟，等待青龙面板容器启动"
 }
 
