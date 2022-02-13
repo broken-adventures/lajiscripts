@@ -158,6 +158,10 @@ dns64server(){
     yellow "设置DNS64服务器完成"
 }
 
+cfArgoTunnel(){
+    wget -N https://cdn.jsdelivr.net/gh/Misaka-blog/argo-tunnel-script@master/argo.sh && bash argo.sh
+}
+
 # 第二页
 bt(){
     if [ $SYSTEM = "CentOS" ]; then
@@ -335,6 +339,7 @@ page1(){
     echo "7. 安装WARP"
     echo "8. 安装docker"
     echo "9. Acme.sh 证书申请脚本"
+    echo "10. CloudFlare Argo Tunnel一键脚本"
     echo "                            "
     echo "0. 返回主菜单"
     read -p "请输入选项:" page1NumberInput
@@ -348,6 +353,7 @@ page1(){
         7 ) warp ;;
         8 ) dockerInstall ;;
         9 ) acmesh ;;
+        10 ) cfArgoTunnel ;;
         0 ) menu
     esac
 }
