@@ -126,7 +126,7 @@ function acmerenew() {
 	bash /root/.acme.sh/acme.sh --list
 	read -p "请输入要续期的域名证书（复制Main_Domain下显示的域名）:" domain
 	if [[ -n $(bash /root/.acme.sh/acme.sh --list | grep $domain) ]]; then
-		checkwarp
+		[[ -n $(wg) ]] && wg-quick down wgcf && yellow "目前VPS已开启WARP，已为你自动关闭WARP以确保证书申请正常"
 		bash /root/.acme.sh/acme.sh --renew -d ${domain} --force --ecc
 		checktls
 		exit 0
